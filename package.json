@@ -1,0 +1,12 @@
+{
+  "name": "netflix-clone",
+  "version": "1.0.0",
+  "scripts": {
+    "install-frontend": "cd frontend && npm install",
+    "build-frontend": "cd frontend && npm run build",
+    "install-backend": "cd backend && ./mvnw clean install",
+    "build-backend": "cd backend && ./mvnw package",
+    "build": "npm run install-frontend && npm run build-frontend && npm run install-backend && npm run build-backend",
+    "start": "cd backend && java -jar target/*.jar"
+  }
+}

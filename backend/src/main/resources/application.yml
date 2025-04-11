@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${MYSQL_URL}
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:prod}
+server:
+  port: ${PORT:8080}
