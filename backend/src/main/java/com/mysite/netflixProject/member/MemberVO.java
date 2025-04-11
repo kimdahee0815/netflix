@@ -13,4 +13,5 @@ public class MemberVO {
 	private String member_addr;
 	private String pw_question;
 	private String pw_answer;
+	private String signup_date;
 }
