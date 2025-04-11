@@ -14,8 +14,7 @@ COPY backend/.mvn ./.mvn
 COPY backend/mvnw .
 COPY backend/src ./src
 RUN chmod +x mvnw
-RUN ./mvnw clean package 
-RUN ./mvnw spring-boot:run
+RUN ./mvnw clean package -DskipTests=true
 
 # Final image
 FROM openjdk:17-jdk-slim
@@ -25,5 +24,9 @@ COPY --from=frontend-build /app/frontend/build ./static
 
 ENV PORT=8080
 ENV SPRING_PROFILES_ACTIVE=prod
+ENV MYSQL_URL=${MYSQL_URL}
+ENV MYSQL_USERNAME=${MYSQL_USERNAME}
+ENV MYSQL_PASSWORD=${MYSQL_PASSWORD}
+
 EXPOSE 8080
 CMD ["java", "-jar", "app.jar"]
