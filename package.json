@@ -2,11 +2,26 @@
   "name": "netflix-clone",
   "version": "1.0.0",
   "scripts": {
-    "install-frontend": "cd frontend && npm install",
+    "install-frontend": "cd frontend && npm install --legacy-peer-deps",
     "build-frontend": "cd frontend && npm run build",
     "install-backend": "cd backend && ./mvnw clean install",
     "build-backend": "cd backend && ./mvnw package",
     "build": "npm run install-frontend && npm run build-frontend && npm run install-backend && npm run build-backend",
     "start": "cd backend && java -jar target/*.jar"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.15",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/styles": "^5.11.13",
+    "@mui/styled-engine-sc": "^5.11.11",
+    "@react-spring/web": "^9.7.1",
+    "axios": "^1.3.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.10.0",
+    "react-scripts": "5.0.1",
+    "react-youtube": "^10.1.0"
   }
 }
