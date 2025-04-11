@@ -9,12 +9,13 @@ RUN npm run build
 # Build backend
 FROM maven:3.8.3-openjdk-17 AS backend-build
 WORKDIR /app/backend
-COPY backend/pom.xml ./
-COPY backend/src ./src
+COPY backend/pom.xml .
 COPY backend/.mvn ./.mvn
 COPY backend/mvnw .
+COPY backend/src ./src
 RUN chmod +x mvnw
-RUN backend/mvnw clean package -DskipTests
+RUN ./mvnw clean package 
+RUN ./mvnw spring-boot:run
 
 # Final image
 FROM openjdk:17-jdk-slim
