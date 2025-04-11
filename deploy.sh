@@ -5,6 +5,21 @@ echo "Installing dependencies..."
 npm run install-frontend
 npm run install-backend
 
+# Install Railway CLI
+npm install -g @railway/cli
+
+# Login to Railway
+railway login
+
+# Initialize project
+railway init
+
+# Add MySQL database
+railway add mysql
+
+# Get database credentials
+railway connect mysql
+
 # Build applications
 echo "Building applications..."
 npm run build
