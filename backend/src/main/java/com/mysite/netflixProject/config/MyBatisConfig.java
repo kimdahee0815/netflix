@@ -17,11 +17,20 @@ public class MyBatisConfig {
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
-        sessionFactory.setTypeAliasesPackage("com.mysite.netflixProject");
         
-        // Use classpath* to search in all classpath locations
+        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+        configuration.setMapUnderscoreToCamelCase(true);
+        sessionFactory.setConfiguration(configuration);
+        
+        // Set type aliases package with specific class
+        sessionFactory.setTypeAliasesPackage("com.mysite.netflixProject.board;"
+                + "com.mysite.netflixProject.favmovie;"
+                + "com.mysite.netflixProject.member;"
+                + "com.mysite.netflixProject.profile");
+        
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         sessionFactory.setMapperLocations(resolver.getResources("classpath*:mappers/*.xml"));
+        
         return sessionFactory.getObject();
     }
     

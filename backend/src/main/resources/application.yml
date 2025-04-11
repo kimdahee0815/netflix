@@ -12,9 +12,3 @@ spring:
     active: ${SPRING_PROFILES_ACTIVE:prod}
 server:
   port: ${PORT:8080}
-
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
-  type-aliases-package: com.mysite.netflixProject
-  mapper-locations: classpath*:mappers/*.xml
