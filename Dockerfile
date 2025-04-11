@@ -14,7 +14,7 @@ COPY backend/src ./src
 COPY backend/.mvn ./.mvn
 COPY backend/mvnw .
 RUN chmod +x mvnw
-RUN ./mvnw clean package -DskipTests
+RUN backend/mvnw clean package -DskipTests
 
 # Final image
 FROM openjdk:17-jdk-slim
