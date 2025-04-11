@@ -10,7 +10,7 @@ import FavMovieList from "./FavMovieList";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useMediaQuery, useTheme } from "@mui/material";
 import axios from "axios";
-
+import config from '../config';
 import React from "react";
 
 const Layout = () => {
@@ -81,7 +81,7 @@ const Layout = () => {
   const loadProfiles = (login_id) => {
     console.log("MEMBERID", login_id);
     axios
-      .post("http://localhost:8080/profiles", {
+      .post(`${config.API_URL}/profiles`, {
         member_id: login_id,
       })
       .then((res) => {

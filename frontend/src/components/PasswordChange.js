@@ -9,6 +9,7 @@ import OutlinedTextField from "./OutlinedTextField";
 import CustomizedButton from "./CustomizedButton";
 import axios from "axios";
 import FormHelperText from "@mui/material/FormHelperText";
+import config from '../config';
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
@@ -102,7 +103,7 @@ export default function PasswordChange({
   const handlePwUpdate = (e) => {
     if (isValidPassword(newPw)) {
       axios
-        .post("http://localhost:8080/passwordUpdate", {
+        .post(`${config.API_URL}/passwordUpdate`, {
           member_id: email,
           member_pw: newPw,
         })

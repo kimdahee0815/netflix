@@ -14,6 +14,7 @@ import PhoneChange from "./PhoneChange";
 import axios from "axios";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useLayoutEffect, useEffect } from "react";
+import config from '../config';
 
 const MyPageBody = () => {
   const theme = useTheme();
@@ -38,7 +39,7 @@ const MyPageBody = () => {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .post("http://localhost:8080/selectMember", {
+      .post(`${config.API_URL}/selectMember`, {
         member_id: user,
       })
       .then((res) => {
@@ -56,7 +57,7 @@ const MyPageBody = () => {
   }, []);
   useEffect(() => {
     axios
-      .post("http://localhost:8080/selectMember", {
+      .post(`${config.API_URL}/selectMember`, {
         member_id: email,
       })
       .then((res) => {
@@ -86,7 +87,7 @@ const MyPageBody = () => {
   const loadProfiles = (memberID) => {
     console.log("MEMBERID", memberID);
     axios
-      .post("http://localhost:8080/profiles", {
+      .post(`${config.API_URL}/profiles`, {
         member_id: memberID,
       })
       .then((res) => {
@@ -138,7 +139,7 @@ const MyPageBody = () => {
   };
   const deleteAccount = () => {
     axios
-      .post("http://localhost:8080/deleteMember", {
+      .post(`${config.API_URL}/deleteMember`, {
         member_id: email,
       })
       .then((res) => {
@@ -146,7 +147,7 @@ const MyPageBody = () => {
         if (res.data === 1) {
           alert("회원 탈퇴되었습니다.");
           axios
-            .post("http://localhost:8080/favmovie/remove", {
+            .post(`${config.API_URL}/favmovie/remove`, {
               member_id: window.sessionStorage.getItem("id"),
             })
             .then((res) => {
@@ -156,7 +157,7 @@ const MyPageBody = () => {
               console.error(e);
             });
           axios
-            .post("http://localhost:8080/customer/deletebyid", {
+            .post(`${config.API_URL}/customer/deletebyid`, {
               member_id: window.sessionStorage.getItem("id"),
             })
             .then((res) => {})
@@ -164,7 +165,7 @@ const MyPageBody = () => {
               console.error(e);
             });
           axios
-            .post("http://localhost:8080/deleteProfileMember", {
+            .post(`${config.API_URL}/deleteProfileMember`, {
               member_id: window.sessionStorage.getItem("id"),
             })
             .then((res) => {})

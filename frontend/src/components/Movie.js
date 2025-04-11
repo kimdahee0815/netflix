@@ -9,6 +9,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 import { useLayoutEffect, useState, useEffect } from "react";
+import config from '../config';
 
 function Movie({
   id,
@@ -54,7 +55,7 @@ function Movie({
 
   if (value === "favmovielist") {
     axios
-      .post("http://localhost:8080/favmovie/chk", {
+      .post(`${config.API_URL}/favmovie/chk`, {
         movie_title: title,
         member_id: window.sessionStorage.getItem("id"),
       })
@@ -67,7 +68,7 @@ function Movie({
   }
   useLayoutEffect(() => {
     axios
-      .post("http://localhost:8080/favmovie/chk", {
+      .post(`${config.API_URL}/favmovie/chk`, {
         movie_title: title,
         member_id: window.sessionStorage.getItem("id"),
       })
@@ -84,7 +85,7 @@ function Movie({
   const modalCheck = () => {
     console.log("modal");
     axios
-      .post("http://localhost:8080/favmovie/chk", {
+      .post(`${config.API_URL}/favmovie/chk`, {
         movie_title: title,
         member_id: window.sessionStorage.getItem("id"),
       })
@@ -101,7 +102,7 @@ function Movie({
     if (ischecked) {
       console.log("isChecked가 true일때");
       axios
-        .post("http://localhost:8080/favmovie/delete", {
+        .post(`${config.API_URL}/favmovie/delete`, {
           member_id: window.sessionStorage.getItem("id"),
           movie_title: title,
         })
@@ -115,7 +116,7 @@ function Movie({
     } else {
       console.log("isChecked false일때 ");
       axios
-        .post("http://localhost:8080/favmovie/isDuplicateTitle", {
+        .post(`${config.API_URL}/favmovie/isDuplicateTitle`, {
           member_id: window.sessionStorage.getItem("id"),
           movie_title: title,
         })
@@ -124,7 +125,7 @@ function Movie({
             //제목이 중복되지 않을 때에만
 
             axios
-              .post("http://localhost:8080/favmovie/insert", {
+              .post(`${config.API_URL}/favmovie/insert`, {
                 member_id: window.sessionStorage.getItem("id"),
                 movie_title: title,
                 movie_summary: summary,

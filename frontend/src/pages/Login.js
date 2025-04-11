@@ -21,6 +21,7 @@ import {
   ThemeProvider,
 } from "@material-ui/core/styles";
 import { orange, blue, green } from "@material-ui/core/colors";
+import config from '../config';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -87,7 +88,7 @@ function Login() {
       setSaveAccount(true);
       setEmail(window.localStorage.getItem("id"));
       axios
-        .post("http://localhost:8080/selectMember", {
+        .post(`${config.API_URL}/selectMember`, {
           member_id: window.localStorage.getItem("id"),
         })
         .then((res) => {
@@ -161,14 +162,14 @@ function Login() {
 
   const handleLogin = () => {
     axios
-      .post("http://localhost:8080/selectMember", {
+      .post(`${config.API_URL}/selectMember`, {
         member_id: email,
       })
       .then((res) => {
         // console.log(res);
         if (res.data !== "") {
           axios
-            .post("http://localhost:8080/login", {
+            .post(`${config.API_URL}/login`, {
               member_id: email,
               member_pw: password,
             })

@@ -9,6 +9,7 @@ import { Paper } from "@mui/material";
 import axios from "axios";
 import Input from "@mui/material/Input";
 import TextField from "@mui/material/TextField";
+import config from '../config';
 
 export default function BoardModify() {
   const [article, setArticle] = useState({
@@ -36,7 +37,7 @@ export default function BoardModify() {
 
   const getDetail = () => {
     axios
-      .get(`http://localhost:8080/customer/detail?board_num=${board_num}`)
+      .get(`${config.API_URL}/customer/detail?board_num=${board_num}`)
       .then((res) => {
         const { data } = res;
         setArticle({
@@ -49,7 +50,7 @@ export default function BoardModify() {
 
   const handleModify = () => {
     axios
-      .post("http://localhost:8080/customer/modify", {
+      .post(`${config.API_URL}/customer/modify`, {
         board_title: article.board_title,
         board_content: article.board_content,
         board_num: board_num,

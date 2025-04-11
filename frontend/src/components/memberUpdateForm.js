@@ -18,6 +18,7 @@ import {
   Theme as AugmentedTheme,
   ThemeProvider,
 } from "@material-ui/core/styles";
+import config from '../config';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -363,7 +364,7 @@ export default function MemberUpdateForm({
   const infoChange = (e) => {
     if (loginCheck()) {
       axios
-        .post("http://localhost:8080/updateMembers", {
+        .post(`${config.API_URL}/updateMembers`, {
           member_id: id,
           member_pw: password,
           member_name: name,

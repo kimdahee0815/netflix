@@ -9,6 +9,7 @@ import OutlinedTextField from "./OutlinedTextField";
 import CustomizedButton from "./CustomizedButton";
 import axios from "axios";
 import FormHelperText from "@mui/material/FormHelperText";
+import config from '../config';
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
@@ -94,7 +95,7 @@ export default function EmailChange({
     if (newEmail !== "") {
       if (isValidId(newEmail)) {
         axios
-          .post("http://localhost:8080/idDuplicateCheck", {
+          .post(`${config.API_URL}/idDuplicateCheck`, {
             member_id: newEmail,
           })
           .then((res) => {
@@ -149,7 +150,7 @@ export default function EmailChange({
   const handleUpdate = (e) => {
     if (emailChangeCheck()) {
       axios
-        .post("http://localhost:8080/emailUpdate", {
+        .post(`${config.API_URL}/emailUpdate`, {
           member_id: email2,
           member_new_id: newEmail,
         })
@@ -157,7 +158,7 @@ export default function EmailChange({
           console.log("emailUpdate =>", res);
           if (res.data === 1) {
             axios
-              .post("http://localhost:8080/profileEmailUpdate", {
+              .post(`${config.API_URL}/profileEmailUpdate`, {
                 member_id: email2,
                 member_new_id: newEmail,
               })
@@ -168,7 +169,7 @@ export default function EmailChange({
                 console.error(e);
               });
             axios
-              .post("http://localhost:8080/customer/modifyid", {
+              .post(`${config.API_URL}/customer/modifyid`, {
                 new_member_id: newEmail,
                 old_member_id: email2,
               })
@@ -177,7 +178,7 @@ export default function EmailChange({
                 console.error(e);
               });
             axios
-              .post("http://localhost:8080/favmovie/modifyid", {
+              .post(`${config.API_URL}/favmovie/modifyid`, {
                 new_member_id: newEmail,
                 old_member_id: email2,
               })

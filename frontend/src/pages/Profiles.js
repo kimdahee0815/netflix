@@ -5,6 +5,8 @@ import { Grid, Typography, Box } from "@mui/material";
 import ProfileAdd from "../components/ProfileAdd";
 import ProfilesManageBtn from "../components/ProfilesManageBtn";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import config from '../config';
+
 const PageTitle = ({ manageMode }) => {
   return (
     <div
@@ -31,7 +33,7 @@ function ProfileManager() {
 
   const loadProfiles = (memberID) => {
     axios
-      .post("http://localhost:8080/profiles", {
+      .post(`${config.API_URL}/profiles`, {
         member_id: memberID,
       })
       .then((res) => {
@@ -45,7 +47,7 @@ function ProfileManager() {
 
   const addProfile = async (newNickname) => {
     try {
-      await axios.post("http://localhost:8080/insertprofiles", {
+      await axios.post(`${config.API_URL}/insertprofiles`, {
         member_id: memberID,
         nickname: newNickname,
       });

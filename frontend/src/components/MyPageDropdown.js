@@ -10,6 +10,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import config from '../config';
 
 const MypageDropDown = () => {
   const memberID = window.sessionStorage.getItem("id");
@@ -22,7 +23,7 @@ const MypageDropDown = () => {
   const loadProfiles = (memberID) => {
     console.log("MEMBERID", memberID);
     axios
-      .post("http://localhost:8080/profiles", {
+      .post(`${config.API_URL}/profiles`, {
         member_id: memberID,
       })
       .then((res) => {

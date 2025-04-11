@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { Paper } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import config from '../config';
 
 export default function BoardInsert() {
   const [board_title, setTitle] = useState("");
@@ -22,7 +23,7 @@ export default function BoardInsert() {
 
   useEffect(() => {
     axios
-      .post("http://localhost:8080/selectMember", {
+      .post(`${config.API_URL}/selectMember`, {
         member_id: user,
       })
       .then((res) => {
@@ -56,7 +57,7 @@ export default function BoardInsert() {
 
   const handleInsert = () => {
     axios
-      .post("http://localhost:8080/customer/insert", {
+      .post(`${config.API_URL}/customer/insert`, {
         member_id: window.sessionStorage.getItem("id"),
         board_title: board_title,
         board_content: board_content,

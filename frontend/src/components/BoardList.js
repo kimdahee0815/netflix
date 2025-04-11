@@ -15,6 +15,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import config from '../config';
 
 export default function StickyHeadTable() {
   const theme = useTheme();
@@ -59,7 +60,7 @@ export default function StickyHeadTable() {
 
   const getList = () => {
     axios
-      .get("http://localhost:8080/customer/get", {})
+      .get(`${config.API_URL}/customer/get`, {})
       .then((res) => {
         const { data } = res;
         setBoardList(data);

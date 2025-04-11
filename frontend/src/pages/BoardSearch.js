@@ -16,6 +16,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import config from '../config';
 
 export default function BoardSearch() {
     const theme = useTheme();
@@ -61,7 +62,7 @@ export default function BoardSearch() {
 
     const getList = () => {
         axios
-            .get(`http://localhost:8080/customer/search?search=${searchAny}`, {})
+            .get(`${config.API_URL}/customer/search?search=${searchAny}`, {})
             .then((res) => {
                 const { data } = res;
                 setBoardList(data);

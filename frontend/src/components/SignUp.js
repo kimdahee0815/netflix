@@ -18,6 +18,7 @@ import {
   Theme as AugmentedTheme,
   ThemeProvider,
 } from "@material-ui/core/styles";
+import config from '../config';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -376,7 +377,7 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
   const loginSubmit = (e) => {
     if (loginCheck()) {
       axios
-        .post("http://localhost:8080/insertMember", {
+        .post(`${config.API_URL}/insertMember`, {
           member_id: id,
           member_pw: password,
           member_name: name,
@@ -404,7 +405,7 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
     if (id !== "") {
       if (isValidId(id)) {
         axios
-          .post("http://localhost:8080/idDuplicateCheck", {
+          .post(`${config.API_URL}/idDuplicateCheck`, {
             member_id: id,
           })
           .then((res) => {

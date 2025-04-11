@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import { useParams, useNavigate } from "react-router-dom";
 import ProfileUpdateForm from "../components/ProfileUpdateForm";
 import TextField from "@mui/material/TextField";
+import config from '../config';
 
 const renderProfileImage = (profileId) => {
   const images = [
@@ -39,7 +40,7 @@ const ProfileUpdate = () => {
   useEffect(() => {
     console.log(profileId);
     axios
-      .post("http://localhost:8080/profileDetail", {
+      .post(`${config.API_URL}/profileDetail`, {
         member_id: member_id,
         profile_id: profileId,
       })
@@ -53,7 +54,7 @@ const ProfileUpdate = () => {
 
   const handleSave = () => {
     axios
-      .put("http://localhost:8080/updateprofiles", {
+      .put(`${config.API_URL}/updateprofiles`, {
         member_id: member_id,
         profile_id: parseInt(profileId, 10),
         nickname: nickname,
@@ -73,14 +74,14 @@ const ProfileUpdate = () => {
 
   const handleDelete = () => {
     axios
-      .post("http://localhost:8080/profileDetail", {
+      .post(`${config.API_URL}/profileDetail`, {
         member_id: member_id,
         profile_id: profileId,
       })
       .then((res) => {
         axios
           .delete(
-            `http://localhost:8080/deleteprofiles?member_id=${member_id}&profile_id=${profileId}`
+            `${config.API_URL}/deleteprofiles?member_id=${member_id}&profile_id=${profileId}`
           )
           .then(() => {
             if (window.localStorage.getItem("profile_num") === profileId) {

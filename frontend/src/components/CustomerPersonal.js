@@ -9,6 +9,7 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import { useEffect } from "react";
+import config from '../config';
 
 const CustomerPersonal = () => {
   const theme = useTheme();
@@ -20,7 +21,7 @@ const CustomerPersonal = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:8080/selectMember", {
+      .post(`${config.API_URL}/selectMember`, {
         member_id: user,
       })
       .then((res) => {

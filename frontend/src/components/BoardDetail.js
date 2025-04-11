@@ -8,6 +8,7 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useMediaQuery, useTheme } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import config from '../config';
 
 function BoardDetail() {
   const [openModal, setOpenModal] = useState(false);
@@ -27,7 +28,7 @@ function BoardDetail() {
 
   const getDetail = () => {
     axios
-      .get(`http://localhost:8080/customer/detail?board_num=${board_num}`)
+      .get(`${config.API_URL}/customer/detail?board_num=${board_num}`)
       .then((res) => {
         const { data } = res;
         setArticle({
@@ -59,7 +60,7 @@ function BoardDetail() {
   const clickDelete = () => {
     if (window.sessionStorage.getItem("id") === "admin@email.com") {
       axios
-        .get(`http://localhost:8080/customer/delete?board_num=${board_num}`)
+        .get(`${config.API_URL}/customer/delete?board_num=${board_num}`)
         .then((res) => {
           alert("정보 삭제 성공!");
           navigate("/board");
@@ -78,7 +79,7 @@ function BoardDetail() {
       alert("내용없이 답변이 불가능합니다");
     } else {
       axios
-        .post("http://localhost:8080/customer/reply", {
+        .post(`${config.API_URL}/customer/reply`, {
           board_reply: board_reply,
           board_num: board_num,
         })

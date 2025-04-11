@@ -12,6 +12,7 @@ import { useRef, useState } from "react";
 import FormHelperText from "@mui/material/FormHelperText";
 import axios from "axios";
 import PasswordChange from "./PasswordChange";
+import config from '../config';
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
@@ -124,7 +125,7 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
   const passwordSearchSubmit = () => {
     if (handlePasswordCheck()) {
       axios
-        .post("http://localhost:8080/passwordSearch", {
+        .post(`${config.API_URL}/passwordSearch`, {
           member_id: id,
           pw_question: passwordQuestion,
           pw_answer: passwordAnswer,
@@ -133,7 +134,7 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
           console.log("passwordSearch =>", res);
           if (res.data === 1) {
             axios
-              .post("http://localhost:8080/selectMember", {
+              .post(`${config.API_URL}/selectMember`, {
                 member_id: id,
               })
               .then((res) => {

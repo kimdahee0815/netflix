@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useEffect } from "react";
 import { Divider } from "@mui/material";
+import config from '../config';
 
 export default function PositionedMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -34,7 +35,7 @@ export default function PositionedMenu() {
 
   useEffect(() => {
     axios
-      .post("http://localhost:8080/selectMember", {
+      .post(`${config.API_URL}/selectMember`, {
         member_id: user,
       })
       .then((res) => {

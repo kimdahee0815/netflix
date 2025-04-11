@@ -9,6 +9,7 @@ import OutlinedTextField from "./OutlinedTextField";
 import CustomizedButton from "./CustomizedButton";
 import axios from "axios";
 import FormHelperText from "@mui/material/FormHelperText";
+import config from '../config';
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
@@ -88,7 +89,7 @@ export default function PhoneChange({
   const handleUpdate = () => {
     if (isValidatePhone(newTel)) {
       axios
-        .post("http://localhost:8080/phoneUpdate", {
+        .post(`${config.API_URL}/phoneUpdate`, {
           member_id: email,
           member_tel: newTel,
         })

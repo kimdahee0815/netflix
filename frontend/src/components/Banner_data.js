@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import React, { useLayoutEffect, useState } from "react";
 import YouTube from "react-youtube";
+import config from '../config';
 
 function Banner_data({
   id,
@@ -93,7 +94,7 @@ function Banner_data({
   const [isclicked, setIsClicked] = useState(false);
   if (value === "favmovielist") {
     axios
-      .post("http://localhost:8080/favmovie/chk", {
+      .post(`${config.API_URL}/favmovie/chk`, {
         movie_title: title,
         member_id: window.sessionStorage.getItem("id"),
       })
@@ -106,7 +107,7 @@ function Banner_data({
   }
   useLayoutEffect(() => {
     axios
-      .post("http://localhost:8080/favmovie/chk", {
+      .post(`${config.API_URL}/favmovie/chk`, {
         movie_title: title,
         member_id: window.sessionStorage.getItem("id"),
       })
@@ -126,7 +127,7 @@ function Banner_data({
       console.log("isChecked가 true일때");
 
       axios
-        .post("http://localhost:8080/favmovie/delete", {
+        .post(`${config.API_URL}/favmovie/delete`, {
           member_id: window.sessionStorage.getItem("id"),
           movie_title: title,
         })
@@ -138,7 +139,7 @@ function Banner_data({
     } else {
       console.log("isChecked false일때 ");
       axios
-        .post("http://localhost:8080/favmovie/isDuplicateTitle", {
+        .post(`${config.API_URL}/favmovie/isDuplicateTitle`, {
           member_id: window.sessionStorage.getItem("id"),
           movie_title: title,
         })
@@ -147,7 +148,7 @@ function Banner_data({
             //제목이 중복되지 않을 때에만
 
             axios
-              .post("http://localhost:8080/favmovie/insert", {
+              .post(`${config.API_URL}/favmovie/insert`, {
                 member_id: window.sessionStorage.getItem("id"),
                 movie_title: title,
                 movie_summary: summary,

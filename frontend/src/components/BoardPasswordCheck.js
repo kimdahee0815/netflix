@@ -10,6 +10,7 @@ import CustomizedButton from "./CustomizedButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import FormHelperText from "@mui/material/FormHelperText";
+import config from '../config';
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
@@ -94,7 +95,7 @@ export default function BoardPasswordCheck({
     if (modify === true) {
       if (isValidPassword(password)) {
         axios
-          .post("http://localhost:8080/login", {
+          .post(`${config.API_URL}/login`, {
             member_id: window.sessionStorage.getItem("id"),
             member_pw: password,
           })
@@ -122,7 +123,7 @@ export default function BoardPasswordCheck({
     } else if (remove === true) {
       if (isValidPassword(password)) {
         axios
-          .post("http://localhost:8080/login", {
+          .post(`${config.API_URL}/login`, {
             member_id: window.sessionStorage.getItem("id"),
             member_pw: password,
           })
@@ -131,7 +132,7 @@ export default function BoardPasswordCheck({
               if (window.sessionStorage.getItem("id") === owner) {
                 axios
                   .get(
-                    `http://localhost:8080/customer/delete?board_num=${boardnum}`
+                    `${config.API_URL}/customer/delete?board_num=${boardnum}`
                   )
                   .then((res) => {
                     alert("정보 삭제 성공!");

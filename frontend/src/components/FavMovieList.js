@@ -3,6 +3,7 @@ import { useEffect, useState, useLayoutEffect } from "react";
 import Movie from "../components/Movie";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
+import config from '../config';
 
 const FavMovieList = () => {
   const [loading, setLoading] = useState(true);
@@ -15,7 +16,7 @@ const FavMovieList = () => {
   };
   useEffect(() => {
     axios
-      .post("http://localhost:8080/favmovie/select", {
+      .post(`${config.API_URL}/favmovie/select`, {
         member_id: window.sessionStorage.getItem("id"),
       })
       .then((res) => {

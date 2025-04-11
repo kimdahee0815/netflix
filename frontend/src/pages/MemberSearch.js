@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import MemberUpdateForm from "../components/memberUpdateForm";
+import config from '../config';
 
 export default function MemberSearch() {
   const theme = useTheme();
@@ -79,7 +80,7 @@ export default function MemberSearch() {
 
   const getList = () => {
     axios
-      .get(`http://localhost:8080/memberSearch?search=${searchAny}`, {})
+      .get(`${config.API_URL}/memberSearch?search=${searchAny}`, {})
       .then((res) => {
         const { data } = res;
         setMemberList(data);
@@ -93,7 +94,7 @@ export default function MemberSearch() {
   const handleTableCellClick = (event, post) => {
     if (event.target.innerText === "수정") {
       axios
-        .post("http://localhost:8080/selectMember", {
+        .post(`${config.API_URL}/selectMember`, {
           member_id: post.member_id,
         })
         .then((res) => {
@@ -119,14 +120,14 @@ export default function MemberSearch() {
         });
     } else if (event.target.innerText === "삭제") {
       axios
-        .post("http://localhost:8080/deleteMember", {
+        .post(`${config.API_URL}/deleteMember`, {
           member_id: post.member_id,
         })
         .then((res) => {
           if (res.data === 1) {
             alert("회원 정보가 삭제되었습니다!");
             axios
-              .post("http://localhost:8080/favmovie/remove", {
+              .post(`${config.API_URL}/favmovie/remove`, {
                 member_id: post.member_id,
               })
               .then((res) => {})
@@ -134,7 +135,7 @@ export default function MemberSearch() {
                 console.error(e);
               });
             axios
-              .post("http://localhost:8080/customer/deletebyid", {
+              .post(`${config.API_URL}/customer/deletebyid`, {
                 member_id: post.member_id,
               })
               .then((res) => {})
@@ -142,7 +143,7 @@ export default function MemberSearch() {
                 console.error(e);
               });
             axios
-              .post("http://localhost:8080/deleteProfileMember", {
+              .post(`${config.API_URL}/deleteProfileMember`, {
                 member_id: post.member_id,
               })
               .then((res) => {
