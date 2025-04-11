@@ -11,7 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
             .allowedOrigins(
-                "https://*.netlify.app",
+                "https://net-flix-clone-dahee-kim.netlify.app",
                 "http://localhost:3000",
                 "https://netflix-dmqv.onrender.com"
             )
