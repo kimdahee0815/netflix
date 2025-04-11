@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-@Service("profileService")
+@Service
 public class ProfileServiceImpl implements ProfileService {
 
-	private ProfileMapper mapper;
+	private final ProfileMapper mapper;
 
     public ProfileServiceImpl(ProfileMapper mapper) {
         this.mapper = mapper;
