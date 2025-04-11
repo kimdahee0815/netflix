@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${MYSQL_URL}
+    url: jdbc:${MYSQL_URL}
     username: ${MYSQL_USERNAME}
     password: ${MYSQL_PASSWORD}
   sql:
@@ -12,3 +12,8 @@ spring:
     active: ${SPRING_PROFILES_ACTIVE:prod}
 server:
   port: ${PORT:8080}
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.mysite.netflixProject
