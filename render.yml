@@ -3,7 +3,7 @@ services:
     name: netflix-backend
     env: docker
     buildCommand: docker build -t netflix-app .
-    startCommand: docker run -p $PORT:8080 netflix-app
+    startCommand: docker run -p $PORT:8080 -e MYSQL_URL="$MYSQL_URL" -e MYSQL_USERNAME="$MYSQL_USERNAME" -e MYSQL_PASSWORD="$MYSQL_PASSWORD" netflix-app
     envVars:
       - key: MYSQL_URL
         value: ${MYSQL_URL}

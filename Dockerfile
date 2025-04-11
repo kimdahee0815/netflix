@@ -11,10 +11,10 @@ FROM maven:3.8.3-openjdk-17 AS backend-build
 WORKDIR /app/backend
 COPY backend/pom.xml .
 COPY backend/.mvn ./.mvn
-COPY backend/mvnw .
+COPY backend/mvnw ./mvnw
 COPY backend/src ./src
 RUN chmod +x mvnw
-RUN ./mvnw clean package -DskipTests=true
+RUN mvn clean package -DskipTests
 
 # Final image
 FROM openjdk:17-jdk-slim
