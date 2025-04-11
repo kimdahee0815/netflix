@@ -7,7 +7,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
 @MapperScan(basePackages = "com.mysite.netflixProject")
@@ -22,18 +21,10 @@ public class MyBatisConfig {
         configuration.setMapUnderscoreToCamelCase(true);
         sessionFactory.setConfiguration(configuration);
         
-        // Set type aliases package for each domain separately
-        String[] typeAliasesPackages = {
-            "com.mysite.netflixProject.board",
-            "com.mysite.netflixProject.favmovie",
-            "com.mysite.netflixProject.member",
-            "com.mysite.netflixProject.profile"
-        };
-        sessionFactory.setTypeAliasesPackage(String.join(",", typeAliasesPackages));
+        // Set type aliases package
+        sessionFactory.setTypeAliasesPackage("com.mysite.netflixProject");
         
-        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sessionFactory.setMapperLocations(resolver.getResources("classpath*:mappers/*.xml"));
-        
+        // No need for mapper XML files since we're using annotations
         return sessionFactory.getObject();
     }
     
