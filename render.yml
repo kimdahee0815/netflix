@@ -4,14 +4,20 @@ services:
     env: docker
     buildCommand: docker build -t netflix-app .
     startCommand: docker run -p $PORT:8080 
-      -e MYSQL_URL="jdbc:${MYSQL_URL}" 
+      -e DB_HOST="${DB_HOST}" 
+      -e DB_PORT="${DB_PORT}" 
+      -e DB_NAME="${DB_NAME}" 
       -e MYSQL_USERNAME="${MYSQL_USERNAME}" 
       -e MYSQL_PASSWORD="${MYSQL_PASSWORD}"
       -e SPRING_PROFILES_ACTIVE="prod"
       netflix-app
     envVars:
-      - key: MYSQL_URL
-        value: jdbc:${MYSQL_URL}
+      - key: DB_HOST
+        value: ${DB_HOST}
+      - key: DB_PORT
+        value: ${DB_PORT} 
+      - key: DB_NAME
+        value: ${DB_NAME}
       - key: MYSQL_USERNAME
         value: ${MYSQL_USERNAME}
       - key: MYSQL_PASSWORD

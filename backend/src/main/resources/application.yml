@@ -6,8 +6,13 @@ spring:
     password: ${MYSQL_PASSWORD}
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:prod}
+  mvc:
+    servlet:
+      load-on-startup: 1
 server:
   port: ${PORT:8080}
+  servlet:
+    context-path: /api
 
 mybatis:
   configuration:
