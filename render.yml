@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: netflix-backend
+    env: docker
+    buildCommand: |
+      chmod +x backend/mvnw
+      cd backend
+      ./mvnw clean package -DskipTests
+    startCommand: java -jar backend/target/*.jar
+    envVars:
+      - key: MYSQL_URL
+        value: ${MYSQL_URL}
+      - key: MYSQL_USERNAME
+        value: ${MYSQL_USERNAME}
+      - key: MYSQL_PASSWORD
+        value: ${MYSQL_PASSWORD}
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: 8080
