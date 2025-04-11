@@ -22,11 +22,14 @@ public class MyBatisConfig {
         configuration.setMapUnderscoreToCamelCase(true);
         sessionFactory.setConfiguration(configuration);
         
-        // Set type aliases package with specific class
-        sessionFactory.setTypeAliasesPackage("com.mysite.netflixProject.board;"
-                + "com.mysite.netflixProject.favmovie;"
-                + "com.mysite.netflixProject.member;"
-                + "com.mysite.netflixProject.profile");
+        // Set type aliases package for each domain separately
+        String[] typeAliasesPackages = {
+            "com.mysite.netflixProject.board",
+            "com.mysite.netflixProject.favmovie",
+            "com.mysite.netflixProject.member",
+            "com.mysite.netflixProject.profile"
+        };
+        sessionFactory.setTypeAliasesPackage(String.join(",", typeAliasesPackages));
         
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         sessionFactory.setMapperLocations(resolver.getResources("classpath*:mappers/*.xml"));
