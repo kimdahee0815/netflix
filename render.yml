@@ -11,3 +11,5 @@ services:
         value: ${MYSQL_USERNAME}
       - key: MYSQL_PASSWORD
         value: ${MYSQL_PASSWORD}
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
