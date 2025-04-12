@@ -12,42 +12,37 @@ import java.io.IOException;
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORSInterceptor implements Filter {
-
-    private static final String[] allowedOrigins = {
-        "http://localhost:3000", "https://net-flix-clone-dahee-kim.netlify.app"
-    };
-
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
+    public void init(FilterConfig filterConfig) throws ServletException {
 
-        String requestOrigin = request.getHeader("Origin");
-        if(isAllowedOrigin(requestOrigin)) {
-            // Authorize the origin, all headers, and all methods
-            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", requestOrigin);
-            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Headers", "*");
-            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Methods",
-                "GET, OPTIONS, HEAD, PUT, POST, DELETE");
-            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Credentials", "true");
-            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Max-Age", "3600");
-            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Expose-Headers", "*");
-            
-            HttpServletResponse resp = (HttpServletResponse) servletResponse;
-
-            // CORS handshake (pre-flight request)
-            if (request.getMethod().equals("OPTIONS")) {
-                resp.setStatus(HttpServletResponse.SC_ACCEPTED);
-                return;
-            }
-        }
-        // pass the request along the filter chain
-        filterChain.doFilter(request, servletResponse);
     }
 
-    private boolean isAllowedOrigin(String origin){
-        for (String allowedOrigin : allowedOrigins) {
-            if(origin.equals(allowedOrigin)) return true;
+    @Override
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) res;
+
+        String origin = request.getHeader("Origin");
+        if ("http://localhost:3000".equals(origin) || 
+            "https://net-flix-clone-dahee-kim.netlify.app".equals(origin)) {
+            response.setHeader("Access-Control-Allow-Origin", origin);
         }
-        return false;
+
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Methods", "*");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers",
+                "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            chain.doFilter(req, res);
+        }
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }
