@@ -13,24 +13,22 @@
     </select>
 
     <select id="getFavMovielist" resultType="com.mysite.netflixProject.favmovie.FavMovieVO">
-        SELECT * 
-        FROM fav_movie 
+        SELECT * FROM fav_movie 
         WHERE member_id = #{member_id}
     </select>
 
-    <delete id="deleteFavMovie" parameterType="com.mysite.netflixProject.favmovie.FavMovieVO">
+    <delete id="deleteFavMovie">
         DELETE FROM fav_movie 
         WHERE movie_title = #{movie_title} AND member_id = #{member_id}
     </delete>
 
-    <delete id="removeMember" parameterType="com.mysite.netflixProject.favmovie.FavMovieVO">
+    <delete id="removeMember">
         DELETE FROM fav_movie 
         WHERE member_id = #{member_id}
     </delete>
 
     <select id="isDuplicateTitle" resultType="int">
-        SELECT count(*) 
-        FROM fav_movie 
+        SELECT count(*) FROM fav_movie 
         WHERE member_id = #{member_id} AND movie_title = #{movie_title}
     </select>
 
