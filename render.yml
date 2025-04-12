@@ -11,10 +11,13 @@ services:
       netflix-app
     envVars:
       - key: PORT
+        sync: false
         value: 8080
       - key: MYSQL_URL
-        value: ${MYSQL_URL}
+        sync: false
       - key: MYSQL_USERNAME
-        value: ${MYSQL_USERNAME}
+        sync: false  
       - key: MYSQL_PASSWORD
-        value: ${MYSQL_PASSWORD}
+        sync: false
+    healthCheckPath: /api/health
+    autoDeploy: true
