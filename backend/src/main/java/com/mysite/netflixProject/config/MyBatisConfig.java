@@ -24,7 +24,7 @@ public class MyBatisConfig {
         
         // Configure XML location
         Resource[] res = new PathMatchingResourcePatternResolver()
-            .getResources("classpath:mappers/*Mapper.xml");
+            .getResources("classpath:mappers/*.xml");
         sessionFactory.setMapperLocations(res);
         
         // Configure MyBatis settings
