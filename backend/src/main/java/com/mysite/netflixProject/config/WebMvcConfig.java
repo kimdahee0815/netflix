@@ -30,9 +30,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .setViewName("forward:/index.html");
     }
 
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-        registry.jsp("/static/", ".html");
-    }
-
 }
