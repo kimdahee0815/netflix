@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS netflixproject;
+USE netflixproject;
+
 CREATE TABLE IF NOT EXISTS member (
     member_num INT AUTO_INCREMENT PRIMARY KEY,
     member_id VARCHAR(255) NOT NULL,
