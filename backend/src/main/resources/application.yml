@@ -20,11 +20,6 @@ spring:
           enabled: true
           paths: /**
 
-mybatis:
-  type-aliases-package: com.mysite.netflixProject
-  configuration:
-    map-underscore-to-camel-case: true
-
 ---
 spring:
   config:
