@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mysite.netflixProject.mappers.FavMovieMapper">
+<mapper namespace="com.mysite.netflixProject.favmovie.FavMovieMapper">
     <insert id="insertFavMovie" parameterType="com.mysite.netflixProject.favmovie.FavMovieVO">
         INSERT INTO fav_movie (member_id, movie_title, movie_summary, movie_image) 
         VALUES (#{member_id}, #{movie_title}, #{movie_summary}, #{movie_image})
