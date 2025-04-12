@@ -19,6 +19,8 @@ public class WebConfig implements WebMvcConfigurer {
             .exposedHeaders(
                 "Access-Control-Allow-Origin",
                 "Access-Control-Allow-Credentials",
+                "Access-Control-Allow-Methods",
+                "Access-Control-Allow-Headers",
                 "Authorization"
             )
             .allowCredentials(true)
