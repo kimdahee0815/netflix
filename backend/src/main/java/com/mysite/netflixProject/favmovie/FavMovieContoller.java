@@ -15,7 +15,7 @@ import com.mysite.netflixProject.board.Idchange;
 
 
 @RestController
-@RequestMapping("/favmovie")
+@RequestMapping("/api/favmovie")
 public class FavMovieContoller {
 	private FavMovieService favMovieService; 
 	

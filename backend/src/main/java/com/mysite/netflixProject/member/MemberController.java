@@ -17,7 +17,7 @@ public class MemberController {
 		this.memberService = memberService;
 	}
 	
-	@RequestMapping("/login")
+	@RequestMapping("/api/login")
 	public int login(@RequestBody MemberVO vo) throws Exception{
 		int res = memberService.login(vo);
 //		System.out.println("res : "+res);
@@ -26,7 +26,7 @@ public class MemberController {
 	}
 
 	
-	@RequestMapping("/insertMember")
+	@RequestMapping("/api/insertMember")
 	public int insertmember(@RequestBody MemberVO vo) throws Exception{
 		int res = memberService.insertMember(vo);
 		
@@ -68,7 +68,7 @@ public class MemberController {
 		
 		return selectedMember;
 	}
-	@RequestMapping("/idDuplicateCheck")
+	@RequestMapping("/api/idDuplicateCheck")
 	public int idDuplicateCheck(@RequestBody MemberVO vo) throws Exception{
 		int res = memberService.idDuplicateCheck(vo);
 //		System.out.println("res : "+res);
