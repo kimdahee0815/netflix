@@ -40,6 +40,6 @@ spring:
       schema-locations: classpath:schema.sql
       continue-on-error: true
 server:
-  port: ${PORT:10000}
+  port: ${PORT:8080}
   servlet:
     context-path: /api

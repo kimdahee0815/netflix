@@ -20,11 +20,8 @@ public class MyBatisConfig {
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         configuration.setMapUnderscoreToCamelCase(true);
         sessionFactory.setConfiguration(configuration);
-        
-        // Set type aliases package
         sessionFactory.setTypeAliasesPackage("com.mysite.netflixProject");
         
-        // No need for mapper XML files since we're using annotations
         return sessionFactory.getObject();
     }
     

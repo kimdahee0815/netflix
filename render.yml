@@ -10,6 +10,8 @@ services:
       -e SPRING_PROFILES_ACTIVE="prod"
       netflix-app
     envVars:
+      - key: PORT
+        value: 8080
       - key: MYSQL_URL
         value: ${MYSQL_URL}
       - key: MYSQL_USERNAME
