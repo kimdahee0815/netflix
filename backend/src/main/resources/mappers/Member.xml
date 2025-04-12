@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mysite.netflixProject.member.MemberMapper">
+    <select id="login" parameterType="com.mysite.netflixProject.member.MemberVO" resultType="int">
+        SELECT count(*) FROM member 
+        WHERE member_id = #{member_id} AND member_pw = #{member_pw}
+    </select>
+
+    <insert id="insertMember" parameterType="com.mysite.netflixProject.member.MemberVO">
+        INSERT INTO member (member_num, member_id, member_pw, member_name, member_tel, member_addr, pw_question, pw_answer)
+        VALUES (1, #{member_id}, #{member_pw}, #{member_name}, #{member_tel}, #{member_addr}, #{pw_question}, #{pw_answer})
+    </insert>
+
+    <select id="passwordSearch" parameterType="com.mysite.netflixProject.member.MemberVO" resultType="int">
+        SELECT count(*) FROM member 
+        WHERE member_id = #{member_id} AND pw_question = #{pw_question} AND pw_answer = #{pw_answer}
+    </select>
+
+    <update id="passwordUpdate" parameterType="com.mysite.netflixProject.member.MemberVO">
+        UPDATE member 
+        SET member_pw = #{member_pw} 
+        WHERE member_id = #{member_id}
+    </update>
+
+    <update id="emailUpdate" parameterType="com.mysite.netflixProject.member.MemberVO">
+        UPDATE member 
+        SET member_id = #{member_new_id} 
+        WHERE member_id = #{member_id}
+    </update>
+
+    <update id="phoneUpdate" parameterType="com.mysite.netflixProject.member.MemberVO">
+        UPDATE member 
+        SET member_tel = #{member_tel} 
+        WHERE member_id = #{member_id}
+    </update>
+
+    <select id="idDuplicateCheck" parameterType="com.mysite.netflixProject.member.MemberVO" resultType="int">
+        SELECT count(*) FROM member 
+        WHERE member_id = #{member_id}
+    </select>
+
+    <select id="selectMember" parameterType="com.mysite.netflixProject.member.MemberVO" resultType="com.mysite.netflixProject.member.MemberVO">
+        SELECT * FROM member 
+        WHERE member_id = #{member_id}
+    </select>
+
+    <delete id="deleteMember" parameterType="com.mysite.netflixProject.member.MemberVO">
+        DELETE FROM member 
+        WHERE member_id = #{member_id}
+    </delete>
+
+    <update id="counterset">
+        SET @cnt = 0
+    </update>
+
+    <update id="counterset2">
+        UPDATE member
+        SET member_num = (@cnt := @cnt + 1)
+        WHERE member_num
+        ORDER BY signup_date ASC
+    </update>
+
+    <select id="getMembers" resultType="com.mysite.netflixProject.member.MemberVO">
+        SELECT member_num, member_id, member_pw, member_name, member_tel, member_addr, pw_question, pw_answer,
+        DATE_FORMAT(signup_date, '%y/%m/%d') as signup_date 
+        FROM member 
+        ORDER BY member_num DESC
+    </select>
+
+    <update id="updateMembers" parameterType="com.mysite.netflixProject.member.MemberVO">
+        UPDATE member 
+        SET member_pw = #{member_pw}, 
+            member_name = #{member_name}, 
+            member_tel = #{member_tel},
+            member_addr = #{member_addr}, 
+            pw_question = #{pw_question}, 
+            pw_answer = #{pw_answer} 
+        WHERE member_id = #{member_id}
+    </update>
+
+    <select id="searchMember" resultType="com.mysite.netflixProject.member.MemberVO">
+        SELECT member_num, member_id, member_pw, member_name, member_tel, member_addr, pw_question, pw_answer,
+        DATE_FORMAT(signup_date, '%y/%m/%d') as signup_date 
+        FROM member 
+        WHERE member_id LIKE CONCAT('%', #{search}, '%') 
+        OR member_name LIKE CONCAT('%', #{search}, '%')
+        ORDER BY member_num DESC
+    </select>
+</mapper>
