@@ -28,7 +28,10 @@ public class CORSInterceptor implements Filter {
             ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Headers", "*");
             ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Methods",
                 "GET, OPTIONS, HEAD, PUT, POST, DELETE");
-
+            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Credentials", "true");
+            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Max-Age", "3600");
+            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Expose-Headers", "*");
+            
             HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
             // CORS handshake (pre-flight request)
