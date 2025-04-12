@@ -7,9 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api")
 public class MemberController {
     private MemberService memberService;
     
@@ -17,12 +19,12 @@ public class MemberController {
         this.memberService = memberService;
     }
     
-    @PostMapping("/api/login")  
+    @PostMapping("/login")  
     public int login(@RequestBody MemberVO vo) throws Exception {
         return memberService.login(vo);
     }
     
-    @PostMapping("/api/insertMember") 
+    @PostMapping("/insertMember") 
     public int insertmember(@RequestBody MemberVO vo) throws Exception {
         return memberService.insertMember(vo);
     }
@@ -52,7 +54,7 @@ public class MemberController {
         return memberService.selectMember(vo);
     }
     
-    @PostMapping("/api/idDuplicateCheck")  
+    @PostMapping("/idDuplicateCheck")  
     public int idDuplicateCheck(@RequestBody MemberVO vo) throws Exception {
         return memberService.idDuplicateCheck(vo);
     }
