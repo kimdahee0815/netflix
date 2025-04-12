@@ -6,34 +6,31 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.http.CacheControl;
 
 @Configuration
 @EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
     
-    // @Override
-    // public void addCorsMappings(CorsRegistry registry) {
-    //     registry.addMapping("/**")
-    //         .allowedOriginPatterns("*")
-    //         .allowedMethods("*")
-    //         .allowedHeaders("*")
-    //         .exposedHeaders("*")
-    //         .allowCredentials(true)
-    //         .maxAge(3600);
-    // }
-    
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
-            .addResourceLocations("classpath:/static/");
+                .addResourceLocations("classpath:/static/")
+                .setCacheControl(CacheControl.noCache());
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:/index.html");
-        registry.addViewController("/{x:[\\w\\-]+}")
-            .setViewName("forward:/index.html");
-        registry.addViewController("/{x:^(?!api$).*$}/**")
-            .setViewName("forward:/index.html");
+        // Forward to home page for all routes except /api/**
+        registry.addViewController("/")
+                .setViewName("forward:/index.html");
+        registry.addViewController("/{path:^(?!api$).*$}/**")
+                .setViewName("forward:/index.html");
+    }
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
     }
 }
