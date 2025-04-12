@@ -9,7 +9,7 @@ import com.mysite.netflixProject.board.BoardVO;
 @Service
 public class MemberServiceImpl implements MemberService {
 
-	private MemberMapper mapper;
+	private final MemberMapper mapper;
 	
 	public MemberServiceImpl(MemberMapper mapper) {
 		this.mapper = mapper;
@@ -53,9 +53,8 @@ public class MemberServiceImpl implements MemberService {
 		return res; 
 	}
 	@Override
-	public int idDuplicateCheck(MemberVO member) {
-		int res = mapper.idDuplicateCheck(member);
-		return res; 
+	public int idDuplicateCheck(MemberVO vo) {
+		return mapper.idDuplicateCheck(vo);
 	}
 	@Override
 	public MemberVO selectMember(MemberVO vo) {
