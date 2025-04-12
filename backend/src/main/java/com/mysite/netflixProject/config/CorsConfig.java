@@ -14,10 +14,17 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         
+        // Add specific allowed origins
+        config.addAllowedOrigin("https://net-flix-clone-dahee-kim.netlify.app");
+        config.addAllowedOrigin("http://localhost:3000");
+        
+        // Configure other CORS settings
         config.setAllowCredentials(true);
-        config.addAllowedOriginPattern("*");  // Changed from addAllowedOrigin
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
+        config.addExposedHeader("Access-Control-Allow-Origin");
+        config.addExposedHeader("Access-Control-Allow-Credentials");
+        config.addExposedHeader("Authorization");
         config.setMaxAge(3600L);
         
         source.registerCorsConfiguration("/**", config);
