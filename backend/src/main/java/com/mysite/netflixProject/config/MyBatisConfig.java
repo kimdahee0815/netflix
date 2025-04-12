@@ -7,8 +7,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
 @MapperScan(basePackages = "com.mysite.netflixProject")
@@ -19,18 +17,12 @@ public class MyBatisConfig {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         
-        // Add type aliases
-        sessionFactory.setTypeAliasesPackage("com.mysite.netflixProject");
-        
-        // Configure XML location
-        Resource[] res = new PathMatchingResourcePatternResolver()
-            .getResources("classpath:mappers/*.xml");
-        sessionFactory.setMapperLocations(res);
-        
         // Configure MyBatis settings
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         configuration.setMapUnderscoreToCamelCase(true);
         sessionFactory.setConfiguration(configuration);
+        
+        sessionFactory.setTypeAliasesPackage("com.mysite.netflixProject");
         
         return sessionFactory.getObject();
     }
