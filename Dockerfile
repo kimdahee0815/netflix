@@ -14,6 +14,7 @@ COPY backend/.mvn ./.mvn
 COPY backend/mvnw ./mvnw
 COPY backend/src ./src
 RUN chmod +x mvnw
+RUN mvn clean install
 RUN mvn clean package -DskipTests
 
 # Final image
