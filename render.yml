@@ -19,5 +19,4 @@ services:
         sync: false  
       - key: MYSQL_PASSWORD
         sync: false
-    healthCheckPath: /api/health
     autoDeploy: true
