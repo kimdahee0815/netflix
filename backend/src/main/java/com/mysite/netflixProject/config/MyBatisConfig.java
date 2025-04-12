@@ -19,14 +19,18 @@ public class MyBatisConfig {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         
+        // Add type aliases
+        sessionFactory.setTypeAliasesPackage("com.mysite.netflixProject");
+        
+        // Configure XML location
         Resource[] res = new PathMatchingResourcePatternResolver()
             .getResources("classpath:mappers/*Mapper.xml");
         sessionFactory.setMapperLocations(res);
         
+        // Configure MyBatis settings
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         configuration.setMapUnderscoreToCamelCase(true);
         sessionFactory.setConfiguration(configuration);
-        sessionFactory.setTypeAliasesPackage("com.mysite.netflixProject");
         
         return sessionFactory.getObject();
     }
