@@ -29,8 +29,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .setViewName("forward:/index.html");
     }
 
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
 }

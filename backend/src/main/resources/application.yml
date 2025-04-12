@@ -8,8 +8,12 @@ spring:
   web:
     resources:
       static-locations: classpath:/static/
+      add-mappings: true
       cache:
         period: 0
+  resources:
+    static-locations: classpath:/static/
+    add-mappings: true
 
 mybatis:
   mapper-locations: classpath:mappers/*.xml
