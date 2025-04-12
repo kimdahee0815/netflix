@@ -28,7 +28,7 @@ public class CORSInterceptor implements Filter {
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", 
-            "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-XSRF-TOKEN");
+            "*");
         response.setHeader("Access-Control-Expose-Headers",
             "Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Authorization");
 
@@ -37,11 +37,5 @@ public class CORSInterceptor implements Filter {
         } else {
             chain.doFilter(req, res);
         }
-    }
-
-    @Override
-    public void init(FilterConfig filterConfig) {}
-
-    @Override
-    public void destroy() {}
+      }
 }
