@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mysite.netflixProject.member.MemberMapper">
+<mapper namespace="com.mysite.netflixProject.mappers.MemberMapper">
     <select id="login" parameterType="com.mysite.netflixProject.member.MemberVO" resultType="int">
         SELECT count(*) FROM member 
         WHERE member_id = #{member_id} AND member_pw = #{member_pw}
