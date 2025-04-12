@@ -4,12 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.mysite.netflixProject.board.BoardVO;
-
 @Service
 public class MemberServiceImpl implements MemberService {
-
-	private final MemberMapper mapper;
+	private MemberMapper mapper;
 	
 	public MemberServiceImpl(MemberMapper mapper) {
 		this.mapper = mapper;

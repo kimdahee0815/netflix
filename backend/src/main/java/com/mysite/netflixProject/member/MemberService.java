@@ -2,7 +2,6 @@ package com.mysite.netflixProject.member;
 
 import java.util.List;
 
-import com.mysite.netflixProject.board.BoardVO;
 
 public interface MemberService {
 	public int login(MemberVO member);
