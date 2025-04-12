@@ -38,4 +38,4 @@ spring:
       schema-locations: classpath:schema.sql
       continue-on-error: true
 server:
-  port: ${PORT:8080}
+  port: ${PORT:10000}
