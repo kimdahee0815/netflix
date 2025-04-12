@@ -13,7 +13,7 @@ import org.springframework.http.CacheControl;
 @Configuration
 @EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
-    
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
@@ -22,7 +22,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                     "https://net-flix-clone-dahee-kim.netlify.app"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization", "X-XSRF-TOKEN")
+                .allowedHeaders("*")
                 .allowCredentials(true)
                 .maxAge(3600);
     }
