@@ -30,8 +30,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("https://net-flix-clone-dahee-kim.netlify.app", "http://localhost:3000")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH")
                 .allowedHeaders("*")
-                .allowCredentials(true);
+                .exposedHeaders("Access-Control-Allow-Origin", 
+                    "Access-Control-Allow-Credentials",
+                    "Access-Control-Allow-Methods",
+                    "Access-Control-Allow-Headers",
+                    "Authorization")
+                .allowCredentials(true),
+                .maxAge(3600);
     }
 }
