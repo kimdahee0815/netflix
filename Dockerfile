@@ -21,9 +21,10 @@ RUN mvn clean package -DskipTests
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 COPY --from=backend-build /app/backend/target/*.jar ./app.jar
-COPY --from=frontend-build /app/frontend/build /app/frontend/build
+COPY --from=frontend-build /app/frontend/build ./app/frontend/build
 
 ENV PORT=8080
+ENV SPRING_PROFILES_ACTIVE=prod
 EXPOSE 8080
 
 CMD ["java", "-jar", "app.jar"]
