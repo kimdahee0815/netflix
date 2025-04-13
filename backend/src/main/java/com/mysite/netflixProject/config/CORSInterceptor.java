@@ -20,29 +20,23 @@ public class CORSInterceptor implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         
         String origin = request.getHeader("Origin");
-        // Allow both local and production origins
         if ("http://localhost:3000".equals(origin) || 
             "https://net-flix-clone-dahee-kim.netlify.app".equals(origin)) {
             response.setHeader("Access-Control-Allow-Origin", origin);
         }
 
+        // Set CORS headers
         response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH");
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, OPTIONS");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", 
-            "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-XSRF-TOKEN");
+            "Origin, X-Requested-With, Content-Type, Accept, Authorization");
 
+        // Handle preflight requests
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
-            return;
+        } else {
+            chain.doFilter(req, res);
         }
-        
-        chain.doFilter(req, res);
     }
-
-    @Override
-    public void init(FilterConfig filterConfig) {}
-
-    @Override
-    public void destroy() {}
 }
