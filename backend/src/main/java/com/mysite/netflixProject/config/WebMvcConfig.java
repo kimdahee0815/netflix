@@ -5,7 +5,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.http.CacheControl;
 
@@ -23,9 +22,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/")
-            .setViewName("forward:/index.html"); 
+                .setViewName("forward:/index.html"); 
         registry.addViewController("/{x:^(?!api$).*$}/**")
-            .setViewName("forward:/index.html"); 
+                .setViewName("forward:/index.html"); 
     }
 
     @Override
