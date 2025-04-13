@@ -22,11 +22,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        // Redirect all non-API routes to index.html for SPA
         registry.addViewController("/")
-                .setViewName("index");
+            .setViewName("forward:/index.html"); 
         registry.addViewController("/{x:^(?!api$).*$}/**")
-                .setViewName("index");
+            .setViewName("forward:/index.html"); 
     }
 
     @Override
