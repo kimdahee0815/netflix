@@ -3,6 +3,13 @@ spring:
     import: optional:file:.env[.properties]
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
+  mvc:
+    view:
+      prefix: ""
+      suffix: ""
+  web:
+    resources:
+      add-mappings: false
 
 mybatis:
   type-aliases-package: com.mysite.netflixProject
