@@ -7,6 +7,13 @@ spring:
     resources:
       static-locations: file:frontend/build/
       add-mappings: true
+  mvc:
+    view:
+      prefix: ""
+      suffix: ""
+  resources:
+    static-locations: file:/app/static/ 
+    add-mappings: false
 
 mybatis:
   type-aliases-package: com.mysite.netflixProject
