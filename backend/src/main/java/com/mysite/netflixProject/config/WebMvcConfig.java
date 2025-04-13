@@ -15,16 +15,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
-        .addResourceLocations("file:/app/static/")
+                .addResourceLocations("file:/app/frontend/build/")
                 .setCacheControl(CacheControl.noCache());
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/")
-                .setViewName("forward:/index.html"); 
-        registry.addViewController("/{x:^(?!api$).*$}/**")
-                .setViewName("forward:/index.html"); 
+                .setViewName("forward:/index.html");
     }
 
     @Override

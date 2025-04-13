@@ -5,12 +5,13 @@ spring:
     active: ${SPRING_PROFILES_ACTIVE:dev}
   web:
     resources:
-      static-locations: file:/app/static/
+      static-locations: file:/app/frontend/build/
       add-mappings: true
   mvc:
     view:
       prefix: ""
       suffix: ""
+    static-path-pattern: /**
   resources:
     static-locations: file:/app/static/ 
     add-mappings: false
