@@ -4,6 +4,9 @@ spring:
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
   mvc:
+    view:
+      prefix: /static/
+      suffix: .html
     static-path-pattern: /**
   web:
     resources:
@@ -19,6 +22,11 @@ spring:
         content:
           enabled: true
           paths: /**
+
+mybatis:
+  type-aliases-package: com.mysite.netflixProject
+  configuration:
+    map-underscore-to-camel-case: true
 
 ---
 spring:
