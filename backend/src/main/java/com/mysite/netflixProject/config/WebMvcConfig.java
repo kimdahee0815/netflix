@@ -15,21 +15,21 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
-                .addResourceLocations("file:/app/frontend/build/")
+                .addResourceLocations("file:/app/frontend/build/") // Serve static files from build folder
                 .setCacheControl(CacheControl.noCache());
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/")
-                .setViewName("forward:/");
+                .setViewName("forward:/index.html");
     }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins(
-                    "http://localhost:3000",
+                    "http://localhost:3000", 
                     "https://net-flix-clone-dahee-kim.netlify.app"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
