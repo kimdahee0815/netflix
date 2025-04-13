@@ -1,33 +1,46 @@
-version: '3.8'
 services:
-  mysql:
-    image: mysql:8
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: netflixproject
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   backend:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: .  # 현재 디렉토리에서 Dockerfile을 찾음
+      dockerfile: Dockerfile  # backend와 frontend를 모두 빌드할 Dockerfile
+    container_name: netflix-backend
     ports:
-      - "8080:8080"
+      - "8080:8080"  # Spring Boot 앱이 8080 포트를 사용할 경우
     environment:
-      - MYSQL_URL=jdbc:mysql://mysql:3306/netflixproject?allowPublicKeyRetrieval=true&useSSL=false
-      - MYSQL_USERNAME=root
-      - MYSQL_PASSWORD=123456
+      - SPRING_PROFILES_ACTIVE=dev
+      - MYSQL_URL=${MYSQL_URL}
+      - MYSQL_USERNAME=${MYSQL_USERNAME}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     depends_on:
       mysql:
         condition: service_healthy
+    volumes:
+      - ./backend:/app/backend  # 백엔드 코드 동기화
 
+  frontend:
+    build:
+      context: .  # 현재 디렉토리에서 Dockerfile을 찾음
+      dockerfile: Dockerfile  # 프론트엔드 빌드를 위한 Dockerfile
+    container_name: netflix-frontend
+    ports:
+      - "3000:3000"  # React 앱이 3000 포트를 사용할 경우
+    volumes:
+      - ./frontend:/app/frontend  # 프론트엔드 코드 동기화
+
+  mysql:
+    image: mysql:8.0
+    container_name: netflix-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql  # MySQL 데이터를 유지하기 위한 볼륨
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10
 volumes:
-  mysql_data:
+  mysql-data:  # MySQL 데이터 저장용 볼륨

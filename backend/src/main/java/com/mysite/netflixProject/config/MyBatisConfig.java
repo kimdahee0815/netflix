@@ -22,8 +22,6 @@ public class MyBatisConfig {
         configuration.setMapUnderscoreToCamelCase(true);
         sessionFactory.setConfiguration(configuration);
         
-        sessionFactory.setTypeAliasesPackage("com.mysite.netflixProject");
-        
         return sessionFactory.getObject();
     }
     
