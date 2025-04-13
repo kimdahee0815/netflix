@@ -10,6 +10,8 @@ spring:
   web:
     resources:
       add-mappings: false
+  resources:
+    static-locations: file:frontend/build/
 
 mybatis:
   type-aliases-package: com.mysite.netflixProject
