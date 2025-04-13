@@ -5,7 +5,7 @@ spring:
     active: ${SPRING_PROFILES_ACTIVE:dev}
   web:
     resources:
-      static-locations: file:frontend/build/
+      static-locations: file:/app/static/
       add-mappings: true
   mvc:
     view:
