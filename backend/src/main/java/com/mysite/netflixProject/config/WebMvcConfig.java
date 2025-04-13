@@ -12,19 +12,6 @@ import org.springframework.http.CacheControl;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    public static final String ALLOWED_METHOD_NAMES = "GET,HEAD,POST,PUT,DELETE,TRACE,OPTIONS,PATCH";
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins(
-                    "http://localhost:3000",
-                    "https://net-flix-clone-dahee-kim.netlify.app"
-                )
-                .allowedMethods(ALLOWED_METHOD_NAMES.split(","))
-                .allowedHeaders("*")
-                .allowCredentials(true)
-                .maxAge(3600);
-    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

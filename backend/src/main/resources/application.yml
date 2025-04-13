@@ -37,8 +37,7 @@ spring:
       continue-on-error: true
 server:
   port: ${PORT:8080}
-  servlet:
-    context-path: /api
+
 ---
 spring:
   config:
@@ -56,5 +55,3 @@ spring:
       continue-on-error: true
 server:
   port: ${PORT:8080}
-  servlet:
-    context-path: /api

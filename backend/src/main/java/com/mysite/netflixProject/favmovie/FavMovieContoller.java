@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import com.mysite.netflixProject.board.Idchange;
 
 @RestController
-@RequestMapping("/api/favmovie")
+@RequestMapping("/favmovie")
 public class FavMovieContoller {
     private FavMovieService favMovieService; 
     
