@@ -98,7 +98,7 @@ export default function StickyHeadTable() {
                   {columns.map((column) => (
                     <TableCell
                       key={column.board_num}
-                      align={column.board_title}
+                      align={column.align || "left"}
                       style={{ minWidth: column.minWidth }}
                     >
                       {column.label}
@@ -126,13 +126,12 @@ export default function StickyHeadTable() {
                       >
                         {columns.map((column) => {
                           return (
-                            <TableCell
-                              key={column.board_num}
-                              align={column.board_title}
-                            >
-                              {column.format
-                                ? column.format(post[column.id], post) :
-                                post[column.id]}
+                            <TableCell key={column.id} align="center">
+                              {column.id === "board_num"
+                                ? boardlist.length - (page * rowsPerPage + index)
+                                : column.format
+                                ? column.format(post[column.id], post)
+                                : post[column.id]}
                             </TableCell>
                           );
                         })}

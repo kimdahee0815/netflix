@@ -57,9 +57,12 @@ export default function PrimarySearchAppBar({ kind }) {
 
   const onClick = () => {
     if (kind === "고객관리") {
-      navigate(`/memberSearch/${search}`);
+      if(search === "" || search === null || search === undefined) {
+        navigate(`/memberBoard`);
+      }else{
+        navigate(`/memberSearch/${search}`);
+      }
     } else {
-      console.log(search)
       if(search === "" || search === null || search === undefined) {
         navigate(`/board`);
       }else{

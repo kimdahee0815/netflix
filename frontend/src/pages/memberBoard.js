@@ -219,12 +219,12 @@ export default function StickyHeadTable() {
                       >
                         {columns.map((column) => {
                           return (
-                            <TableCell
-                              key={column.member_num}
-                              align={column.board_title}
-                              style={{ textAlign: "center" }}
-                            >
-                              {post[column.id]}
+                            <TableCell key={column.id} align="center">
+                              {column.id === "member_num"
+                                ? memberList.length - (page * rowsPerPage + index)
+                                : column.format
+                                ? column.format(post[column.id], post)
+                                : post[column.id]}
                             </TableCell>
                           );
                         })}
