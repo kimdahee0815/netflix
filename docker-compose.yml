@@ -1,31 +1,35 @@
 services:
+  # frontend:
+  #   build:
+  #     context: .
+  #     dockerfile: frontend/Dockerfile.dev  # dev용 Dockerfile 사용
+  #   container_name: netflix-frontend
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./frontend:/app            # 로컬 코드와 컨테이너 코드 sync
+  #     - /app/node_modules          # node_modules는 컨테이너 내 것 유지
+  #   environment:
+  #     - CHOKIDAR_USEPOLLING=true  # hot reload를 위한 옵션
+  #   env_file:
+  #     - .env.development           # API 주소 등 dev 환경 변수 적용
+
   backend:
     build:
-      context: .  # 현재 디렉토리에서 Dockerfile을 찾음
-      dockerfile: Dockerfile  # backend와 frontend를 모두 빌드할 Dockerfile
+      context: .
+      dockerfile: Dockerfile
     container_name: netflix-backend
     ports:
-      - "8080:8080"  # Spring Boot 앱이 8080 포트를 사용할 경우
-    environment:
-      - SPRING_PROFILES_ACTIVE=dev
-      - MYSQL_URL=${MYSQL_URL}
-      - MYSQL_USERNAME=${MYSQL_USERNAME}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - "8080:8080"
     depends_on:
       mysql:
         condition: service_healthy
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - .env.development
     volumes:
-      - ./backend:/app/backend  # 백엔드 코드 동기화
-
-  frontend:
-    build:
-      context: .  # 현재 디렉토리에서 Dockerfile을 찾음
-      dockerfile: Dockerfile  # 프론트엔드 빌드를 위한 Dockerfile
-    container_name: netflix-frontend
-    ports:
-      - "3000:3000"  # React 앱이 3000 포트를 사용할 경우
-    volumes:
-      - ./frontend:/app/frontend  # 프론트엔드 코드 동기화
+      - ./backend:/app/backend
 
   mysql:
     image: mysql:8.0
@@ -33,14 +37,19 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3307:3306"
     volumes:
-      - mysql-data:/var/lib/mysql  # MySQL 데이터를 유지하기 위한 볼륨
-    command: --default-authentication-plugin=mysql_native_password
+      - mysql-data:/var/lib/mysql
+    env_file:
+      - .env.development
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
       timeout: 5s
-      retries: 10
+      retries: 5
+
 volumes:
-  mysql-data:  # MySQL 데이터 저장용 볼륨
+  mysql-data:
