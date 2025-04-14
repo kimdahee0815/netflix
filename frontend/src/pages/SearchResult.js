@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Movie from "../components/Movie";
 import Grid from "@mui/material/Grid";
+import fetchSummary from '../util/fetchSummary'
 
 
 const SearchResult = ({ search }) => {
@@ -14,7 +15,9 @@ const SearchResult = ({ search }) => {
     const json = await (
       await fetch(`https://yts.mx/api/v2/list_movies.json?limit=48&query_term=${search}`)
     ).json();
-    setMovies(json.data);
+    let updatedMovies = await fetchSummary(json.data);
+
+    setMovies(updatedMovies);
     setLoading(false);
   };
 
@@ -43,7 +46,7 @@ const SearchResult = ({ search }) => {
       ) : (
         <div style={{ marginTop: "100px" }}>
           <Grid container spacing={2}>
-            {movies.movie_count === 0 ? (
+            {movies.length === 0 ? (
               <div
                 style={{
                   marginLeft: "30px",
@@ -55,13 +58,13 @@ const SearchResult = ({ search }) => {
                 검색결과가 존재하지 않습니다!
               </div>
             ) : (
-              movies.movies.map((movie) => (
+              movies.map((movie) => (
                 <Grid item xs={2} key={movie.id}>
                   <Movie
                     id={movie.id}
                     medium_cover_image={movie.medium_cover_image}
                     title={movie.title}
-                    summary={movie.summary}
+                    summary={movie.summary? movie.summary : movie.movie_summary}
                     genres={movie.genres}
                   />
                 </Grid>

@@ -5,6 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Box } from "@mui/material";
+import fetchSummary from '../util/fetchSummary'
 
 const OutputMovieGenres = ({ genre }) => {
   const [movies, setMovies] = useState([]);
@@ -32,10 +33,10 @@ const OutputMovieGenres = ({ genre }) => {
         `https://yts.mx/api/v2/list_movies.json?limit=25&genre=${genre}&minimum_rating=8`
       )
     ).json();
+    let updatedMovies = await fetchSummary(movieData.data);
 
-    let data = movieData.data.movies;
     setLoading(false);
-    setMovies(shuffle(data));
+    setMovies(shuffle(updatedMovies));
   };
 
   function shuffle(array) {
@@ -54,7 +55,7 @@ const OutputMovieGenres = ({ genre }) => {
             id={movie.id}
             medium_cover_image={movie.medium_cover_image}
             title={movie.title}
-            summary={movie.summary}
+            summary={movie.summary? movie.summary : movie.movie_summary}
             genres={movie.genres}
           />
         </Grid>

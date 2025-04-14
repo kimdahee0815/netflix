@@ -1,35 +1,44 @@
 /* eslint-disable array-callback-return */
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useEffect, useState } from "react";
 import Movie from "../components/Movie";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 import config from '../config';
+import { FavListUpdateProvider } from "../store/FavListTriggerContext";
 
 const FavMovieList = () => {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
+  const [favListState, setFavListState] = useState(false);
 
-  const [number, setNumber] = useState(0);
-
-  const getData = (number) => {
-    setNumber(number);
-  };
   useEffect(() => {
     axios
       .post(`${config.API_URL}/favmovie/select`, {
         member_id: window.sessionStorage.getItem("id"),
       })
       .then((res) => {
-        console.log(res.data);
-        setMovies([...res.data]);
+        console.log(res.data)
+        const movies = [...res.data];
+        setMovies(movies);
         setLoading(false);
       })
       .catch((e) => {
         console.error(e);
       });
-  }, [number]);
+      console.log(favListState)
+  }, [favListState]);
+
+  const favListUpdate = ()=>{
+    setFavListState(favListState=>!favListState);
+  }
+
+  const ctxValue = {
+    favListState,
+    favListUpdate,
+  }
 
   return (
+    <FavListUpdateProvider value={ctxValue}>
     <div>
       {loading ? (
         <div
@@ -49,15 +58,13 @@ const FavMovieList = () => {
             <div style={{ marginTop: "100px" }}>
               <Grid container spacing={2}>
                 {movies.map((movie) => (
-                  <Grid item xs={2} key={movie.movie_num}>
+                  <Grid key={movie.imdb_code} item xs={2}>
                     <Movie
                       id={movie.movie_num}
                       title={movie.movie_title}
-                      summary={movie.movie_summary}
+                      summary={movie.summary? movie.summary : movie.movie_summary}
                       medium_cover_image={movie.movie_image}
                       value="favmovielist"
-                      number={number}
-                      getData={getData}
                     />
                   </Grid>
                 ))}
@@ -79,6 +86,7 @@ const FavMovieList = () => {
         </div>
       )}
     </div>
+    </FavListUpdateProvider>
   );
 };
 

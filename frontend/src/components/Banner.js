@@ -2,6 +2,7 @@ import Grid from "@mui/material/Grid";
 import * as React from "react";
 import { useState, useLayoutEffect } from "react";
 import Banner_data from "./Banner_data";
+import fetchSummary from "../util/fetchSummary";
 
 function Banner() {
   const [movie, setMovie] = useState();
@@ -10,7 +11,8 @@ function Banner() {
       `https://yts.mx/api/v2/list_movies.json?limit=20&sort_by=download_count&order_by=desc`
     );
     const data = await response.json();
-    const movies = data.data.movies;
+    let updatedMovies = await fetchSummary(data.data);
+    const movies = updatedMovies;
     const randomNum = Math.floor(Math.random() * movies.length);
     setMovie(movies[randomNum]);
   };

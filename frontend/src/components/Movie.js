@@ -10,6 +10,8 @@ import Grid from "@mui/material/Grid";
 import axios from "axios";
 import { useLayoutEffect, useState, useEffect } from "react";
 import config from '../config';
+import {useContext} from 'react';
+import { FavListUpdateContext } from "../store/FavListTriggerContext";
 
 function Movie({
   id,
@@ -18,13 +20,10 @@ function Movie({
   summary,
   genres,
   value,
-  number,
-  getData,
+  rating,
 }) {
-  const onClick = () => {
-    console.log(number);
-    getData(number + 1);
-  };
+  const {favListUpdate} = useContext(FavListUpdateContext);
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -53,19 +52,6 @@ function Movie({
   const handleClose = () => setOpen(false);
   const [ischecked, setIsChecked] = useState(false);
 
-  if (value === "favmovielist") {
-    axios
-      .post(`${config.API_URL}/favmovie/chk`, {
-        movie_title: title,
-        member_id: window.sessionStorage.getItem("id"),
-      })
-      .then((res) => {
-        setIsChecked(res.data?.length ? true : false);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-  }
   useLayoutEffect(() => {
     axios
       .post(`${config.API_URL}/favmovie/chk`, {
@@ -73,34 +59,38 @@ function Movie({
         member_id: window.sessionStorage.getItem("id"),
       })
       .then((res) => {
-        setIsChecked(res.data?.length ? true : false);
+        if(res.data?.length){
+          setIsChecked(true);
+        }else{
+          setIsChecked(false);
+        }
       })
       .catch((e) => {
         console.error(e);
       });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      
   }, []);
 
   const modalCheck = () => {
-    console.log("modal");
     axios
       .post(`${config.API_URL}/favmovie/chk`, {
         movie_title: title,
         member_id: window.sessionStorage.getItem("id"),
       })
       .then((res) => {
-        setIsChecked(res.data?.length ? true : false);
+        if(res.data?.length){
+          setIsChecked(true);
+        }else{
+          setIsChecked(false);
+        }
       })
       .catch((e) => {
         console.error(e);
       });
   };
   const handlelike = () => {
-    console.log("ischecked" + ischecked);
 
     if (ischecked) {
-      console.log("isChecked가 true일때");
       axios
         .post(`${config.API_URL}/favmovie/delete`, {
             member_id: window.sessionStorage.getItem("id"),
@@ -108,13 +98,14 @@ function Movie({
         })
         .then((res) => {
           handleClose();
+          favListUpdate();
         })
         .catch((e) => {
           console.error(e);
         });
       setIsChecked(false);
+
     } else {
-      console.log("isChecked false일때 ");
       axios
         .post(`${config.API_URL}/favmovie/isDuplicateTitle`, {
           member_id: window.sessionStorage.getItem("id"),
@@ -135,14 +126,15 @@ function Movie({
               .catch((e) => {
                 console.error(e);
               });
-          } else {
-          }
+          } 
         })
         .catch((e) => {
           console.error(e);
         });
       setIsChecked(true);
+      
     }
+
   };
 
   return (
@@ -166,7 +158,6 @@ function Movie({
           transform: isHover ? "scale(1.1)" : "scale(1)",
           cursor: "pointer",
         }}
-        // onClick={handleOpen}
         onClick={() => {
           handleOpen();
           modalCheck();
@@ -174,7 +165,6 @@ function Movie({
       />
       {isHover ? (
         <div
-          // onClick={handleOpen}
           onClick={() => {
             handleOpen();
             modalCheck();
@@ -260,7 +250,6 @@ function Movie({
                   }}
                   onClick={() => {
                     handlelike();
-                    onClick();
                   }}
                   startIcon={ischecked ? <StarIcon /> : <StarBorderIcon />}
                 >

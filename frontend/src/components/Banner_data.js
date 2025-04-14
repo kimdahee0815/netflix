@@ -74,6 +74,7 @@ function Banner_data({
     position: "absolute",
     top: "50%",
     left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 780,
     height: 400,
     bgcolor: "rgba(0,0,0,0.8)",
@@ -92,19 +93,6 @@ function Banner_data({
   const handleClose = () => setOpen(false);
   const [ischecked, setIsChecked] = useState(false);
 
-  if (value === "favmovielist") {
-    axios
-      .post(`${config.API_URL}/favmovie/chk`, {
-        movie_title: title,
-        member_id: window.sessionStorage.getItem("id"),
-      })
-      .then((res) => {
-        setIsChecked(res.data?.length ? true : false);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-  }
   useLayoutEffect(() => {
     axios
       .post(`${config.API_URL}/favmovie/chk`, {
@@ -112,8 +100,11 @@ function Banner_data({
         member_id: window.sessionStorage.getItem("id"),
       })
       .then((res) => {
-        console.log(res.data);
-        setIsChecked(res.data?.length ? true : false);
+        if(res.data?.length){
+          setIsChecked(true);
+        }else{
+          setIsChecked(false);
+        }
       })
       .catch((e) => {
         console.error(e);
@@ -121,10 +112,8 @@ function Banner_data({
   }, []);
 
   const handlelike = () => {
-    console.log("ischecked" + ischecked);
 
     if (ischecked) {
-      console.log("isChecked가 true일때");
 
       axios
         .post(`${config.API_URL}/favmovie/delete`, {
@@ -137,7 +126,6 @@ function Banner_data({
         });
       setIsChecked(false);
     } else {
-      console.log("isChecked false일때 ");
       axios
         .post(`${config.API_URL}/favmovie/isDuplicateTitle`, {
           member_id: window.sessionStorage.getItem("id"),
@@ -265,6 +253,8 @@ function Banner_data({
                 marginLeft: "16px",
                 display: "flex",
                 width: "450px",
+                alignItems: "flex-start",
+                flexDirection: "column",
               }}
             >
               <div
@@ -278,7 +268,7 @@ function Banner_data({
                   style={{
                     fontSize: 18,
                     display: "block",
-                    overflow: "hidden",
+                    height: "230px",
                   }}
                 >
                   {summary.length > 500 ? `${summary.slice(0, 500)}…` : summary}
