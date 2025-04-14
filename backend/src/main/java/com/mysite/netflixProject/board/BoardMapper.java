@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Update;
 public interface BoardMapper {
 	
 	@Select("select board_num, member_id, board_title, board_content, "
-			+ "date_format(board_date, '%m월 %d일 %H시') as board_date, board_reply from customercenter order by board_num asc")
+			+ "date_format(board_date, '%m월 %d일 %H시') as board_date, board_reply from customercenter order by board_num desc")
 	public List<BoardVO> getBoardList();
 	
 	@Update("set @cnt=0;")
@@ -20,32 +20,31 @@ public interface BoardMapper {
 	
 	@Update("update customercenter"
 			+ " set board_num = (@cnt := @cnt + 1)"
-			+ " where board_num"
 			+ " order by board_date DESC;")
 	public void counterset2();
 	
-	@Insert("insert into customercenter (member_id, board_title, board_content, board_num) values "
-			+ "(#{member_id},#{board_title},#{board_content},1)")
+	@Insert("insert into customercenter (member_id, board_title, board_content) values "
+			+ "(#{member_id},#{board_title},#{board_content})")
 	public int insertBoard(BoardVO board);
 	
 	@Select("select member_id, board_title, "
 			+ "board_content,board_reply from customercenter where board_num = #{board_num}")
 	public BoardVO getDetail(BoardVO board);
 	
-	@Update("update customercenter set board_title=#{board_title}, board_content=#{board_content} "
+	@Update("update customercenter set board_title = #{board_title}, board_content = #{board_content} "
 			+ " where board_num=#{board_num}")
 	public int modifyBoard(BoardVO board);
 	
-	@Update("update customercenter set member_id=#{new_member_id} where member_id=#{old_member_id}")
+	@Update("update customercenter set member_id = #{new_member_id} where member_id = #{old_member_id}")
 	public int modifyID(Idchange change);
 	
-	@Delete("delete from customercenter where board_num=#{board_num}")
+	@Delete("delete from customercenter where board_num = #{board_num}")
 	public int deleteBoard(BoardVO board);
 	
-	@Delete("delete from customercenter where member_id=#{member_id}")
+	@Delete("delete from customercenter where member_id = #{member_id}")
 	public int deleteId(BoardVO board);
 	
-	@Update("update customercenter set board_reply=#{board_reply} where board_num = #{board_num}")
+	@Update("update customercenter set board_reply = #{board_reply} where board_num = #{board_num}")
 	public int replyBoard(BoardVO board);
 	
 	@Select("SELECT board_num, member_id, board_title, board_content, "

@@ -57,7 +57,7 @@ public class ProfileController {
             new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
-    @DeleteMapping("/deleteProfileMember")
+    @PostMapping("/deleteProfileMember")
     public int deleteProfileMember(@RequestBody ProfileVO vo) {
         return profileService.deleteProfileMember(vo);
     }

@@ -35,27 +35,29 @@ public class BoardController {
         return impl.getDetail(board);
     }
 
-    @PutMapping("/modify")
+    @PostMapping("/modify")
     public int modifyBoard(@RequestBody BoardVO board) {
         return impl.modifyBoard(board);
     }
     
-    @PutMapping("/modifyid")
+    @PostMapping("/modifyid")
     public int modifyID(@RequestBody Idchange change) {
         return impl.modifyID(change);
     }
 
-    @DeleteMapping("/delete")
-    public int deleteBoard(@RequestBody BoardVO board) {
-        return impl.deleteBoard(board);
+    @GetMapping("/delete")
+    public int deleteBoard(@RequestParam("board_num") int boardNum) {
+        BoardVO boardVO = new BoardVO();
+        boardVO.setBoard_num(boardNum);
+        return impl.deleteBoard(boardVO);
     }
     
-    @DeleteMapping("/deletebyid")
+    @PostMapping("/deletebyid")
     public int deleteId(@RequestBody BoardVO board) {
         return impl.deleteId(board);
     }
     
-    @PutMapping("/reply")
+    @PostMapping("/reply")
     public int replyBoard(@RequestBody BoardVO board) {
         return impl.replyBoard(board);
     }

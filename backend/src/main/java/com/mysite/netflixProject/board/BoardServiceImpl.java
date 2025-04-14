@@ -23,8 +23,8 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int insertBoard(BoardVO board) {
 		int res = mapper.insertBoard(board);
-		mapper.counterset();
-		mapper.counterset2();
+		//mapper.counterset();
+		//mapper.counterset2();
 		return res;
 	}
 
@@ -49,8 +49,8 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int deleteBoard(BoardVO board) {
 		int res = mapper.deleteBoard(board);
-		mapper.counterset();
-		mapper.counterset2();
+		//mapper.counterset();
+		//mapper.counterset2();
 		return res;
 	}
 	
@@ -70,10 +70,8 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<BoardVO> searchBoard(String search){
 		List<BoardVO> vo = mapper.searchBoard(search);
-		  return vo;
+		return vo;
 	}
-	
-	
 
 }
 

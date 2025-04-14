@@ -2,6 +2,8 @@ package com.mysite.netflixProject.member;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
 
 public interface MemberService {
 	public int login(MemberVO member);

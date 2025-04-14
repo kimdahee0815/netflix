@@ -166,8 +166,8 @@ function Login() {
         member_id: email,
       })
       .then((res) => {
-        // console.log(res);
-        if (res.data !== "") {
+        console.log(res);
+        if (res.data) {
           axios
             .post(`${config.API_URL}/login`, {
               member_id: email,

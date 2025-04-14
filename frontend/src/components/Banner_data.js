@@ -91,7 +91,7 @@ function Banner_data({
   };
   const handleClose = () => setOpen(false);
   const [ischecked, setIsChecked] = useState(false);
-  const [isclicked, setIsClicked] = useState(false);
+
   if (value === "favmovielist") {
     axios
       .post(`${config.API_URL}/favmovie/chk`, {
@@ -128,8 +128,8 @@ function Banner_data({
 
       axios
         .post(`${config.API_URL}/favmovie/delete`, {
-          member_id: window.sessionStorage.getItem("id"),
-          movie_title: title,
+            member_id: window.sessionStorage.getItem("id"),
+            movie_title: title,
         })
         .then((res) => {})
         .catch((e) => {

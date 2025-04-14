@@ -11,32 +11,32 @@ import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface MemberMapper {
-	@Select("select count(*) from member where member_id=#{member_id} and member_pw=#{member_pw}")
+	@Select("select count(*) from member where member_id = #{member_id} and member_pw = #{member_pw}")
 	public int login(MemberVO member);
 	
-	@Insert("insert into member (member_num, member_id, member_pw, member_name, member_tel, member_addr, pw_question, pw_answer) "
-			+ "values (1, #{member_id}, #{member_pw}, #{member_name}, #{member_tel}, #{member_addr}, #{pw_question}, #{pw_answer})")
+	@Insert("insert into member (member_id, member_pw, member_name, member_tel, member_addr, pw_question, pw_answer) "
+			+ "values (#{member_id}, #{member_pw}, #{member_name}, #{member_tel}, #{member_addr}, #{pw_question}, #{pw_answer})")
 	public int insertMember(MemberVO member);
 	
-	@Select("select count(*) from member where member_id=#{member_id} and pw_question=#{pw_question} and pw_answer=#{pw_answer}")
+	@Select("select count(*) from member where member_id = #{member_id} and pw_question = #{pw_question} and pw_answer = #{pw_answer}")
 	public int passwordSearch(MemberVO member);
 	
-	@Update("update member set member_pw=#{member_pw} where member_id=#{member_id}")
+	@Update("update member set member_pw = #{member_pw} where member_id = #{member_id}")
 	public int passwordUpdate(MemberVO vo);
 	
-	@Update("update member set member_id=#{member_new_id} where member_id=#{member_id}")
+	@Update("update member set member_id = #{member_new_id} where member_id = #{member_id}")
 	public int emailUpdate(MemberVO vo);
 	
-	@Update("update member set member_tel=#{member_tel} where member_id=#{member_id}")
+	@Update("update member set member_tel = #{member_tel} where member_id = #{member_id}")
 	public int phoneUpdate(MemberVO vo);
 	
 	@Select("SELECT count(*) FROM member WHERE member_id = #{member_id}")
 	public int idDuplicateCheck(MemberVO vo);
 	
-	@Select("select * from member where member_id=#{member_id}")
+	@Select("select * from member where member_id = #{member_id}")
 	public MemberVO selectMember(MemberVO vo);
 	
-	@Delete("delete from member where member_id=#{member_id}")
+	@Delete("delete from member where member_id = #{member_id}")
 	public int deleteMember(MemberVO vo);
 	
 
@@ -45,7 +45,6 @@ public interface MemberMapper {
 	
 	@Update("update member"
 			+ " set member_num = (@cnt := @cnt + 1)"
-			+ " where member_num"
 			+ " order by signup_date asc;")
 	public void counterset2();
 	
@@ -54,8 +53,8 @@ public interface MemberMapper {
 //	@Select("select * from member")
 	public List<MemberVO> getMembers();
 	
-	@Update("update member set member_pw=#{member_pw}, member_name=#{member_name}, member_tel=#{member_tel},"
-			+"member_addr=#{member_addr}, pw_question=#{pw_question}, pw_answer=#{pw_answer} where member_id=#{member_id}")
+	@Update("update member set member_pw = #{member_pw}, member_name = #{member_name}, member_tel = #{member_tel},"
+			+"member_addr = #{member_addr}, pw_question = #{pw_question}, pw_answer = #{pw_answer} where member_id = #{member_id}")
 	public int updateMembers(MemberVO vo);
 
 	@Select("SELECT member_num, member_id, member_pw, member_name, member_tel, member_addr, pw_question, pw_answer, "

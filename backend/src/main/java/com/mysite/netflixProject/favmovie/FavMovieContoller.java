@@ -19,32 +19,35 @@ public class FavMovieContoller {
         return favMovieService.insertFavMovie(favmovieVO);
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public int deleteFavMovie(@RequestBody FavMovieVO favmovieVO) throws Exception {
         return favMovieService.deleteFavMovie(favmovieVO);
     }
     
-    @DeleteMapping("/remove")
+    @PostMapping("/remove")
     public int removeMember(@RequestBody FavMovieVO favmovieVO) throws Exception {
         return favMovieService.removeMember(favmovieVO);
     }
     
-    @GetMapping("/chk")
+    @PostMapping("/chk")
     public List<FavMovieVO> chkLike(@RequestBody FavMovieVO favmovieVO) {
         return favMovieService.chkLike(favmovieVO);
     }
     
-    @GetMapping("/select")
-    public ArrayList<FavMovieVO> getFavMovielist(@RequestBody FavMovieVO favmovieVO) {
+    @PostMapping("/select")
+    public List<FavMovieVO> getFavMovielist(@RequestBody FavMovieVO favmovieVO) {
+        System.out.println("Member ID: " + favmovieVO.getMember_id());
+        List<FavMovieVO> result = favMovieService.getFavMovielist(favmovieVO);
+        System.out.println("Result size: " + result.size());
         return favMovieService.getFavMovielist(favmovieVO);
     }
     
-    @GetMapping("/isDuplicateTitle")
+    @PostMapping("/isDuplicateTitle")
     public int isDuplicateTitle(@RequestBody FavMovieVO favmovieVO) {
         return favMovieService.isDuplicateTitle(favmovieVO);
     }
     
-    @PutMapping("/modifyid")
+    @PostMapping("/modifyid")
     public int modifyID(@RequestBody Idchange change) {
         return favMovieService.modifyID(change);
     }

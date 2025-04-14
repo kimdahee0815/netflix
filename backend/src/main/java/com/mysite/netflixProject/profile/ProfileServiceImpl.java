@@ -38,9 +38,9 @@ public class ProfileServiceImpl implements ProfileService {
 	    if (profileId > 4) {   
 	        throw new IllegalStateException("최대 4개까지 등록가능");
 	    }
-	    mapper.insertNickname(member_id, 1, nickname);
-	    mapper.counterset();
-		mapper.counterset2(member_id);
+	    mapper.insertNickname(member_id, profileId, nickname);
+	   // mapper.counterset();
+		//mapper.counterset2(member_id);
 	}
 
 	@Override
@@ -52,8 +52,8 @@ public class ProfileServiceImpl implements ProfileService {
 	@Override
 	public int deleteNickname(String member_id, int profile_id) {
 	    int res = mapper.deleteNickname(member_id, profile_id);
-	    mapper.counterset();
-	    mapper.counterset2(member_id);
+	   // mapper.counterset();
+	   // mapper.counterset2(member_id);
 		return res;
 	}
 

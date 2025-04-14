@@ -59,7 +59,12 @@ export default function PrimarySearchAppBar({ kind }) {
     if (kind === "고객관리") {
       navigate(`/memberSearch/${search}`);
     } else {
-      navigate(`/boardSearch/${search}`);
+      console.log(search)
+      if(search === "" || search === null || search === undefined) {
+        navigate(`/board`);
+      }else{
+        navigate(`/boardSearch/${search}`);
+      }
     }
   };
 

@@ -103,8 +103,8 @@ function Movie({
       console.log("isChecked가 true일때");
       axios
         .post(`${config.API_URL}/favmovie/delete`, {
-          member_id: window.sessionStorage.getItem("id"),
-          movie_title: title,
+            member_id: window.sessionStorage.getItem("id"),
+            movie_title: title,
         })
         .then((res) => {
           handleClose();
