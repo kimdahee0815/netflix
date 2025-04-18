@@ -1,4 +1,4 @@
-# 🎬 Netflix and Chill – Streaming Platform
+# <img src="frontend/public/netflix.ico" alt="Netflix Clone Icon" width="40" height="40">Netflix and Chill – Streaming Platform 🎬
 
 A Netflix-inspired full-stack streaming platform built with React, Spring Boot, MySQL, and Docker. Users can discover movies, create personalized favorite lists, and manage their profiles, while admins can handle content, user comments, and more through a comprehensive dashboard. Deployed on the cloud with Docker for easy scaling.
 
