@@ -129,7 +129,7 @@ const NavBar = ({
 
   return (
     <AppBar position="fixed" style={{ background: "#212121" }}>
-      <Container maxWidth="xl">
+      <Container maxWidth={false} sx={{ padding: 0, margin: 0 }}>
         <Toolbar disableGutters>
           <ArrowBackIosNewIcon
             sx={{

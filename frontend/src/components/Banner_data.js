@@ -43,7 +43,7 @@ function Banner_data({
     : {
         height: "350px",
         display: "flex",
-        marginLeft: "8.5%",
+        justifyContent:"center"
       };
   const imgStyle = isMediumScreen
     ? {
