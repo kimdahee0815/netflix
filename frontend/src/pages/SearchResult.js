@@ -45,7 +45,7 @@ const SearchResult = ({ search }) => {
         </div>
       ) : (
         <div style={{ marginTop: "100px" }}>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} justifyContent="center">
             {movies.length === 0 ? (
               <div
                 style={{
@@ -59,7 +59,7 @@ const SearchResult = ({ search }) => {
               </div>
             ) : (
               movies.map((movie) => (
-                <Grid item xs={2} key={movie.id}>
+                <Grid item xs={2} key={movie.id} justifyContent="center">
                   <Movie
                     id={movie.id}
                     medium_cover_image={movie.medium_cover_image}

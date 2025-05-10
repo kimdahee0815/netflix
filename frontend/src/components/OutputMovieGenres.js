@@ -5,147 +5,86 @@ import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Box } from "@mui/material";
-import fetchSummary from '../util/fetchSummary'
+import { useDispatch, useSelector } from "react-redux";
+import { getAllGenresMoviesData } from '../store/movie'; 
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
 
 const OutputMovieGenres = ({ genre }) => {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [moviesIndex, setMoviesIndex] = useState(0);
-  useLayoutEffect(() => {
-    setLoading(true);
-    loadMovies();
-  }, []);
+  const movies = useSelector((state) => state.movie.movies);
+  const loading = useSelector((state)=> state.movie.loading);
 
-  const moveLeft = useCallback(() => {
-    setMoviesIndex((moviesIndex) => {
-      return moviesIndex === 0 ? moviesIndex + 20 : moviesIndex - 5;
-    });
-  }, []);
-  const moveRight = useCallback(() => {
-    setMoviesIndex((moviesIndex) => {
-      return moviesIndex === 20 ? moviesIndex - 20 : moviesIndex + 5;
-    });
-  }, []);
+const MovieSlider = ({ movies }) => {
+  const [sliderRef] = useKeenSlider({
+  loop: true,
+  slides: { perView: 6, spacing: 3 }, 
+});
 
-  const loadMovies = async () => {
-    const movieData = await (
-      await fetch(
-        `https://yts.mx/api/v2/list_movies.json?limit=25&genre=${genre}&minimum_rating=8`
-      )
-    ).json();
-    let updatedMovies = await fetchSummary(movieData.data);
-
-    setLoading(false);
-    setMovies(shuffle(updatedMovies));
-  };
-
-  function shuffle(array) {
-    return array.sort(() => Math.random() - 0.5);
-  }
-
-  const movieRender = () => {
-    let result = [];
-
-    for (let i = moviesIndex; i < moviesIndex + 5; i++) {
-      let movie = movies[i];
-
-      result.push(
-        <Grid item xs={2} key={movie.id}>
-          <Movie
-            id={movie.id}
-            medium_cover_image={movie.medium_cover_image}
-            title={movie.title}
-            summary={movie.summary? movie.summary : movie.movie_summary}
-            genres={movie.genres}
-          />
-        </Grid>
-      );
-    }
-    return result;
-  };
+  return (
+ <div
+  ref={sliderRef}
+  className="keen-slider"
+  style={{
+    padding: "0 24px",
+    overflow: "hidden",
+    position: "relative",
+  }}
+>
+  {movies?.[genre]?.map((movie) => (
+    <div
+  key={movie.id}
+  className="keen-slider__slide"
+  style={{
+    display: "flex",
+    justifyContent: "center",
+  }}
+>
+  <div
+    style={{
+      width: "300px",              
+      aspectRatio: "2 / 3",        
+      borderRadius: "8px",
+      overflow: "hidden",
+      boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
+      backgroundColor: "#000",
+      transition: "transform 0.3s ease",
+    }}
+  >
+    <Movie {...movie} />
+  </div>
+</div>
+  ))}
+</div>
+  );
+};
 
   return (
     <div>
-      {loading ? (
-        <div>
-          <Box
-            style={{
-              height: "22em",
-            }}
-          >
-            &nbsp;
-          </Box>
-        </div>
+      {loading || !movies?.[genre]?.length ? (
+       <div style={{ height: "300px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <p style={{ color: "white", fontSize: "1.5em" }}>LOADING...</p>
+      </div>
       ) : (
         <div>
-          <h2
-            style={{
-              marginTop: "0px",
-              justifyContent: "center",
-              marginLeft: "8.5%",
-              color: "white",
-              fontSize: "1.5em",
-            }}
-          >
-            genre : {genre}
-          </h2>
-          <Grid
-            container
-            spacing={2}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Grid
-              style={{
-                display: "flex",
-              }}
-              item
-              xs={1}
-            >
-              <IconButton
-                onClick={moveLeft}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                }}
-              >
-                <ArrowBackIosIcon
-                  style={{
-                    width: "40%",
-                    height: "100%",
-                    color: "red",
-                    scale: "2.0",
-                    marginLeft: "1.5em",
-                  }}
-                />
-              </IconButton>
-            </Grid>
+           <h2
+        style={{
+    margin: "40px 0 10px 60px",
+    color: "#fff",
+    fontSize: "2.2rem",
+    fontWeight: "900",
+    textShadow: "0 0 10px rgba(255, 0, 0, 0.6), 0 0 20px rgba(255, 0, 0, 0.4)",
+    borderLeft: "6px solid red",
+    paddingLeft: "16px",
+    textTransform: "uppercase",
+    letterSpacing: "1px"
+  }}
 
-            {movies?.length && movieRender()}
-            {/* {movieRender()} */}
-            <Grid item xs={1}>
-              <IconButton
-                onClick={moveRight}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                }}
-              >
-                <ArrowForwardIosIcon
-                  style={{
-                    width: "40%",
-                    height: "100%",
-                    color: "red",
-                    scale: "2.0",
-                    marginRight: "1.5em",
-                  }}
-                />
-              </IconButton>
-            </Grid>
-          </Grid>
+    >
+      {genre}
+    </h2>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <MovieSlider movies={movies} genre={genre}/>
+          </div>
         </div>
       )}
     </div>

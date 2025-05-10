@@ -8,7 +8,10 @@ const fetchSummary = async (data)=>{
           `https://www.omdbapi.com/?i=${movie.imdb_code}&apikey=4a472414&plot=full`
         );
         const data = await res.json();
-        movie.summary = data.Plot; 
+        if(res.ok || !movie.summary){
+          movie.summary = data.Plot; 
+        }
+        movie.rating = data.imdbRating;
       }
       return movie;
     })

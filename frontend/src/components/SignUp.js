@@ -11,32 +11,8 @@ import { useState } from "react";
 import { TextField } from "@mui/material";
 import FormHelperText from "@mui/material/FormHelperText";
 import axios from "axios";
-import {
-  createMuiTheme,
-  makeStyles,
-  createStyles,
-  Theme as AugmentedTheme,
-  ThemeProvider,
-} from "@material-ui/core/styles";
 import config from '../config';
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      // color: green[900],
-
-      "& .MuiOutlinedInput-root": {
-        backgroundColor: "transparent",
-        "& fieldset": {
-          borderColor: "rgba(0, 0, 0, 0.23)", // default
-        },
-        "&.Mui-focused fieldset": {
-          border: "2px solid white", // customized
-        },
-      },
-    },
-  })
-);
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
     children,
@@ -108,7 +84,6 @@ const inputFormStyle = {
 };
 
 export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
-  const classes = useStyles();
   const [open, setOpen] = React.useState(openSignUp);
 
   const handleClose2 = () => {
@@ -481,9 +456,25 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 }}
               >
                 <TextField
-                  classes={{
-                    root: classes.root,
-                  }}
+                   sx={{
+                    my: 1,
+                    width: "255px",
+                    color: "white",
+                    background: "#38393b",
+                    fontSize: "20px",
+                    borderRadius: 1,
+                    marginRight: "10px",
+                    height: "53px",
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "transparent",
+                  "& fieldset": {
+                    borderColor: "rgba(0, 0, 0, 0.23)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "2px solid white",
+                  },
+                },
+                }}
                   name="email"
                   onKeyPress={gotoPasswordInput}
                   autoComplete="off"
@@ -494,16 +485,6 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                   required
                   inputProps={{ style: { color: "white" } }}
                   InputLabelProps={{ style: { color: "white" } }}
-                  sx={{
-                    my: 1,
-                    width: "255px",
-                    color: "white",
-                    background: "#38393b",
-                    fontSize: "20px",
-                    borderRadius: 1,
-                    marginRight: "10px",
-                    height: "53px",
-                  }}
                 />
 
                 <CustomizedButton
@@ -525,8 +506,22 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 비밀번호
               </Typography>
               <TextField
-                classes={{
-                  root: classes.root,
+                  sx={{
+                   my: 1,
+                    width: "360px",
+                    color: "white",
+                    background: "#38393b",
+                    fontSize: "20px",
+                    borderRadius: 1,
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "transparent",
+                  "& fieldset": {
+                    borderColor: "rgba(0, 0, 0, 0.23)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "2px solid white",
+                  },
+                },
                 }}
                 name="password2"
                 onKeyPress={gotoPasswordConfirmInput}
@@ -541,7 +536,6 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 required
                 inputProps={{ style: { color: "white" } }}
                 InputLabelProps={{ style: { color: "white" } }}
-                sx={formStyle}
               />
               <FormHelperText sx={{ color: "red" }}>
                 {passwordError}
@@ -556,13 +550,26 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 비밀번호 확인
               </Typography>
               <TextField
-                classes={{
-                  root: classes.root,
+                 sx={{
+                   my: 1,
+                    width: "360px",
+                    color: "white",
+                    background: "#38393b",
+                    fontSize: "20px",
+                    borderRadius: 1,
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "transparent",
+                  "& fieldset": {
+                    borderColor: "rgba(0, 0, 0, 0.23)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "2px solid white",
+                  },
+                },
                 }}
                 name="passwordconfirm"
                 onKeyPress={gotoNameInput}
                 autoComplete="off"
-                sx={formStyle}
                 required
                 inputProps={{ style: { color: "white" } }}
                 InputLabelProps={{ style: { color: "white" } }}
@@ -581,8 +588,22 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 이름
               </Typography>
               <TextField
-                classes={{
-                  root: classes.root,
+                 sx={{
+                   my: 1,
+                    width: "360px",
+                    color: "white",
+                    background: "#38393b",
+                    fontSize: "20px",
+                    borderRadius: 1,
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "transparent",
+                  "& fieldset": {
+                    borderColor: "rgba(0, 0, 0, 0.23)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "2px solid white",
+                  },
+                },
                 }}
                 name="name"
                 onKeyPress={gotoTelInput}
@@ -594,7 +615,6 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 required
                 inputProps={{ style: { color: "white" } }}
                 InputLabelProps={{ style: { color: "white" } }}
-                sx={formStyle}
               />
               <FormHelperText sx={{ color: "red" }}>{nameError}</FormHelperText>
             </Box>
@@ -607,8 +627,22 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 전화번호
               </Typography>
               <TextField
-                classes={{
-                  root: classes.root,
+                 sx={{
+                   my: 1,
+                    width: "360px",
+                    color: "white",
+                    background: "#38393b",
+                    fontSize: "20px",
+                    borderRadius: 1,
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "transparent",
+                  "& fieldset": {
+                    borderColor: "rgba(0, 0, 0, 0.23)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "2px solid white",
+                  },
+                },
                 }}
                 name="tel"
                 onKeyPress={gotoAddrInput}
@@ -617,7 +651,6 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 required
                 inputProps={{ style: { color: "white" } }}
                 InputLabelProps={{ style: { color: "white" } }}
-                sx={formStyle}
                 value={tel}
                 onChange={handleTelChange}
               />
@@ -632,8 +665,22 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 주소
               </Typography>
               <TextField
-                classes={{
-                  root: classes.root,
+                 sx={{
+                   my: 1,
+                    width: "360px",
+                    color: "white",
+                    background: "#38393b",
+                    fontSize: "20px",
+                    borderRadius: 1,
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "transparent",
+                  "& fieldset": {
+                    borderColor: "rgba(0, 0, 0, 0.23)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "2px solid white",
+                  },
+                },
                 }}
                 name="addr"
                 onKeyPress={gotoPwQInput}
@@ -642,7 +689,6 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 required
                 inputProps={{ style: { color: "white" } }}
                 InputLabelProps={{ style: { color: "white" } }}
-                sx={formStyle}
                 value={addr}
                 onChange={handleAddrChange}
               />
@@ -672,8 +718,16 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 비밀번호 찾기 질문
               </Typography>
               <SelectInput
-                classes={{
-                  root: classes.root,
+                 sx={{
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "transparent",
+                  "& fieldset": {
+                    borderColor: "rgba(0, 0, 0, 0.23)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "2px solid white",
+                  },
+                },
                 }}
                 onKeyPress={gotoPwAInput}
                 autoComplete="off"
@@ -693,8 +747,22 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
               </Typography>
 
               <TextField
-                classes={{
-                  root: classes.root,
+                 sx={{
+                   my: 1,
+                    width: "360px",
+                    color: "white",
+                    background: "#38393b",
+                    fontSize: "20px",
+                    borderRadius: 1,
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "transparent",
+                  "& fieldset": {
+                    borderColor: "rgba(0, 0, 0, 0.23)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "2px solid white",
+                  },
+                },
                 }}
                 name="pwA"
                 autoComplete="off"
@@ -702,7 +770,6 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 required
                 inputProps={{ style: { color: "white" } }}
                 InputLabelProps={{ style: { color: "white" } }}
-                sx={formStyle}
                 value={pwCheck}
                 onChange={handlePwCheckChange}
                 onKeyPress={checkenterSubmit}

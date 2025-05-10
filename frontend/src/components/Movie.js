@@ -30,13 +30,15 @@ function Movie({
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 780,
-    height: 400,
+    height: "auto",
     bgcolor: "rgba(0,0,0,0.8)",
     border: "2px solid #000",
     boxShadow: 24,
     p: 2,
     display: "flex",
     zIndex: 9999,
+    outline: "none",
+    overflowY: "auto",
   };
 
   const [isHover, setIsHover] = React.useState(false);
@@ -151,12 +153,13 @@ function Movie({
         src={medium_cover_image}
         title={title}
         style={{
-          width: "95%",
-          height: "95%",
+          width: "100%",
+          height: "100%",
           objectFit: "cover",
           transition: "all 0.3s ease-out",
           transform: isHover ? "scale(1.1)" : "scale(1)",
           cursor: "pointer",
+          transformOrigin: "center",
         }}
         onClick={() => {
           handleOpen();
@@ -171,8 +174,8 @@ function Movie({
           }}
           style={{
             position: "absolute",
-            top: 0,
-            left: 0,
+            top: 9,
+            left: 7,
             width: "95%",
             height: "95%",
             display: "flex",
@@ -181,6 +184,7 @@ function Movie({
             zIndex: 10,
             backgroundColor: "rgba(0,0,0,0.8)",
             cursor: "pointer",
+            transformOrigin: "center",
           }}
         >
           <Typography
@@ -232,11 +236,10 @@ function Movie({
                     height: "230px",
                     fontSize: 18,
                     display: "block",
+                    overflowY: "auto"
                   }}
                 >
-                  {summary?.length > 400
-                    ? `${summary.slice(0, 400)}...`
-                    : summary}
+                  {summary}
                 </p>
               </div>
               <Grid>

@@ -36,7 +36,7 @@ const NewDateAdd = () => {
         </div>
       ) : (
         <div style={{ marginTop: "100px" }}>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} justifyContent="center">
             {movies.map((movie) => (
               <Grid item xs={2} key={movie.id}>
                 <Movie

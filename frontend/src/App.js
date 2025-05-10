@@ -1,3 +1,6 @@
+import React from 'react';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,15 +17,12 @@ import Profiles from "./pages/Profiles";
 import Customercenter from "./pages/CustomerCenter";
 import ProfileUpdate from "./pages/ProfileUpdate";
 import BoardInsert from "./pages/BoardInsert";
-import { useEffect } from "react";
 import Board from "./components/Board";
 import BoardList from "./components/BoardList";
 import BoardModify from "./pages/BoardModify";
 import BoardDetail from "./components/BoardDetail";
 import MemberBoard from "./pages/memberBoard";
 import BoardSearch from "./pages/BoardSearch";
-import { useState } from "react";
-import axios from "axios";
 import MemberSearch from "./pages/MemberSearch";
 
 const App = () => {

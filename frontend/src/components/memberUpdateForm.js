@@ -12,31 +12,10 @@ import { TextField } from "@mui/material";
 import FormHelperText from "@mui/material/FormHelperText";
 import axios from "axios";
 import {
-  createMuiTheme,
-  makeStyles,
-  createStyles,
-  Theme as AugmentedTheme,
   ThemeProvider,
-} from "@material-ui/core/styles";
+} from '@mui/material/styles';
 import config from '../config';
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      // color: green[900],
-
-      "& .MuiOutlinedInput-root": {
-        backgroundColor: "transparent",
-        "& fieldset": {
-          borderColor: "rgba(0, 0, 0, 0.23)", // default
-        },
-        "&.Mui-focused fieldset": {
-          border: "2px solid white", // customized
-        },
-      },
-    },
-  })
-);
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
     children,
@@ -114,7 +93,6 @@ export default function MemberUpdateForm({
   updateFormClose,
   info,
 }) {
-  const classes = useStyles();
   const [open, setOpen] = React.useState(openMemberUpdateForm);
 
   const handleClose2 = () => {
@@ -473,8 +451,22 @@ export default function MemberUpdateForm({
                 비밀번호
               </Typography>
               <TextField
-                classes={{
-                  root: classes.root,
+                sx={{
+                   my: 1,
+                    width: "360px",
+                    color: "white",
+                    background: "#38393b",
+                    fontSize: "20px",
+                    borderRadius: 1,
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "transparent",
+                  "& fieldset": {
+                    borderColor: "rgba(0, 0, 0, 0.23)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "2px solid white",
+                  },
+                },
                 }}
                 autoComplete="off"
                 name="memberpassword"
@@ -486,7 +478,6 @@ export default function MemberUpdateForm({
                 required
                 inputProps={{ style: { color: "white" } }}
                 InputLabelProps={{ style: { color: "white" } }}
-                sx={formStyle}
               />
               <FormHelperText sx={{ color: "red" }}>
                 {passwordError}
@@ -501,13 +492,26 @@ export default function MemberUpdateForm({
                 비밀번호 확인
               </Typography>
               <TextField
-                classes={{
-                  root: classes.root,
+                 sx={{
+                   my: 1,
+                    width: "360px",
+                    color: "white",
+                    background: "#38393b",
+                    fontSize: "20px",
+                    borderRadius: 1,
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "transparent",
+                  "& fieldset": {
+                    borderColor: "rgba(0, 0, 0, 0.23)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "2px solid white",
+                  },
+                },
                 }}
                 autoComplete="off"
                 name="memberpasswordconfirm"
                 onKeyPress={gotoNameInput}
-                sx={formStyle}
                 required
                 inputProps={{ style: { color: "white" } }}
                 InputLabelProps={{ style: { color: "white" } }}
@@ -526,8 +530,22 @@ export default function MemberUpdateForm({
                 이름
               </Typography>
               <TextField
-                classes={{
-                  root: classes.root,
+                 sx={{
+                   my: 1,
+                    width: "360px",
+                    color: "white",
+                    background: "#38393b",
+                    fontSize: "20px",
+                    borderRadius: 1,
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "transparent",
+                  "& fieldset": {
+                    borderColor: "rgba(0, 0, 0, 0.23)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "2px solid white",
+                  },
+                },
                 }}
                 autoComplete="off"
                 name="membername"
@@ -539,7 +557,6 @@ export default function MemberUpdateForm({
                 required
                 inputProps={{ style: { color: "white" } }}
                 InputLabelProps={{ style: { color: "white" } }}
-                sx={formStyle}
               />
               <FormHelperText sx={{ color: "red" }}>{nameError}</FormHelperText>
             </Box>
@@ -552,8 +569,22 @@ export default function MemberUpdateForm({
                 전화번호
               </Typography>
               <TextField
-                classes={{
-                  root: classes.root,
+                 sx={{
+                   my: 1,
+                    width: "360px",
+                    color: "white",
+                    background: "#38393b",
+                    fontSize: "20px",
+                    borderRadius: 1,
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "transparent",
+                  "& fieldset": {
+                    borderColor: "rgba(0, 0, 0, 0.23)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "2px solid white",
+                  },
+                },
                 }}
                 autoComplete="off"
                 name="membertel"
@@ -562,7 +593,6 @@ export default function MemberUpdateForm({
                 required
                 inputProps={{ style: { color: "white" } }}
                 InputLabelProps={{ style: { color: "white" } }}
-                sx={formStyle}
                 value={tel}
                 onChange={handleTelChange}
               />
@@ -577,8 +607,22 @@ export default function MemberUpdateForm({
                 주소
               </Typography>
               <TextField
-                classes={{
-                  root: classes.root,
+                 sx={{
+                   my: 1,
+                    width: "360px",
+                    color: "white",
+                    background: "#38393b",
+                    fontSize: "20px",
+                    borderRadius: 1,
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "transparent",
+                  "& fieldset": {
+                    borderColor: "rgba(0, 0, 0, 0.23)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "2px solid white",
+                  },
+                },
                 }}
                 autoComplete="off"
                 name="memberaddr"
@@ -587,7 +631,6 @@ export default function MemberUpdateForm({
                 required
                 inputProps={{ style: { color: "white" } }}
                 InputLabelProps={{ style: { color: "white" } }}
-                sx={formStyle}
                 value={addr}
                 onChange={handleAddrChange}
               />
@@ -606,8 +649,22 @@ export default function MemberUpdateForm({
                 비밀번호 찾기 질문
               </Typography>
               <SelectInput
-                classes={{
-                  root: classes.root,
+                 sx={{
+                   my: 1,
+                    width: "360px",
+                    color: "white",
+                    background: "#38393b",
+                    fontSize: "20px",
+                    borderRadius: 1,
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "transparent",
+                  "& fieldset": {
+                    borderColor: "rgba(0, 0, 0, 0.23)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "2px solid white",
+                  },
+                },
                 }}
                 autoComplete="off"
                 // name="memberpwQ"
@@ -630,8 +687,22 @@ export default function MemberUpdateForm({
               </Typography>
 
               <TextField
-                classes={{
-                  root: classes.root,
+                 sx={{
+                   my: 1,
+                    width: "360px",
+                    color: "white",
+                    background: "#38393b",
+                    fontSize: "20px",
+                    borderRadius: 1,
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "transparent",
+                  "& fieldset": {
+                    borderColor: "rgba(0, 0, 0, 0.23)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "2px solid white",
+                  },
+                },
                 }}
                 autoComplete="off"
                 name="memberpwA"
@@ -639,7 +710,6 @@ export default function MemberUpdateForm({
                 required
                 inputProps={{ style: { color: "white" } }}
                 InputLabelProps={{ style: { color: "white" } }}
-                sx={formStyle}
                 value={pwCheck}
                 onChange={handlePwCheckChange}
                 onKeyPress={checkenterSubmit}

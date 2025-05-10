@@ -14,36 +14,19 @@ import SignUp from "../components/SignUp";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import {
-  createMuiTheme,
-  makeStyles,
-  createStyles,
-  Theme as AugmentedTheme,
-  ThemeProvider,
-} from "@material-ui/core/styles";
-import { orange, blue, green } from "@material-ui/core/colors";
+ createTheme, ThemeProvider 
+} from '@mui/material/styles';
 import config from '../config';
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      // color: green[900],
-
-      "& .MuiOutlinedInput-root": {
-        backgroundColor: "transparent",
-        "& fieldset": {
-          borderColor: "rgba(0, 0, 0, 0.23)", // default
-        },
-        "&.Mui-focused fieldset": {
-          border: "2px solid white", // customized
-        },
-      },
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#ffffff", 
     },
-  })
-);
+  },
+});
 
 function Login() {
-  const classes = useStyles();
-  const theme = createMuiTheme();
   const emailRef = useRef();
   const pwRef = useRef();
 
@@ -238,6 +221,7 @@ function Login() {
   };
 
   return (
+     <ThemeProvider theme={theme}>
     <Container
       component="main"
       maxWidth="md"
@@ -272,9 +256,6 @@ function Login() {
           로그인
         </Typography>
         <TextField
-          classes={{
-            root: classes.root,
-          }}
           autoComplete="off"
           onKeyPress={gotoPasswordInput}
           ref={emailRef}
@@ -308,9 +289,6 @@ function Login() {
         </FormHelperText>
 
         <TextField
-          classes={{
-            root: classes.root,
-          }}
           ref={pwRef}
           label={pwLabel}
           type="password"
@@ -423,6 +401,7 @@ function Login() {
         </Box>
       </Box>
     </Container>
+        </ThemeProvider>
   );
 }
 
