@@ -40,13 +40,6 @@ const FavMovieList = () => {
 
   return (
     <FavListUpdateProvider value={ctxValue}>
-      <Box 
-        sx={{ 
-          mt: 12,
-          width: "90%", 
-          mx: "auto",
-        }}
-      >
         {loading ? (
           <div
             style={{
@@ -58,7 +51,7 @@ const FavMovieList = () => {
             loading...
           </div>
         ) : (
-          <>
+          <div style={{ marginTop: "100px" }}>
             {movies.length ? (
               <Grid 
                 container 
@@ -88,9 +81,8 @@ const FavMovieList = () => {
                 찜목록이 없습니다.
               </div>
             )}
-          </>
+          </div>
         )}
-      </Box>
     </FavListUpdateProvider>
   );
 };
