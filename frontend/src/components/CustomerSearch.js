@@ -72,7 +72,7 @@ export default function PrimarySearchAppBar({ kind }) {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, width: "100vw" }}>
       <Typography
         variant="h4"
         noWrap
@@ -87,16 +87,19 @@ export default function PrimarySearchAppBar({ kind }) {
       >
         {kind}
       </Typography>
-      <Box sx={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
-        <Search>
-          <StyledInputBase
-            onKeyPress={handleEnter}
-            placeholder="검색어를 입력하세요"
-            inputProps={{ "aria-label": "search" }}
-            onChange={onchange}
-            sx={{ width: "100%" }}
-          />
-        </Search>
+      <Box sx={{ display: "flex", alignItems: "center",justifyContent:"center", marginBottom: "10px", width: "100%" }}>
+       <Search sx={{ 
+        flexGrow: 1,
+        maxWidth: "800px" 
+      }}>
+        <StyledInputBase
+          onKeyPress={handleEnter}
+          placeholder="검색어를 입력하세요"
+          inputProps={{ "aria-label": "search" }}
+          onChange={onchange}
+          sx={{ width: "100%" }}
+        />
+      </Search>
         <CustomizedButton label="검색" value="search" onClick={onClick} />
       </Box>
     </Box>

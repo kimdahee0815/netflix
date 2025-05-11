@@ -12,6 +12,7 @@ import { useLayoutEffect, useState, useEffect } from "react";
 import config from '../config';
 import {useContext} from 'react';
 import { FavListUpdateContext } from "../store/FavListTriggerContext";
+import '../css/movie.css';
 
 function Movie({
   id,
@@ -231,16 +232,9 @@ function Movie({
                 }}
               >
                 <h2 style={{ display: "block" }}>{title}</h2>
-                <p
-                  style={{
-                    height: "230px",
-                    fontSize: 18,
-                    display: "block",
-                    overflowY: "auto"
-                  }}
-                >
-                  {summary}
-                </p>
+              <p className="summary-scroll">
+                {summary}
+              </p>
               </div>
               <Grid>
                 <Button

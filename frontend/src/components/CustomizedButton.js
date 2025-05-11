@@ -48,7 +48,7 @@ export default function CustomizedButton(props) {
           onClick={props.onClick}
           variant="contained"
           disableRipple
-          sx={{ width: 149 }}
+          sx={{ width: 142 }}
         >
           {props.label}
         </BootstrapButton>

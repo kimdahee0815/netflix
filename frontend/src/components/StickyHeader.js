@@ -20,7 +20,7 @@ const StickyHeader = ({ kind }) => {
       style={{ background: "#212121" }}
     >
       <Toolbar sx={{ width: "100%" }}>
-        <Grid container sx={{ pt: 2, width: "100%" }}>
+        <Grid container sx={{ pt: 2, width: "100%" }} justifyContent="center">
           <Box sx={{ display: "flex", width: "100%" }}>
             <Box sx={{ display: "block", width: "80%", ml: 3 }}>
               <Typography

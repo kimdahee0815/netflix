@@ -208,292 +208,170 @@ const MyPageBody = () => {
   };
 
   return (
-    <Container sx={{ paddingTop: "100px" }}>
-      <Typography sx={{ fontSize: 35, mb: 2 }}>계정</Typography>
-      <Divider />
-      <Grid container sx={{ m: 1 }}>
-        {isSmallScreen ? (
-          <Grid
-            item
-            xs={12}
-            sx={{ fontSize: 19, color: "black", mb: 3, fontWeight: "bold" }}
-          >
-            멤버십 & 결제 정보
-          </Grid>
-        ) : (
-          <Grid
-            item
-            xs={3}
-            sx={{ fontSize: 19, color: "black", fontWeight: "bold" }}
-          >
-            멤버십 & 결제 정보
-          </Grid>
-        )}
-
-        <Grid item xs={9} sx={{ direction: "column" }}>
-          <Grid container>
-            <Grid item xs={9} sx={{ pl: 2, pt: 3, color: "gray" }}>
-              이메일 주소 : {email}
-            </Grid>
-            <Grid item xs={2} sx={{ p: 2 }}>
-              <Box sx={{ width: 200 }}>
-                <CustomizedButton
-                  label="이메일 주소 변경"
-                  value="emailChange"
-                  onClick={handleEmailOpen}
-                ></CustomizedButton>
-                {openEmailModal ? (
-                  <EmailChange
-                    value="이메일 주소"
-                    openModal={openEmailModal}
-                    setOpenModal={setOpenEmailModal}
-                    handleOpen={handleEmailOpen}
-                    handleClose={handleEmailClose}
-                    setEmail={setEmail}
-                  ></EmailChange>
-                ) : null}
-              </Box>
-            </Grid>
-            <Grid item xs={9} sx={{ pl: 2, pt: 3, color: "gray" }}>
-              비밀번호 : {pw}
-            </Grid>
-            <Grid item xs={2} sx={{ p: 2 }}>
-              <Box sx={{ width: "200%" }}>
-                <CustomizedButton
-                  label="비밀번호 변경"
-                  value="passwordChange"
-                  onClick={handlePwOpen}
-                ></CustomizedButton>
-                {openPwModal ? (
-                  <PasswordChange
-                    label="마이페이지 비밀번호 변경"
-                    openPwModal={openPwModal}
-                    setOpenPwModal={setOpenPwModal}
-                    handlePwOpen={handlePwOpen}
-                    handlePwClose={handlePwClose}
-                    setPasswordSearch={setPasswordSearch}
-                    setPw={setPw}
-                    pw={pw}
-                  ></PasswordChange>
-                ) : null}
-              </Box>
-            </Grid>
-            <Grid item xs={9} sx={{ pl: 2, pt: 3, color: "gray" }}>
-              휴대폰 번호 : {tel}
-            </Grid>
-            <Grid item xs={2} sx={{ p: 2 }}>
-              <Box sx={{ width: 200, mb: 2 }}>
-                <CustomizedButton
-                  label="휴대폰 번호 변경"
-                  value="phoneChange"
-                  onClick={handlePhoneOpen}
-                ></CustomizedButton>
-                {openPhoneModal ? (
-                  <PhoneChange
-                    value="휴대폰 번호"
-                    openModal={openPhoneModal}
-                    setOpenModal={setOpenPhoneModal}
-                    handleOpen={handlePhoneOpen}
-                    handleClose={handlePhoneClose}
-                    setTel={setTel}
-                    tel={tel}
-                  ></PhoneChange>
-                ) : null}
-              </Box>
-            </Grid>
-          </Grid>
-          <Divider />
-          <Grid container>
-            <Grid item xs={10} sx={{ p: 2 }}>
-              결제 정보가 없습니다
-            </Grid>
-            <Grid item xs={2} sx={{ p: 2 }}></Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-
-      <Divider />
-
-      <Grid container sx={{ m: 1 }}>
-        {isSmallScreen ? (
-          <Grid
-            item
-            xs={12}
-            sx={{ fontSize: 19, color: "black", mb: 3, fontWeight: "bold" }}
-          >
-            멤버십 상세 정보
-          </Grid>
-        ) : (
-          <Grid
-            item
-            xs={3}
-            sx={{ fontSize: 19, color: "black", fontWeight: "bold" }}
-          >
-            멤버십 상세 정보
-          </Grid>
-        )}
-
-        <Grid item xs={9} sx={{ direction: "column" }}>
-          {isSmallScreen ? (
-            <Grid container>
-              <Grid item xs={12} sx={{ p: 2 }}>
-                스트리밍 멤버십에 가입하지 않으셨습니다.
-              </Grid>
-            </Grid>
-          ) : (
-            <Grid container>
-              <Grid item xs={9} sx={{ p: 2 }}>
-                스트리밍 멤버십에 가입하지 않으셨습니다.
-              </Grid>
-              <Grid item xs={3} sx={{ pr: 2 }}>
-                <Typography
-                  sx={{
-                    fontSize: 14,
-                    mr: 5,
-                    mb: 3,
-                    color: "blue",
-                    textAlign: "right",
-                    mt: 2,
-                  }}
-                >
-                  스트리밍 멤버십 추가
-                </Typography>
-              </Grid>
-            </Grid>
-          )}
-        </Grid>
-      </Grid>
-
-      <Divider />
-
-      <Grid container sx={{ m: 1 }}>
-        {isSmallScreen ? (
-          <Grid
-            item
-            xs={12}
-            sx={{ fontSize: 19, color: "black", mb: 3, fontWeight: "bold" }}
-          >
-            프로필 & 자녀 보호 설정
-          </Grid>
-        ) : (
-          <Grid
-            item
-            xs={3}
-            sx={{ fontSize: 19, color: "black", fontWeight: "bold" }}
-          >
-            프로필 & 자녀 보호 설정
-          </Grid>
-        )}
-
-        <Grid item xs={9} sx={{ direction: "row" }}>
-          <Grid container>
-            <Box sx={{ display: "flex" }}>
-              {profileImg === "" ? (
-                <AccountBoxIcon sx={{ fontSize: 80 }} />
-              ) : (
-                <Box
-                  component="img"
-                  sx={{
-                    ml: 2,
-                    mr: 3,
-                    height: 100,
-                    width: 100,
-                    maxHeight: { xs: 70, md: 100 },
-                    maxWidth: { xs: 70, md: 100 },
-                  }}
-                  src={profileImg}
-                />
-              )}
-
-              <Typography
-                sx={{
-                  pl: 2,
-                  display: "flex",
-                  alignItems: "center",
-                  height: "80px",
-                  fontWeight: "bold",
-                  fontSize: "1.8em",
-                }}
-              >
-                {profileNickname}
-              </Typography>
-            </Box>
-            <Grid></Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-
-      <Divider />
-      <Grid container sx={{ m: 1 }}>
-        <Grid
-          item
-          xs={3}
-          sx={{ fontSize: 19, color: "black", fontWeight: "bold" }}
-        >
-          설정
-        </Grid>
-        <Grid item xs={9} sx={{ color: "blue" }}>
-          마케팅 커뮤니케이션
-        </Grid>
-      </Grid>
-      <Divider />
-      {isSmallScreen ? (
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "end",
-            mt: 5,
-          }}
-        >
-          {user === "admin@email.com" ? (
-            <Box sx={{ mr: 3 }}>
-              <CustomizedButton
-                label="넷플릭스 회원 관리하기"
-                onClick={gotoMemberBoard}
-              ></CustomizedButton>
-            </Box>
-          ) : null}
-          <Box sx={{ mr: 3, mt: 2 }}>
-            <CustomizedButton
-              label="로그인 정보 삭제하기"
-              value="로그인 정보 삭제하기2"
-              onClick={deleteLoginInfo}
-            ></CustomizedButton>
-          </Box>
-          <Box sx={{ mr: 3, mt: 2 }}>
-            <CustomizedButton
-              label="탈퇴하기"
-              value="탈퇴하기2"
-              onClick={deleteAccount}
-            ></CustomizedButton>
-          </Box>
+<Container sx={{ paddingTop: "100px" }}>
+  <Typography sx={{ fontSize: 35, mb: 2 }}>계정</Typography>
+  <Divider />
+    {openEmailModal && (
+      <EmailChange
+        value="이메일 주소"
+        openModal={openEmailModal}
+        setOpenModal={setOpenEmailModal}
+        handleOpen={handleEmailOpen}
+        handleClose={handleEmailClose}
+        setEmail={setEmail}
+      />
+    )}
+    {openPwModal && (
+      <PasswordChange
+        label="마이페이지 비밀번호 변경"
+        openPwModal={openPwModal}
+        setOpenPwModal={setOpenPwModal}
+        handlePwOpen={handlePwOpen}
+        handlePwClose={handlePwClose}
+        setPasswordSearch={setPasswordSearch}
+        setPw={setPw}
+        pw={pw}
+      />
+    )}
+    {openPhoneModal && (
+      <PhoneChange
+        value="휴대폰 번호"
+        openModal={openPhoneModal}
+        setOpenModal={setOpenPhoneModal}
+        handleOpen={handlePhoneOpen}
+        handleClose={handlePhoneClose}
+        setTel={setTel}
+        tel={tel}
+      />
+    )}
+  {/* 멤버십 & 결제 정보 */}
+  <Box sx={{ m: 2 }}>
+    <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>
+      멤버십 & 결제 정보
+    </Typography>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
+        <Typography sx={{ color: "gray" }}>이메일 주소 : {email}</Typography>
+        <Box sx={{ flexShrink: 0 }}> 
+          <CustomizedButton 
+            label="이메일 주소 변경" 
+            value="emailChange" 
+            onClick={handleEmailOpen} 
+          />
         </Box>
-      ) : (
-        <Box sx={{ display: "flex", justifyContent: "end", mt: 5 }}>
-          {user === "admin@email.com" ? (
-            <Box sx={{ mr: 3 }}>
-              <CustomizedButton
-                label="넷플릭스 회원 관리하기"
-                onClick={gotoMemberBoard}
-              ></CustomizedButton>
-            </Box>
-          ) : null}
-          <Box sx={{ mr: 3 }}>
-            <CustomizedButton
-              label="로그인 정보 삭제하기"
-              onClick={deleteLoginInfo}
-            ></CustomizedButton>
-          </Box>
-          <Box>
-            <CustomizedButton
-              label="탈퇴하기"
-              onClick={deleteAccount}
-            ></CustomizedButton>
-          </Box>
+      </Box>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
+        <Typography sx={{ color: "gray" }}>비밀번호 : {pw}</Typography>
+        <Box sx={{ flexShrink: 0 }}> 
+          <CustomizedButton 
+            label="비밀번호 변경" 
+            value="passwordChange" 
+            onClick={handlePwOpen} 
+          />
         </Box>
+      </Box>
+
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%"}}>
+        <Typography sx={{ color: "gray" }}>휴대폰 번호 : {tel}</Typography>
+        <Box sx={{ flexShrink: 0 }}> 
+          <CustomizedButton 
+            label="휴대폰 번호 변경" 
+            value="phoneChange" 
+            onClick={handlePhoneOpen} 
+          />
+        </Box>
+      </Box>
+
+      <Divider sx={{ my: 2 }} />
+      <Typography>결제 정보가 없습니다</Typography>
+    </Box>
+  </Box>
+
+  <Divider />
+
+  {/* 멤버십 상세 정보 */}
+  <Box sx={{ m: 2 }}>
+    <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>
+      멤버십 상세 정보
+    </Typography>
+    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <Typography>스트리밍 멤버십에 가입하지 않으셨습니다.</Typography>
+      {!isSmallScreen && (
+        <Typography sx={{ fontSize: 14, color: "blue", textAlign: "right" }}>
+          스트리밍 멤버십 추가
+        </Typography>
       )}
-    </Container>
+    </Box>
+  </Box>
+
+  <Divider />
+
+  {/* 프로필 & 자녀 보호 설정 */}
+  <Box sx={{ m: 2 }}>
+    <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>
+      프로필 & 자녀 보호 설정
+    </Typography>
+    <Box sx={{ display: "flex", alignItems: "center" }}>
+      {profileImg === "" ? (
+        <AccountBoxIcon sx={{ fontSize: 80 }} />
+      ) : (
+        <Box
+          component="img"
+          sx={{
+            ml: 2,
+            mr: 3,
+            height: 100,
+            width: 100,
+            maxHeight: { xs: 70, md: 100 },
+            maxWidth: { xs: 70, md: 100 },
+          }}
+          src={profileImg}
+        />
+      )}
+      <Typography
+        sx={{
+          pl: 2,
+          display: "flex",
+          alignItems: "center",
+          height: "80px",
+          fontWeight: "bold",
+          fontSize: "1.8em",
+        }}
+      >
+        {profileNickname}
+      </Typography>
+    </Box>
+  </Box>
+
+  <Divider />
+
+  {/* 설정 */}
+  <Box sx={{ m: 2 }}>
+    <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>설정</Typography>
+    <Typography sx={{ color: "blue" }}>마케팅 커뮤니케이션</Typography>
+  </Box>
+
+  <Divider />
+
+  {/* 버튼들 */}
+  <Box
+    sx={{
+      display: "flex",
+      flexDirection: isSmallScreen ? "column" : "row",
+      justifyContent: "end",
+      alignItems: isSmallScreen ? "end" : "center",
+      mt: 5,
+      gap: 2,
+      m: 2,
+    }}
+  >
+    {user === "admin@email.com" && (
+      <CustomizedButton label="넷플릭스 회원 관리하기" onClick={gotoMemberBoard} />
+    )}
+    <CustomizedButton label="로그인 정보 삭제하기" onClick={deleteLoginInfo} />
+    <CustomizedButton label="탈퇴하기" onClick={deleteAccount} />
+  </Box>
+</Container>
   );
 };
 
