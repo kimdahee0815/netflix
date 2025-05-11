@@ -3,7 +3,7 @@ import fetchSummary from './../util/fetchSummary';
 
 const initialState = {
   movies: {}, 
-  loading: true,
+  loading: {},
 }
 const movieSlice = createSlice({
   name:'movie',
@@ -14,7 +14,8 @@ const movieSlice = createSlice({
       state.movies[genre] = movies;
     },
     setLoading(state, action) {
-      state.loading = action.payload;
+      const { genre, value } = action.payload;
+      state.loading[genre] = value;
     },
   }
 })
@@ -22,7 +23,7 @@ const movieSlice = createSlice({
 function shuffle(array) {
     return array.sort(() => Math.random() - 0.5);
 }
-const fetchAllMovies = async (genre, minRating = 8, maxPages = 4) => {
+const fetchAllMovies = async (genre, minRating = 8, maxPages = 2) => {
   let allMovies = [];
 
   for (let page = 1; page <= maxPages; page++) {
@@ -30,6 +31,7 @@ const fetchAllMovies = async (genre, minRating = 8, maxPages = 4) => {
       `https://yts.mx/api/v2/list_movies.json?limit=50&page=${page}&genre=${genre}&minimum_rating=${minRating}`
     );
     const data = await res.json();
+    console.log(data.data.movies)
     if (data?.data?.movies?.length > 0) {
       allMovies = [...allMovies, ...data?.data?.movies];
     } else {
@@ -41,17 +43,17 @@ const fetchAllMovies = async (genre, minRating = 8, maxPages = 4) => {
 };
 export const getAllGenresMoviesData = (genres = []) => {
   return async (dispatch, getState) => {
-    dispatch(movieActions.setLoading(true)); 
+     for (let genre of genres) {
+      dispatch(movieActions.setLoading({ genre, value: true }));
 
-    for (let genre of genres) {
       const movieData = await fetchAllMovies(genre);
       const updatedMovies = await fetchSummary(movieData);
       dispatch(
         movieActions.addMovies({ genre, movies: shuffle(updatedMovies) })
       );
-    }
 
-    dispatch(movieActions.setLoading(false));
+      dispatch(movieActions.setLoading({ genre, value: false }));
+    }
   };
 };
 export const movieActions = movieSlice.actions;

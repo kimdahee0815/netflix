@@ -3,6 +3,7 @@ import * as React from "react";
 import { useState, useLayoutEffect } from "react";
 import Banner_data from "./Banner_data";
 import fetchSummary from "../util/fetchSummary";
+import '../css/movie.css';
 
 function Banner() {
   const [movie, setMovie] = useState();

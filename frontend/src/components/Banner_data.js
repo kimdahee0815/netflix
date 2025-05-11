@@ -264,14 +264,8 @@ function Banner_data({
                 }}
               >
                 <h2 style={{ display: "block" }}>{title}</h2>
-                <p
-                  style={{
-                    fontSize: 18,
-                    display: "block",
-                    height: "230px",
-                  }}
-                >
-                  {summary.length > 500 ? `${summary.slice(0, 500)}…` : summary}
+                <p className="summary-scroll">
+                  {summary}
                 </p>
               </div>
             </Typography>

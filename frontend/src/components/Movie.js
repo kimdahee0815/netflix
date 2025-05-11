@@ -20,7 +20,6 @@ function Movie({
   title,
   summary,
   genres,
-  value,
   rating,
 }) {
   const {favListUpdate} = useContext(FavListUpdateContext);
