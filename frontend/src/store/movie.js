@@ -31,7 +31,7 @@ const fetchAllMovies = async (genre, minRating = 8, maxPages = 2) => {
       `https://yts.mx/api/v2/list_movies.json?limit=50&page=${page}&genre=${genre}&minimum_rating=${minRating}`
     );
     const data = await res.json();
-    console.log(data.data.movies)
+
     if (data?.data?.movies?.length > 0) {
       allMovies = [...allMovies, ...data?.data?.movies];
     } else {
