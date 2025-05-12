@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import fetchSummary from './../util/fetchSummary';
+import fetchSummary from '../util/fetchSummary';
 
 const initialState = {
   movies: {}, 
