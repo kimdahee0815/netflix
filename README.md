@@ -40,6 +40,6 @@ A Netflix-inspired full-stack streaming platform built with **React**, **Spring 
 
 ## 🖼 Preview
 
-
+![Preview](./netflix-gif.gif)
 
 ---
