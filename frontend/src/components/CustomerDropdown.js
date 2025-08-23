@@ -113,7 +113,7 @@ export default function PositionedMenu() {
           프로필 관리
         </MenuItem>
         <Divider />
-        {memberId ? (
+        {memberId !== undefined ? (
           <MenuItem onClick={logout} component={Link} to="/">
             로그아웃
           </MenuItem>
