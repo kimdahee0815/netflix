@@ -70,7 +70,7 @@ export default function FadeMenu({ onClick }) {
           <Typography textAlign="center">{"프로필 변경"}</Typography>
         </MenuItem>
         <Divider />
-        {memberID !== undefined ? (
+        {memberID !== null ? (
           <MenuItem onClick={onClick} component={Link} to="/">
             <Typography textAlign="center">{"로그아웃"}</Typography>
           </MenuItem>

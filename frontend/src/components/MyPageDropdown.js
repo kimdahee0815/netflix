@@ -193,7 +193,7 @@ const MypageDropDown = () => {
           고객 센터
         </MenuItem>
         <Divider />
-        {memberID !== undefined ? (
+        {memberID !== null ? (
           <MenuItem onClick={logout} component={Link} to="/">
             로그아웃
           </MenuItem>
