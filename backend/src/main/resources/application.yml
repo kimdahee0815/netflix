@@ -34,7 +34,7 @@ spring:
   config:
     import: optional:file:local.env[.properties]
     activate:
-      on-profile: dev
+      on-profile: prod
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${POSTGRES_DB}
