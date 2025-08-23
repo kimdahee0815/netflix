@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useEffect } from "react";
 import { Divider } from "@mui/material";
-import config from '../config';
+import config from "../config";
 
 export default function PositionedMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -30,7 +30,7 @@ export default function PositionedMenu() {
   const logout = () => {
     window.sessionStorage.clear(); // 세션스토리지에 저장된 속성값 모두 삭제
     window.localStorage.removeItem("profile_num");
-    navigate("/", { replace: true }); // 로그인페이지로 이동
+    navigate("/login", { replace: true }); // 로그인페이지로 이동
   };
 
   useEffect(() => {

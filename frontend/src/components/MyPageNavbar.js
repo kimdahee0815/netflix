@@ -33,7 +33,7 @@ const StickyHeader = () => {
             <Typography
               noWrap
               component="a"
-              href="/login"
+              href="/"
               sx={{
                 mr: 2,
                 fontFamily: "helvetica",

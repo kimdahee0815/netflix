@@ -5,7 +5,7 @@ import { Grid, Typography, Box } from "@mui/material";
 import ProfileAdd from "../components/ProfileAdd";
 import ProfilesManageBtn from "../components/ProfilesManageBtn";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import config from '../config';
+import config from "../config";
 
 const PageTitle = ({ manageMode }) => {
   return (
@@ -72,7 +72,7 @@ function ProfileManager() {
 
   const navigate = useNavigate();
   const goBack = () => {
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -191,32 +191,32 @@ function ProfileManager() {
         ))}
         {profiles.length < 4 && (
           <Grid item xs={3} style={{ margin: "10px" }}>
-           <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 180,
-              position: "relative",
-              boxSizing: "border-box",
-              "&:hover": {
-                cursor: "pointer",
-              },
-            }}
-          >
-          <ProfileAdd onAddProfile={addProfile} />
-          <Typography
-            variant="h5"
-            component="h1"
-            style={{
-              color: "white",
-              textAlign: "center",
-            }}
-          >
-            프로필 추가
-          </Typography>
-          </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 180,
+                position: "relative",
+                boxSizing: "border-box",
+                "&:hover": {
+                  cursor: "pointer",
+                },
+              }}
+            >
+              <ProfileAdd onAddProfile={addProfile} />
+              <Typography
+                variant="h5"
+                component="h1"
+                style={{
+                  color: "white",
+                  textAlign: "center",
+                }}
+              >
+                프로필 추가
+              </Typography>
+            </Box>
           </Grid>
         )}
       </div>

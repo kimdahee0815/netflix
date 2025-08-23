@@ -13,15 +13,13 @@ import CustomizedButton from "../components/CustomizedButton";
 import SignUp from "../components/SignUp";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import {
- createTheme, ThemeProvider 
-} from '@mui/material/styles';
-import config from '../config';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import config from "../config";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#ffffff", 
+      main: "#ffffff",
     },
   },
 });
@@ -174,10 +172,10 @@ function Login() {
                     window.localStorage.clear();
                   }
                 }
-                navigate("/login");
+                navigate("/");
               } else {
                 alert("비밀번호가 다릅니다!");
-                navigate("/");
+                navigate("/login");
               }
             })
             .catch((e) => {
@@ -221,187 +219,191 @@ function Login() {
   };
 
   return (
-     <ThemeProvider theme={theme}>
-    <Container
-      component="main"
-      maxWidth="md"
-      sx={{
-        marginTop: "25vh",
-        padding: "300px",
-        paddingTop: "220px",
-        background: "black",
-        color: "white",
-        borderRadius: "15px",
-        position: "relative",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "40vh",
-        width: "100%",
-        backgroundPosition: "center",
-      }}
-    >
-      <Box
+    <ThemeProvider theme={theme}>
+      <Container
+        component="main"
+        maxWidth="md"
         sx={{
-          marginTop: 8,
+          marginTop: "25vh",
+          padding: "300px",
+          paddingTop: "220px",
+          background: "black",
+          color: "white",
+          borderRadius: "15px",
+          position: "relative",
           display: "flex",
-          flexDirection: "column",
+          justifyContent: "center",
           alignItems: "center",
-          padding: "16px",
-          width: "90%",
-          minWidth: "400px",
+          height: "40vh",
+          width: "100%",
+          backgroundPosition: "center",
         }}
       >
-        <Typography component="h1" variant="h5" sx={{ mt: "30px", mb: "30px" }}>
-          로그인
-        </Typography>
-        <TextField
-          autoComplete="off"
-          onKeyPress={gotoPasswordInput}
-          ref={emailRef}
-          margin="normal"
-          label={emailLabel}
-          type="email"
-          name="email"
-          fullWidth
-          variant="outlined"
-          inputProps={{ style: { color: "white" } }}
-          InputLabelProps={{ style: { color: "white" } }}
+        <Box
           sx={{
-            my: 1,
-            background: "#38393b",
-            // border: "1.5px solid white",
-            "&:hover": {
-              border: "none",
-            },
-            "&:click": {
-              backgroundColor: "transparent",
-              border: "none",
-            },
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "16px",
+            width: "90%",
+            minWidth: "400px",
           }}
-          required
-          value={email}
-          onChange={handleEmailChange}
-          // 이메일 주소 입력란의 값이 변경될때마다 이 함수가 호출됨
-        />
-        <FormHelperText sx={{ padding: "1px", color: "red" }}>
-          {emailError}
-        </FormHelperText>
-
-        <TextField
-          ref={pwRef}
-          label={pwLabel}
-          type="password"
-          name="password"
-          autoComplete="current-password"
-          required
-          fullWidth
-          variant="outlined"
-          inputProps={{ style: { color: "white" } }}
-          InputLabelProps={{ style: { color: "white" } }}
-          sx={{
-            my: 1,
-            background: "#38393b",
-            "&:hover": {
-              border: "none",
-            },
-            "&.Mui-focused fieldset": {
-              backgroundColor: "transparent",
-              border: "none",
-            },
-          }}
-          value={password}
-          onChange={handlePasswordChange}
-          onKeyPress={checkenterSubmit}
-        />
-
-        <FormHelperText sx={{ color: "red" }}>{passwordError}</FormHelperText>
-
-        <Box sx={{ display: "flex", width: "100%", mt: 4, mb: 3 }}>
-          <Box sx={{ display: "flex", width: "50%" }}>
-            <Typography sx={{ justifyContent: "start" }}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    value="remember"
-                    color="primary"
-                    sx={{
-                      color: "white",
-                      "&.Mui-checked": {
-                        color: "white",
-                        "&:hover": {
-                          backgroundColor: "transparent",
-                        },
-                      },
-                    }}
-                    checked={saveAccount}
-                    onChange={saveAccountChange}
-                    name="saveAccount"
-                  />
-                }
-                label="로그인 정보 저장"
-                sx={{ mr: "auto" }}
-              />
-            </Typography>
-          </Box>
-          <Box sx={{ display: "flex", width: "50%", justifyContent: "end" }}>
-            <Box>
-              <CustomizedButton
-                label="비밀번호 찾기"
-                value="비밀번호 찾기"
-                onClick={handleOpen}
-              ></CustomizedButton>
-            </Box>
-            {openModal ? (
-              <PasswordCheck
-                openModal={openModal}
-                setOpenModal={setOpenModal}
-                handleOpen={handleOpen}
-                handleClose={handleClose}
-              ></PasswordCheck>
-            ) : null}
-          </Box>
-        </Box>
-
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ background: "#e50914", mt: "24px", mb: "16px" }}
-          onClick={checkSubmit}
         >
-          로그인
-        </Button>
-
-        <Box lg={{ display: "flex", alignItems: "center" }}>
-          <Box
-            sx={{
-              background: "#e50914",
-              mt: "24px",
-              mb: "16px",
-              borderRadius: "5px",
-            }}
+          <Typography
+            component="h1"
+            variant="h5"
+            sx={{ mt: "30px", mb: "30px" }}
           >
-            <CustomizedButton
-              label="지금 가입하세요"
-              value="지금 가입하세요"
-              onClick={signUpOpen}
-            ></CustomizedButton>
-            {openSignUp ? (
-              <ThemeProvider theme={theme}>
-                <SignUp
-                  openSignUp={openSignUp}
-                  setOpenSignUp={setOpenSignUp}
-                  signUpOpen={signUpOpen}
-                  signUpClose={signUpClose}
-                ></SignUp>
-              </ThemeProvider>
-            ) : null}
+            로그인
+          </Typography>
+          <TextField
+            autoComplete="off"
+            onKeyPress={gotoPasswordInput}
+            ref={emailRef}
+            margin="normal"
+            label={emailLabel}
+            type="email"
+            name="email"
+            fullWidth
+            variant="outlined"
+            inputProps={{ style: { color: "white" } }}
+            InputLabelProps={{ style: { color: "white" } }}
+            sx={{
+              my: 1,
+              background: "#38393b",
+              // border: "1.5px solid white",
+              "&:hover": {
+                border: "none",
+              },
+              "&:click": {
+                backgroundColor: "transparent",
+                border: "none",
+              },
+            }}
+            required
+            value={email}
+            onChange={handleEmailChange}
+            // 이메일 주소 입력란의 값이 변경될때마다 이 함수가 호출됨
+          />
+          <FormHelperText sx={{ padding: "1px", color: "red" }}>
+            {emailError}
+          </FormHelperText>
+
+          <TextField
+            ref={pwRef}
+            label={pwLabel}
+            type="password"
+            name="password"
+            autoComplete="current-password"
+            required
+            fullWidth
+            variant="outlined"
+            inputProps={{ style: { color: "white" } }}
+            InputLabelProps={{ style: { color: "white" } }}
+            sx={{
+              my: 1,
+              background: "#38393b",
+              "&:hover": {
+                border: "none",
+              },
+              "&.Mui-focused fieldset": {
+                backgroundColor: "transparent",
+                border: "none",
+              },
+            }}
+            value={password}
+            onChange={handlePasswordChange}
+            onKeyPress={checkenterSubmit}
+          />
+
+          <FormHelperText sx={{ color: "red" }}>{passwordError}</FormHelperText>
+
+          <Box sx={{ display: "flex", width: "100%", mt: 4, mb: 3 }}>
+            <Box sx={{ display: "flex", width: "50%" }}>
+              <Typography sx={{ justifyContent: "start" }}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      value="remember"
+                      color="primary"
+                      sx={{
+                        color: "white",
+                        "&.Mui-checked": {
+                          color: "white",
+                          "&:hover": {
+                            backgroundColor: "transparent",
+                          },
+                        },
+                      }}
+                      checked={saveAccount}
+                      onChange={saveAccountChange}
+                      name="saveAccount"
+                    />
+                  }
+                  label="로그인 정보 저장"
+                  sx={{ mr: "auto" }}
+                />
+              </Typography>
+            </Box>
+            <Box sx={{ display: "flex", width: "50%", justifyContent: "end" }}>
+              <Box>
+                <CustomizedButton
+                  label="비밀번호 찾기"
+                  value="비밀번호 찾기"
+                  onClick={handleOpen}
+                ></CustomizedButton>
+              </Box>
+              {openModal ? (
+                <PasswordCheck
+                  openModal={openModal}
+                  setOpenModal={setOpenModal}
+                  handleOpen={handleOpen}
+                  handleClose={handleClose}
+                ></PasswordCheck>
+              ) : null}
+            </Box>
+          </Box>
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ background: "#e50914", mt: "24px", mb: "16px" }}
+            onClick={checkSubmit}
+          >
+            로그인
+          </Button>
+
+          <Box lg={{ display: "flex", alignItems: "center" }}>
+            <Box
+              sx={{
+                background: "#e50914",
+                mt: "24px",
+                mb: "16px",
+                borderRadius: "5px",
+              }}
+            >
+              <CustomizedButton
+                label="지금 가입하세요"
+                value="지금 가입하세요"
+                onClick={signUpOpen}
+              ></CustomizedButton>
+              {openSignUp ? (
+                <ThemeProvider theme={theme}>
+                  <SignUp
+                    openSignUp={openSignUp}
+                    setOpenSignUp={setOpenSignUp}
+                    signUpOpen={signUpOpen}
+                    signUpClose={signUpClose}
+                  ></SignUp>
+                </ThemeProvider>
+              ) : null}
+            </Box>
           </Box>
         </Box>
-      </Box>
-    </Container>
-        </ThemeProvider>
+      </Container>
+    </ThemeProvider>
   );
 }
 

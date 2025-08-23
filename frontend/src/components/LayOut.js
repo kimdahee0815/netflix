@@ -7,25 +7,19 @@ import DownLoadmany from "./DownLoadmany";
 import GoodMany from "./GoodMany";
 import NewDateAdd from "./NewDateAdd";
 import FavMovieList from "./FavMovieList";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useMediaQuery, useTheme } from "@mui/material";
 import axios from "axios";
-import config from '../config';
-import React from "react";
+import config from "../config";
 
 const Layout = () => {
   const theme = useTheme();
   const [search, setSearch] = useState("");
   const [menuClick, setMenuClick] = useState(false);
   const [menuKind, setMenuKind] = useState("");
-
-  const navigate = useNavigate();
   const location = useLocation();
 
   let profile_num = location.pathname.slice(7);
-
-  //console.log(profile_num);
-  // console.log("param 값은: " + profile_num);
 
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
   const footerLayout = isSmallScreen
@@ -35,13 +29,6 @@ const Layout = () => {
     : {};
 
   useEffect(() => {
-    //로그인 상태인지 체크
-    const login_id = window.sessionStorage.getItem("id"); // 세션스토리지에 저장되어 있는 id값 읽음
-    console.log("window.sessionStorage(login_id) =>", login_id);
-    if (login_id === null) {
-      alert("로그인후 사용가능합니다!!");
-      navigate("/");
-    }
     const handleResize = () => {
       const main = document.querySelector("main");
       const footer = document.querySelector("footer");
@@ -79,7 +66,6 @@ const Layout = () => {
   });
 
   const loadProfiles = (login_id) => {
-    console.log("MEMBERID", login_id);
     axios
       .post(`${config.API_URL}/profiles`, {
         member_id: login_id,

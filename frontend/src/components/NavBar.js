@@ -161,7 +161,7 @@ const NavBar = ({
             />
           </Box>
 
-          <Typography noWrap component="a" href="/login" sx={typographySx}>
+          <Typography noWrap component="a" href="/" sx={typographySx}>
             NETFLIX
           </Typography>
 

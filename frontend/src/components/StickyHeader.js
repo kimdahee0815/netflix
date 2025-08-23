@@ -11,8 +11,6 @@ const StickyHeader = ({ kind }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-
-
   return (
     <AppBar
       position="fixed"
@@ -26,7 +24,7 @@ const StickyHeader = ({ kind }) => {
               <Typography
                 noWrap
                 component="a"
-                href="/login"
+                href="/"
                 sx={{
                   fontFamily: "helvetica",
                   fontWeight: 1000,
