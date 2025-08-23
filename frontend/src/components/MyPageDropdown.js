@@ -16,50 +16,59 @@ const MypageDropDown = () => {
   const memberID = window.sessionStorage.getItem("id");
   const profileNum = window.localStorage.getItem("profile_num");
   const [profileNickname, setProfileNickName] = useState("USER");
-  useEffect(() => {
-    loadProfiles(memberID);
-  }, [memberID]);
 
-  const loadProfiles = (memberID) => {
-    console.log("MEMBERID", memberID);
-    axios
-      .post(`${config.API_URL}/profiles`, {
-        member_id: memberID,
-      })
-      .then((res) => {
-        console.log("res profiles", res.data);
-        if (res.data.length > 0) {
-          if (profileNum !== undefined) {
-            // console.log(window.profile_num);
-            setProfileNickName(res.data[profileNum - 1].nickname);
-            setProfileImg(profileImages[profileNum - 1]);
-          } else {
-            // console.log(window.profile_num);
-            setProfileNickName(res.data[0].nickname);
-            setProfileImg(profileImages[0]);
-          }
-        }
-      })
-      .catch((error) => {
-        console.error("Error loading profiles:", error);
-      });
-  };
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
   const [profileImg, setProfileImg] = useState("");
-  const profileImages = [
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRVHHNwcCOQ4Y7ulfRG1cZb9joFo5CV921mN1Ha1skrsyRx7PJcLa1stsjBm79z7QV9pQ&usqp=CAU",
-    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png",
-    "https://external-preview.redd.it/0dTT-3SprPcsNCqo1GTCI-nqGM9EdZYwqyYr_pZ-baE.jpg?auto=webp&s=a1e8532d326f5aa122df2f31694bf142f117fc06",
-    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png",
-  ];
+  const profileImages = React.useMemo(
+    () => [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRVHHNwcCOQ4Y7ulfRG1cZb9joFo5CV921mN1Ha1skrsyRx7PJcLa1stsjBm79z7QV9pQ&usqp=CAU",
+      "https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png",
+      "https://external-preview.redd.it/0dTT-3SprPcsNCqo1GTCI-nqGM9EdZYwqyYr_pZ-baE.jpg?auto=webp&s=a1e8532d326f5aa122df2f31694bf142f117fc06",
+      "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png",
+    ],
+    []
+  );
+
+  const loadProfiles = React.useCallback(
+    (memberID) => {
+      axios
+        .post(`${config.API_URL}/profiles`, {
+          member_id: memberID,
+        })
+        .then((res) => {
+          console.log("res profiles", res.data);
+          if (res.data.length > 0) {
+            if (profileNum !== undefined) {
+              setProfileNickName(res.data[profileNum - 1].nickname);
+              setProfileImg(profileImages[profileNum - 1]);
+            } else {
+              setProfileNickName(res.data[0].nickname);
+              setProfileImg(profileImages[0]);
+            }
+          }
+        })
+        .catch((error) => {
+          console.error("Error loading profiles:", error);
+        });
+    },
+    [profileImages, profileNum]
+  );
+
+  useEffect(() => {
+    loadProfiles(memberID);
+  }, [loadProfiles, memberID]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const login = () => {
+    navigate("/login", { replace: true }); // 로그인페이지로 이동
   };
 
   const logout = () => {
@@ -184,9 +193,15 @@ const MypageDropDown = () => {
           고객 센터
         </MenuItem>
         <Divider />
-        <MenuItem onClick={logout} component={Link} to="/">
-          로그아웃
-        </MenuItem>
+        {memberID !== undefined ? (
+          <MenuItem onClick={logout} component={Link} to="/">
+            로그아웃
+          </MenuItem>
+        ) : (
+          <MenuItem onClick={login} component={Link} to="/login">
+            로그인
+          </MenuItem>
+        )}
       </Menu>
     </div>
   );
