@@ -120,7 +120,7 @@ const OutputMovieGenres = memo(({ genre }) => {
       )}
     </div>
   );
-}, []);
+});
 
 export default OutputMovieGenres;
 
