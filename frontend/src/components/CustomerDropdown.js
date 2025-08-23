@@ -11,6 +11,7 @@ import { Divider } from "@mui/material";
 import config from "../config";
 
 export default function PositionedMenu() {
+  const memberId = window.sessionStorage.getItem("id");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
@@ -33,6 +34,10 @@ export default function PositionedMenu() {
     navigate("/login", { replace: true }); // 로그인페이지로 이동
   };
 
+  const login = () => {
+    navigate("/login", { replace: true }); // 로그인페이지로 이동
+  };
+
   useEffect(() => {
     axios
       .post(`${config.API_URL}/selectMember`, {
@@ -50,7 +55,7 @@ export default function PositionedMenu() {
       .catch((e) => {
         console.error(e);
       });
-  }, []);
+  }, [user]);
 
   return (
     <div>
@@ -108,9 +113,15 @@ export default function PositionedMenu() {
           프로필 관리
         </MenuItem>
         <Divider />
-        <MenuItem onClick={logout} component={Link} to="/">
-          로그아웃
-        </MenuItem>
+        {memberId ? (
+          <MenuItem onClick={logout} component={Link} to="/">
+            로그아웃
+          </MenuItem>
+        ) : (
+          <MenuItem onClick={login} component={Link} to="/login">
+            로그인
+          </MenuItem>
+        )}
       </Menu>
     </div>
   );
