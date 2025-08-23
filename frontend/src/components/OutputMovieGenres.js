@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useLayoutEffect } from "react";
+import { useEffect, useState, useCallback, useLayoutEffect, memo } from "react";
 import Grid from "@mui/material/Grid";
 import Movie from "../components/Movie";
 import IconButton from "@mui/material/IconButton";
@@ -6,109 +6,121 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllGenresMoviesData } from '../store/movie'; 
+import { getAllGenresMoviesData } from "../store/movie";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 
-const OutputMovieGenres = ({ genre }) => {
+const OutputMovieGenres = memo(({ genre }) => {
   const movies = useSelector((state) => state.movie.movies);
-  const loading = useSelector((state)=> state.movie.loading[genre]);
-   const [dotCount, setDotCount] = useState(0);
+  const loading = useSelector((state) => state.movie.loading[genre]);
+  const [dotCount, setDotCount] = useState(0);
 
-   useEffect(() => {
+  useEffect(() => {
     if (loading) {
       const intervalId = setInterval(() => {
         setDotCount((prevCount) => (prevCount + 1) % 4);
-      }, 500); 
-      return () => clearInterval(intervalId); 
+      }, 500);
+      return () => clearInterval(intervalId);
     }
   }, [genre, loading]);
-  
-    const loadingText = `LOADING${'.'.repeat(dotCount)}`;
 
-const MovieSlider = ({ movies }) => {
-  const [sliderRef] = useKeenSlider({
-  loop: true,
-  slides: { perView: 6, spacing: 3 }, 
-});
+  const loadingText = `LOADING${".".repeat(dotCount)}`;
 
-  return (
- <div
-  ref={sliderRef}
-  className="keen-slider"
-  style={{
-    padding: "0 24px",
-    overflow: "hidden",
-    position: "relative",
-  }}
->
-  {movies?.[genre]?.map((movie) => (
-    <div
-  key={movie.id}
-  className="keen-slider__slide"
-  style={{
-    display: "flex",
-    justifyContent: "center",
-  }}
->
-  <div
-    style={{
-      width: "300px",              
-      aspectRatio: "2 / 3",        
-      borderRadius: "8px",
-      overflow: "hidden",
-      boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
-      backgroundColor: "#000",
-      transition: "transform 0.3s ease",
-    }}
-  >
-    <Movie {...movie} />
-  </div>
-</div>
-  ))}
-</div>
-  );
-};
+  const MovieSlider = ({ movies }) => {
+    const [sliderRef] = useKeenSlider({
+      loop: true,
+      slides: { perView: 6, spacing: 3 },
+    });
+
+    return (
+      <div
+        ref={sliderRef}
+        className="keen-slider"
+        style={{
+          padding: "0 24px",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        {movies?.[genre]?.map((movie) => (
+          <div
+            key={movie.id}
+            className="keen-slider__slide"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                width: "300px",
+                aspectRatio: "2 / 3",
+                borderRadius: "8px",
+                overflow: "hidden",
+                boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
+                backgroundColor: "#000",
+                transition: "transform 0.3s ease",
+              }}
+            >
+              <Movie {...movie} />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div>
       <h2
         style={{
-        margin: "40px 0 10px 60px",
-        color: "#fff",
-        fontSize: "2.2rem",
-        fontWeight: "900",
-        textShadow: "0 0 10px rgba(255, 0, 0, 0.6), 0 0 20px rgba(255, 0, 0, 0.4)",
-        borderLeft: "6px solid red",
-        paddingLeft: "16px",
-        textTransform: "uppercase",
-        letterSpacing: "1px"
-      }}
-    >
-      {genre}
-    </h2>
+          margin: "40px 0 10px 60px",
+          color: "#fff",
+          fontSize: "2.2rem",
+          fontWeight: "900",
+          textShadow:
+            "0 0 10px rgba(255, 0, 0, 0.6), 0 0 20px rgba(255, 0, 0, 0.4)",
+          borderLeft: "6px solid red",
+          paddingLeft: "16px",
+          textTransform: "uppercase",
+          letterSpacing: "1px",
+        }}
+      >
+        {genre}
+      </h2>
       {loading || !movies?.[genre]?.length ? (
-        <div style={{ height: "300px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <p style={{
-            fontSize: "3.5em",
-            fontWeight: "bold",
-            fontFamily: 'Orbitron, sans-serif', 
-            letterSpacing: '0.15em',
-            color: '#00FFFF', 
-            textShadow: '0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF', // 네온 효과
-            animation: 'neonFlicker 1.5s infinite alternate, pulse 1.5s infinite alternate'
-          }}>
+        <div
+          style={{
+            height: "300px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <p
+            style={{
+              fontSize: "3.5em",
+              fontWeight: "bold",
+              fontFamily: "Orbitron, sans-serif",
+              letterSpacing: "0.15em",
+              color: "#00FFFF",
+              textShadow:
+                "0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF", // 네온 효과
+              animation:
+                "neonFlicker 1.5s infinite alternate, pulse 1.5s infinite alternate",
+            }}
+          >
             {loadingText}
           </p>
         </div>
       ) : (
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <MovieSlider movies={movies} genre={genre}/>
-          </div>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <MovieSlider movies={movies} genre={genre} />
+        </div>
       )}
     </div>
   );
-};
+}, []);
 
 export default OutputMovieGenres;
 
