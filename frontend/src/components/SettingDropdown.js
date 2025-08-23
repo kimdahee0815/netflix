@@ -10,13 +10,19 @@ import Typography from "@mui/material/Typography";
 import { Divider } from "@mui/material";
 
 export default function FadeMenu({ onClick }) {
+  const memberID = window.sessionStorage.getItem("id");
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const navigate = useNavigate();
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const login = () => {
+    navigate("/login", { replace: true }); // 로그인페이지로 이동
   };
 
   return (
@@ -64,9 +70,15 @@ export default function FadeMenu({ onClick }) {
           <Typography textAlign="center">{"프로필 변경"}</Typography>
         </MenuItem>
         <Divider />
-        <MenuItem onClick={onClick}>
-          <Typography textAlign="center">{"로그아웃"}</Typography>
-        </MenuItem>
+        {memberID !== undefined ? (
+          <MenuItem onClick={onClick} component={Link} to="/">
+            <Typography textAlign="center">{"로그아웃"}</Typography>
+          </MenuItem>
+        ) : (
+          <MenuItem onClick={login} component={Link} to="/login">
+            <Typography textAlign="center">{"로그인"}</Typography>
+          </MenuItem>
+        )}
       </Menu>
     </>
   );
