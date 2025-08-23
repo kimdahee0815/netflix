@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS member (
-    member_num INT AUTO_INCREMENT PRIMARY KEY,
+    member_num SERIAL PRIMARY KEY,
     member_id VARCHAR(255) NOT NULL,
     member_pw VARCHAR(255) NOT NULL,
     member_name VARCHAR(255),
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS fav_movie (
 );
 
 CREATE TABLE IF NOT EXISTS customercenter (
-    board_num INT AUTO_INCREMENT PRIMARY KEY,
+    board_num SERIAL PRIMARY KEY,
     member_id VARCHAR(255),
     board_title VARCHAR(255),
     board_content TEXT,

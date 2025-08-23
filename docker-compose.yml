@@ -1,18 +1,20 @@
 services:
-  # frontend:
-  #   build:
-  #     context: .
-  #     dockerfile: frontend/Dockerfile.dev  # dev용 Dockerfile 사용
-  #   container_name: netflix-frontend
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ./frontend:/app            # 로컬 코드와 컨테이너 코드 sync
-  #     - /app/node_modules          # node_modules는 컨테이너 내 것 유지
-  #   environment:
-  #     - CHOKIDAR_USEPOLLING=true  # hot reload를 위한 옵션
-  #   env_file:
-  #     - .env.development           # API 주소 등 dev 환경 변수 적용
+  postgres:
+    image: postgres:14
+    container_name: netflix-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   backend:
     build:
@@ -22,34 +24,12 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      mysql:
+      postgres:
         condition: service_healthy
-    environment:
-      - NODE_ENV=development
     env_file:
       - .env.development
     volumes:
       - ./backend:/app/backend
 
-  mysql:
-    image: mysql:8.0
-    container_name: netflix-mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USERNAME}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    ports:
-      - "3307:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-    env_file:
-      - .env.development
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
 volumes:
-  mysql-data:
+  pgdata:

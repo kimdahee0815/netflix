@@ -13,18 +13,18 @@ spring:
       suffix: ""
     static-path-pattern: /**
   resources:
-    static-locations: file:/app/static/ 
+    static-locations: file:/app/static/
     add-mappings: false
   sql:
     init:
       mode: always
       schema-locations: classpath:schema.sql
-      continue-on-error: true 
+      continue-on-error: true
 
 logging:
   level:
     root: INFO
-    com.mysite: DEBUG      # 네 패키지 전체 DEBUG
+    com.mysite: DEBUG # 네 패키지 전체 DEBUG
     org.mybatis: DEBUG
     org.apache.ibatis: DEBUG
     java.sql: DEBUG
@@ -36,14 +36,14 @@ spring:
     activate:
       on-profile: dev
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${MYSQL_URL}
-    username: ${MYSQL_USERNAME}
-    password: ${MYSQL_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    url: ${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
   sql:
     init:
       mode: always
-      schema-locations: classpath:schema.sql
+      schema-locations: classpath:schema-postgres.sql
       continue-on-error: true
 
 server:
