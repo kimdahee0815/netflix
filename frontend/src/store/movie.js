@@ -54,15 +54,16 @@ const fetchAllMovies = async (genre) => {
 };
 
 export async function fetchLikes() {
-    const res = await axios.get(`${config.API_URL}/favmovie/chk`);
-    const data = await res.json();
+    const data = await axios.get(`${config.API_URL}/favmovie/chk`);
     return data;
 }
 
 export const getAllGenresMoviesData = (genres = []) => {
     return async (dispatch, getState) => {
       const likesData = await fetchLikes();
+      console.log(likesData)
       const likesMap = Object.fromEntries(likesData.map((item) => [item.movie_title, item]));
+      console.log(likesMap)
       for (let genre of genres) {
         dispatch(movieActions.setLoading({ genre, value: true }));
 
