@@ -6,7 +6,7 @@ import "keen-slider/keen-slider.min.css";
 
 const OutputMovieGenres = memo(({ genre }) => {
     const movies = useSelector((state) => state.movie.movies);
-    const loading = useSelector((state) => state.movie.loading[genre]);
+    const loading = useSelector((state) => state.movie.loading.all);
     const [dotCount, setDotCount] = useState(0);
 
     useEffect(() => {

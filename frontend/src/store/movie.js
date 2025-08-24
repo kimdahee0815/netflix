@@ -5,6 +5,7 @@ import config from "../config";
 
 const initialState = {
     movies: {},
+    searchMovies: [],
     loading: {},
 };
 const movieSlice = createSlice({
@@ -19,6 +20,10 @@ const movieSlice = createSlice({
             const { genre, value } = action.payload;
             state.loading[genre] = value;
         },
+        searchMovies(state, action){
+            const {movies} = action.payload;
+            state.searchMovies = movies;
+        }
     },
 });
 
@@ -61,26 +66,49 @@ export async function fetchLikes() {
 export const getAllGenresMoviesData = (genres = []) => {
     return async (dispatch, getState) => {
       const likesData = await fetchLikes();
-      console.log(likesData)
       const likesMap = Object.fromEntries(likesData.data.map((item) => [item.movie_title, item]));
-      console.log(likesMap)
+      dispatch(movieActions.setLoading({ genre:"all", value: true }));
       for (let genre of genres) {
-        dispatch(movieActions.setLoading({ genre, value: true }));
-
         const movieData = await fetchAllMovies(genre);
+        console.log(movieData)
         const updatedMovies = await fetchSummary(movieData);
 
         const moviesWithLikes = updatedMovies.map((movie) => ({
             ...movie,
-            likes: likesMap[movie.movie_title].movie_count || 0,
+            likes: likesMap[movie.title]?.movie_count || 0,
         }));
 
         dispatch(movieActions.addMovies({ genre, movies: shuffle(moviesWithLikes) }));
-
-        dispatch(movieActions.setLoading({ genre, value: false }));
       }
+      
+      dispatch(movieActions.setLoading({ genre:"all", value: false }));
   };
 };
+
+export const getSearchMovies = async (search) =>{
+  const data = await axios.get(`https://yts.mx/api/v2/list_movies.json?limit=48&query_term=${search}`)
+  let updatedMovies = await fetchSummary(data?.data?.data?.movies);
+
+  return updatedMovies;
+}
+
+export const getAllSearchMovies = (search) => {
+  return async (dispatch) =>{
+    dispatch(movieActions.setLoading({ genre: 'search', value: true }));
+    const likesData = await fetchLikes();
+    const likesMap = Object.fromEntries(likesData.data.map((item) => [item.movie_title, item]));
+    console.log(likesMap)
+    const movies = await getSearchMovies(search);
+    const moviesWithLikes = movies.map((movie) => ({
+      ...movie,
+      likes: likesMap[movie.title]?.movie_count || 0,
+    }));
+    console.log(moviesWithLikes)
+    dispatch(movieActions.searchMovies({movies: moviesWithLikes}))
+    dispatch(movieActions.setLoading({ genre: 'search', value: false }));
+  }
+};
+
 export const movieActions = movieSlice.actions;
 
 export default movieSlice.reducer;
