@@ -59,26 +59,25 @@ export async function fetchLikes() {
 }
 
 export const getAllGenresMoviesData = async (genres = []) => {
-    const likesData = await fetchLikes();
-    const likesMap = Object.fromEntries(likesData.map((item) => [item.movie_title, item]));
-
     return async (dispatch, getState) => {
-        for (let genre of genres) {
-            dispatch(movieActions.setLoading({ genre, value: true }));
+      const likesData = await fetchLikes();
+      const likesMap = Object.fromEntries(likesData.map((item) => [item.movie_title, item]));
+      for (let genre of genres) {
+        dispatch(movieActions.setLoading({ genre, value: true }));
 
-            const movieData = await fetchAllMovies(genre);
-            const updatedMovies = await fetchSummary(movieData);
+        const movieData = await fetchAllMovies(genre);
+        const updatedMovies = await fetchSummary(movieData);
 
-            const moviesWithLikes = updatedMovies.map((movie) => ({
-                ...movie,
-                likes: likesMap[movie.movie_title].movie_count || 0,
-            }));
+        const moviesWithLikes = updatedMovies.map((movie) => ({
+            ...movie,
+            likes: likesMap[movie.movie_title].movie_count || 0,
+        }));
 
-            dispatch(movieActions.addMovies({ genre, movies: shuffle(moviesWithLikes) }));
+        dispatch(movieActions.addMovies({ genre, movies: shuffle(moviesWithLikes) }));
 
-            dispatch(movieActions.setLoading({ genre, value: false }));
-        }
-    };
+        dispatch(movieActions.setLoading({ genre, value: false }));
+      }
+  };
 };
 export const movieActions = movieSlice.actions;
 
