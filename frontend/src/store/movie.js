@@ -35,6 +35,12 @@ const fetchAllMovies = async (genre) => {
         const res = await fetch(
             `https://yts.mx/api/v2/list_movies.json?limit=50&page=${page}&genre=${genre}&minimum_rating=${minRating}`
         );
+        // const res = await fetch(`https://api.themoviedb.org/3/genre/movie/list?language=en`,{
+        //    headers: {
+        //     Authorization: 'Bearer YOUR_ACCESS_TOKEN',
+        //     accept: 'application/json'
+        //   }
+        // })
         const data = await res.json();
 
         if (data?.data?.movies?.length > 0) {
