@@ -58,7 +58,7 @@ export async function fetchLikes() {
     return data;
 }
 
-export const getAllGenresMoviesData = async (genres = []) => {
+export const getAllGenresMoviesData = (genres = []) => {
     return async (dispatch, getState) => {
       const likesData = await fetchLikes();
       const likesMap = Object.fromEntries(likesData.map((item) => [item.movie_title, item]));
