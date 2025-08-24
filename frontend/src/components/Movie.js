@@ -8,7 +8,7 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
-import { useLayoutEffect, useState, useEffect } from "react";
+import { useState } from "react";
 import config from "../config";
 import { useContext } from "react";
 import { FavListUpdateContext } from "../store/FavListTriggerContext";
@@ -48,41 +48,6 @@ function Movie({ id, medium_cover_image, title, summary, movie_count, genres, ra
     const handleClose = () => setOpen(false);
     const [ischecked, setIsChecked] = useState(false);
 
-    useLayoutEffect(() => {
-        axios
-            .post(`${config.API_URL}/favmovie/chk`, {
-                movie_title: title,
-                member_id: window.sessionStorage.getItem("id"),
-            })
-            .then((res) => {
-                if (res.data?.length) {
-                    setIsChecked(true);
-                } else {
-                    setIsChecked(false);
-                }
-            })
-            .catch((e) => {
-                console.error(e);
-            });
-    }, []);
-
-    const modalCheck = () => {
-        axios
-            .post(`${config.API_URL}/favmovie/chk`, {
-                movie_title: title,
-                member_id: window.sessionStorage.getItem("id"),
-            })
-            .then((res) => {
-                if (res.data?.length) {
-                    setIsChecked(true);
-                } else {
-                    setIsChecked(false);
-                }
-            })
-            .catch((e) => {
-                console.error(e);
-            });
-    };
     const handlelike = () => {
         if (ischecked) {
             axios
@@ -152,14 +117,12 @@ function Movie({ id, medium_cover_image, title, summary, movie_count, genres, ra
                 }}
                 onClick={() => {
                     handleOpen();
-                    modalCheck();
                 }}
             />
             {isHover ? (
                 <div
                     onClick={() => {
                         handleOpen();
-                        modalCheck();
                     }}
                     style={{
                         position: "absolute",
