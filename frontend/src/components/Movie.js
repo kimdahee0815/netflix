@@ -14,8 +14,8 @@ import { useContext } from "react";
 import { FavListUpdateContext } from "../store/FavListTriggerContext";
 import "../css/movie.css";
 
-function Movie({ imdbID: id, Title: title, Genre: genre, Plot: plot, imdbRating: rating, Poster: image, summary, likes}) {
-  console.log( id, title, genre, plot, rating, image, summary, likes)  
+function Movie({ id, title, rating, genres, summary, medium_cover_image: image, likes}) {
+  console.log( id, title, genres, rating, image, summary, likes)  
   const { favListUpdate } = useContext(FavListUpdateContext);
     const memberId = window.sessionStorage.getItem("id");
 
