@@ -13,7 +13,7 @@ public interface FavMovieService {
 	
 	public List<FavMovieVO> getFavMovielist(FavMovieVO favmovieVO);
 
-	public List<FavMovieVO> getAllFavMovieList();
+	public List<FavMovieVO> getAllFavMovieCount();
 	
 	public int deleteFavMovie(FavMovieVO favmovieVO);
 	

@@ -1,6 +1,5 @@
 package com.mysite.netflixProject.favmovie;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.mysite.netflixProject.board.Idchange;

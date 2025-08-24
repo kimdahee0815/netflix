@@ -31,7 +31,7 @@ public class FavMovieContoller {
 
     @GetMapping("/chk")
     public List<FavMovieVO> getAllFavMovieCount() {
-        return favMovieService.getAllFavMovieList();
+        return favMovieService.getAllFavMovieCount();
     }
     
     @PostMapping("/chk")
