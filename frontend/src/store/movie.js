@@ -62,7 +62,7 @@ export const getAllGenresMoviesData = (genres = []) => {
     return async (dispatch, getState) => {
       const likesData = await fetchLikes();
       console.log(likesData)
-      const likesMap = Object.fromEntries(likesData.map((item) => [item.movie_title, item]));
+      const likesMap = Object.fromEntries(likesData.data.map((item) => [item.movie_title, item]));
       console.log(likesMap)
       for (let genre of genres) {
         dispatch(movieActions.setLoading({ genre, value: true }));
