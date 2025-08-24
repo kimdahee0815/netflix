@@ -30,7 +30,7 @@ public class FavMovieContoller {
     }
 
     @GetMapping("/chk")
-    public List<FavMovieVO> getAllFavMovieList() {
+    public List<FavMovieVO> getAllFavMovieCount() {
         return favMovieService.getAllFavMovieList();
     }
     

@@ -39,8 +39,8 @@ public class FavMovieServiceImpl implements FavMovieService {
         return favmovie_list;
     }
 
-    public List<FavMovieVO> getAllFavMovieList() {
-        List<FavMovieVO> favmovie_list = mapper.getAllFavMovieList();
+    public List<FavMovieVO> getAllFavMovieCount() {
+        List<FavMovieVO> favmovie_list = mapper.getAllFavMovieCount();
         return favmovie_list;
     }
     
