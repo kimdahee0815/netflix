@@ -12,6 +12,8 @@ public interface FavMovieService {
 	public int insertFavMovie(FavMovieVO favmovieVO);
 	
 	public List<FavMovieVO> getFavMovielist(FavMovieVO favmovieVO);
+
+	public List<FavMovieVO> getAllFavMovieList();
 	
 	public int deleteFavMovie(FavMovieVO favmovieVO);
 	

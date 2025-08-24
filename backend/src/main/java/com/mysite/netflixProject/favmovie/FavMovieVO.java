@@ -8,5 +8,5 @@ public class FavMovieVO {
 	private String movie_title;
 	private String movie_summary;
 	private String movie_image;
-	
+	private int movie_count;
 }
