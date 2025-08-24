@@ -14,8 +14,9 @@ import { useContext } from "react";
 import { FavListUpdateContext } from "../store/FavListTriggerContext";
 import "../css/movie.css";
 
-function Movie({ id, medium_cover_image, title, summary, movie_count, genres, rating }) {
-    const { favListUpdate } = useContext(FavListUpdateContext);
+function Movie({ imdbID: id, Title: title, Genre: genre, Plot: plot, imdbRating, Poster: image, summary, likes}) {
+  console.log( id, title, genre, plot, imdbrATING, image, summary, likes)  
+  const { favListUpdate } = useContext(FavListUpdateContext);
     const memberId = window.sessionStorage.getItem("id");
 
     const style = {
@@ -78,7 +79,7 @@ function Movie({ id, medium_cover_image, title, summary, movie_count, genres, ra
                                 member_id: window.sessionStorage.getItem("id"),
                                 movie_title: title,
                                 movie_summary: summary,
-                                movie_image: medium_cover_image,
+                                movie_image: image,
                             })
                             .then((res) => {})
                             .catch((e) => {
@@ -104,7 +105,7 @@ function Movie({ id, medium_cover_image, title, summary, movie_count, genres, ra
             onMouseLeave={handleLeave}
         >
             <img
-                src={medium_cover_image}
+                src={image}
                 title={title}
                 style={{
                     width: "100%",
@@ -161,7 +162,7 @@ function Movie({ id, medium_cover_image, title, summary, movie_count, genres, ra
                             style={{
                                 display: "flex",
                             }}
-                            src={medium_cover_image}
+                            src={image}
                         ></img>
                         <Typography
                             component="span"
@@ -214,7 +215,7 @@ function Movie({ id, medium_cover_image, title, summary, movie_count, genres, ra
                                         disabled
                                         startIcon={<StarIcon />}
                                     >
-                                        {movie_count}
+                                        {likes}
                                     </Button>
                                 )}
                             </Grid>

@@ -54,8 +54,7 @@ const fetchAllMovies = async (genre) => {
 };
 
 export async function fetchLikes() {
-    const res = await axios.get(`${config.API_URL}/favmovie/chk`);
-    const data = await res.json();
+    const data = await axios.get(`${config.API_URL}/favmovie/chk`);
     return data;
 }
 
@@ -72,7 +71,7 @@ export const getAllGenresMoviesData = async (genres = []) => {
 
             const moviesWithLikes = updatedMovies.map((movie) => ({
                 ...movie,
-                likes: likesMap[movie.title].movie_count || 0,
+                likes: likesMap[movie.movie_title].movie_count || 0,
             }));
 
             dispatch(movieActions.addMovies({ genre, movies: shuffle(moviesWithLikes) }));
