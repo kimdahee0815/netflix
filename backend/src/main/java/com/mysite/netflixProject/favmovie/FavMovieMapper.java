@@ -29,7 +29,7 @@ public interface FavMovieMapper {
 	@Update("update fav_movie set member_id = #{new_member_id} where member_id = #{old_member_id}")
 	public int modifyID(Idchange change);
 
-	@Select("select movie_title, COUNT(*) AS movie_count, movie_summary, movie_image, member_id FROM fav_movie GROUP BY title")
+	@Select("select movie_title, COUNT(*) AS movie_count, movie_summary, movie_image, member_id FROM fav_movie GROUP BY movie_title")
 	public List<FavMovieVO> getAllFavMovieList();
 
 }
