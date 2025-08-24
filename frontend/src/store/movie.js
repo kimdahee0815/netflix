@@ -54,7 +54,8 @@ const fetchAllMovies = async (genre) => {
 };
 
 export async function fetchLikes() {
-    const data = await axios.get(`${config.API_URL}/favmovie/chk`);
+    const res = await axios.get(`${config.API_URL}/favmovie/chk`);
+    const data = await res.json();
     return data;
 }
 
