@@ -26,6 +26,7 @@ export default function useSearchMovie(apiUrl) {
                 ...movie,
                 likes: likesMap[movie.title]?.movie_count || 0,
             }));
+            console.log(moviesWithLikes);
             setMovies(moviesWithLikes);
             setLoading(false);
         };

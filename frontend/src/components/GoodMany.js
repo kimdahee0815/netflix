@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
 import Movie from "../components/Movie";
 import Grid from "@mui/material/Grid";
-import fetchSummary from "../util/fetchSummary";
-import { fetchLikes } from "../store/movie";
 import useSearchMovie from "../util/useSearchMovie";
 
 const GoodMany = () => {
