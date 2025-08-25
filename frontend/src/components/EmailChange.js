@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, forwardRef, cloneElement } from "react";
 import PropTypes from "prop-types";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
@@ -9,9 +9,9 @@ import OutlinedTextField from "./OutlinedTextField";
 import CustomizedButton from "./CustomizedButton";
 import axios from "axios";
 import FormHelperText from "@mui/material/FormHelperText";
-import config from '../config';
+import config from "../config";
 
-const Fade = React.forwardRef(function Fade(props, ref) {
+const Fade = forwardRef(function Fade(props, ref) {
   const {
     children,
     in: open,
@@ -38,7 +38,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
 
   return (
     <animated.div ref={ref} style={style} {...other}>
-      {React.cloneElement(children, { onClick })}
+      {cloneElement(children, { onClick })}
     </animated.div>
   );
 });
@@ -71,13 +71,11 @@ export default function EmailChange({
   handleClose,
   setEmail,
 }) {
-  const [open, setOpen] = React.useState(openModal);
-  const [newEmail, setNewEmail] = React.useState("");
-  const [email2, setEmail2] = React.useState(
-    window.sessionStorage.getItem("id")
-  );
+  const [open, setOpen] = useState(openModal);
+  const [newEmail, setNewEmail] = useState("");
+  const email2 = useState(window.sessionStorage.getItem("id"));
 
-  const [idError, setIdError] = React.useState("");
+  const [idError, setIdError] = useState("");
 
   const handleClose2 = () => {
     handleClose();

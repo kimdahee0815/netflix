@@ -20,7 +20,6 @@ import config from "../config";
 export default function StickyHeadTable() {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const isMiddleScreen = useMediaQuery(theme.breakpoints.down("md"));
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

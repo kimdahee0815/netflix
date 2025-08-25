@@ -2,7 +2,7 @@ import { Container, Paper, Typography, Box } from "@mui/material";
 import StickyHeader from "./StickyHeader";
 import CustomizedButton from "./CustomizedButton";
 import BoardPasswordCheck from "./BoardPasswordCheck";
-import React from "react";
+import React, { useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
@@ -26,7 +26,7 @@ function BoardDetail() {
   });
   const navigate = useNavigate();
 
-  const getDetail = () => {
+  const getDetail = useCallback(() => {
     axios
       .get(`${config.API_URL}/customer/detail?board_num=${board_num}`)
       .then((res) => {
@@ -38,11 +38,11 @@ function BoardDetail() {
           board_reply: data.board_reply,
         });
       });
-  };
+  }, [board_num]);
 
   useEffect(() => {
     getDetail();
-  }, [board_num]);
+  }, [board_num, getDetail]);
 
   const clickModify = () => {
     if (window.sessionStorage.getItem("id") === "admin@email.com") {
@@ -71,7 +71,7 @@ function BoardDetail() {
   };
 
   const answerSubmit = () => {
-    if (board_reply == "") {
+    if (board_reply === "") {
       alert("내용없이 답변이 불가능합니다");
     } else {
       axios
@@ -115,7 +115,6 @@ function BoardDetail() {
   };
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const isMiddleScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const reflyChange = (event) => {
     setBoard_reply(event.target.value);

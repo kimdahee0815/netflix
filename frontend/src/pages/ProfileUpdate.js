@@ -49,7 +49,7 @@ const ProfileUpdate = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [member_id, profileId]);
 
   const handleSave = () => {
     axios

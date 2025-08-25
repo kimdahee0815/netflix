@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import PersonalHelpCard from "./PersonalHelpCard";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -14,10 +14,9 @@ import config from "../config";
 const CustomerPersonal = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const isMiddleScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [user, setUser] = React.useState(window.sessionStorage.getItem("id"));
-  const [userName, setUserName] = React.useState("");
+  const user = window.sessionStorage.getItem("id");
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     axios
@@ -35,7 +34,8 @@ const CustomerPersonal = () => {
       .catch((e) => {
         console.error(e);
       });
-  }, []);
+  }, [user]);
+
   let paddingTop = "250px";
   if (isSmallScreen) {
     paddingTop = "180px";

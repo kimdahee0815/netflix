@@ -1,17 +1,17 @@
-import * as React from "react";
+import { forwardRef, useState, cloneElement } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
+import FormHelperText from "@mui/material/FormHelperText";
 import { useSpring, animated } from "@react-spring/web";
 import OutlinedTextField from "./OutlinedTextField";
 import CustomizedButton from "./CustomizedButton";
-import axios from "axios";
-import FormHelperText from "@mui/material/FormHelperText";
 import config from "../config";
 
-const Fade = React.forwardRef(function Fade(props, ref) {
+const Fade = forwardRef(function Fade(props, ref) {
   const {
     children,
     in: open,
@@ -38,7 +38,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
 
   return (
     <animated.div ref={ref} style={style} {...other}>
-      {React.cloneElement(children, { onClick })}
+      {cloneElement(children, { onClick })}
     </animated.div>
   );
 });
@@ -72,10 +72,10 @@ export default function PhoneChange({
   setTel,
   tel,
 }) {
-  const [open, setOpen] = React.useState(openModal);
-  const [newTel, setNewTel] = React.useState("");
-  const [telError, setTelError] = React.useState("");
-  const [email, setEmail] = React.useState(window.sessionStorage.getItem("id"));
+  const [open, setOpen] = useState(openModal);
+  const [newTel, setNewTel] = useState("");
+  const [telError, setTelError] = useState("");
+  const email = window.sessionStorage.getItem("id");
 
   const handleClose2 = () => {
     setOpen(false);

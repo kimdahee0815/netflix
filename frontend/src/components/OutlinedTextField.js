@@ -1,9 +1,5 @@
-import * as React from "react";
-import FormControl, { useFormControl } from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Box from "@mui/material/Box";
-import FormHelperText from "@mui/material/FormHelperText";
-import { useRef } from "react";
 
 export default function OutlinedTextField({
   label,
@@ -50,7 +46,7 @@ export default function OutlinedTextField({
         e.target.value
           .replace(/[^0-9]/g, "")
           .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})(\d{0,1})$/g, "$1-$2-$3")
-          .replace(/(\-{1,2})$/g, "")
+          .replace(/(-{1,2})$/g, "")
           .slice(0, 13)
       );
       setTelError(

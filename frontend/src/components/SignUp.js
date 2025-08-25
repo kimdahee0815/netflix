@@ -1,19 +1,18 @@
-import * as React from "react";
+import { useEffect, forwardRef, cloneElement, useState } from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import { useSpring, animated } from "@react-spring/web";
-import SelectInput from "./SelectInput";
-import CustomizedButton from "./CustomizedButton";
-import { useState } from "react";
 import { TextField } from "@mui/material";
 import FormHelperText from "@mui/material/FormHelperText";
-import axios from "axios";
-import config from '../config';
+import SelectInput from "./SelectInput";
+import CustomizedButton from "./CustomizedButton";
+import config from "../config";
 
-const Fade = React.forwardRef(function Fade(props, ref) {
+const Fade = forwardRef(function Fade(props, ref) {
   const {
     children,
     in: open,
@@ -40,7 +39,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
 
   return (
     <animated.div ref={ref} style={style} {...other}>
-      {React.cloneElement(children, { onClick })}
+      {cloneElement(children, { onClick })}
     </animated.div>
   );
 });
@@ -69,14 +68,6 @@ const style = {
   overflowY: "scroll",
 };
 
-const formStyle = {
-  my: 1,
-  width: "360px",
-  color: "white",
-  background: "#38393b",
-  fontSize: "20px",
-  borderRadius: 1,
-};
 const inputFormStyle = {
   display: "flex",
   flexWrap: "wrap",
@@ -84,7 +75,7 @@ const inputFormStyle = {
 };
 
 export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
-  const [open, setOpen] = React.useState(openSignUp);
+  const [open, setOpen] = useState(openSignUp);
 
   const handleClose2 = () => {
     setOpen(false);
@@ -181,9 +172,9 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
     }
   };
 
-  // React.useEffect(() => {
-  //   emailFocus();
-  // }, []);
+  useEffect(() => {
+    emailFocus();
+  }, []);
 
   const onConfirmPasswordHandler = (event) => {
     setConfirmPassword(event.currentTarget.value);
@@ -451,7 +442,7 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 }}
               >
                 <TextField
-                   sx={{
+                  sx={{
                     my: 1,
                     width: "255px",
                     color: "white",
@@ -460,16 +451,16 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                     borderRadius: 1,
                     marginRight: "10px",
                     height: "53px",
-                  "& .MuiOutlinedInput-root": {
-                    backgroundColor: "transparent",
-                  "& fieldset": {
-                    borderColor: "rgba(0, 0, 0, 0.23)",
-                  },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid white",
-                  },
-                },
-                }}
+                    "& .MuiOutlinedInput-root": {
+                      backgroundColor: "transparent",
+                      "& fieldset": {
+                        borderColor: "rgba(0, 0, 0, 0.23)",
+                      },
+                      "&.Mui-focused fieldset": {
+                        border: "2px solid white",
+                      },
+                    },
+                  }}
                   name="email"
                   onKeyPress={gotoPasswordInput}
                   autoComplete="off"
@@ -501,22 +492,22 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 비밀번호
               </Typography>
               <TextField
-                  sx={{
-                   my: 1,
-                    width: "360px",
-                    color: "white",
-                    background: "#38393b",
-                    fontSize: "20px",
-                    borderRadius: 1,
+                sx={{
+                  my: 1,
+                  width: "360px",
+                  color: "white",
+                  background: "#38393b",
+                  fontSize: "20px",
+                  borderRadius: 1,
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "transparent",
-                  "& fieldset": {
-                    borderColor: "rgba(0, 0, 0, 0.23)",
+                    "& fieldset": {
+                      borderColor: "rgba(0, 0, 0, 0.23)",
+                    },
+                    "&.Mui-focused fieldset": {
+                      border: "2px solid white",
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid white",
-                  },
-                },
                 }}
                 name="password2"
                 onKeyPress={gotoPasswordConfirmInput}
@@ -545,22 +536,22 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 비밀번호 확인
               </Typography>
               <TextField
-                 sx={{
-                   my: 1,
-                    width: "360px",
-                    color: "white",
-                    background: "#38393b",
-                    fontSize: "20px",
-                    borderRadius: 1,
+                sx={{
+                  my: 1,
+                  width: "360px",
+                  color: "white",
+                  background: "#38393b",
+                  fontSize: "20px",
+                  borderRadius: 1,
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "transparent",
-                  "& fieldset": {
-                    borderColor: "rgba(0, 0, 0, 0.23)",
+                    "& fieldset": {
+                      borderColor: "rgba(0, 0, 0, 0.23)",
+                    },
+                    "&.Mui-focused fieldset": {
+                      border: "2px solid white",
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid white",
-                  },
-                },
                 }}
                 name="passwordconfirm"
                 onKeyPress={gotoNameInput}
@@ -583,22 +574,22 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 이름
               </Typography>
               <TextField
-                 sx={{
-                   my: 1,
-                    width: "360px",
-                    color: "white",
-                    background: "#38393b",
-                    fontSize: "20px",
-                    borderRadius: 1,
+                sx={{
+                  my: 1,
+                  width: "360px",
+                  color: "white",
+                  background: "#38393b",
+                  fontSize: "20px",
+                  borderRadius: 1,
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "transparent",
-                  "& fieldset": {
-                    borderColor: "rgba(0, 0, 0, 0.23)",
+                    "& fieldset": {
+                      borderColor: "rgba(0, 0, 0, 0.23)",
+                    },
+                    "&.Mui-focused fieldset": {
+                      border: "2px solid white",
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid white",
-                  },
-                },
                 }}
                 name="name"
                 onKeyPress={gotoTelInput}
@@ -622,22 +613,22 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 전화번호
               </Typography>
               <TextField
-                 sx={{
-                   my: 1,
-                    width: "360px",
-                    color: "white",
-                    background: "#38393b",
-                    fontSize: "20px",
-                    borderRadius: 1,
+                sx={{
+                  my: 1,
+                  width: "360px",
+                  color: "white",
+                  background: "#38393b",
+                  fontSize: "20px",
+                  borderRadius: 1,
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "transparent",
-                  "& fieldset": {
-                    borderColor: "rgba(0, 0, 0, 0.23)",
+                    "& fieldset": {
+                      borderColor: "rgba(0, 0, 0, 0.23)",
+                    },
+                    "&.Mui-focused fieldset": {
+                      border: "2px solid white",
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid white",
-                  },
-                },
                 }}
                 name="tel"
                 onKeyPress={gotoAddrInput}
@@ -660,22 +651,22 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 주소
               </Typography>
               <TextField
-                 sx={{
-                   my: 1,
-                    width: "360px",
-                    color: "white",
-                    background: "#38393b",
-                    fontSize: "20px",
-                    borderRadius: 1,
+                sx={{
+                  my: 1,
+                  width: "360px",
+                  color: "white",
+                  background: "#38393b",
+                  fontSize: "20px",
+                  borderRadius: 1,
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "transparent",
-                  "& fieldset": {
-                    borderColor: "rgba(0, 0, 0, 0.23)",
+                    "& fieldset": {
+                      borderColor: "rgba(0, 0, 0, 0.23)",
+                    },
+                    "&.Mui-focused fieldset": {
+                      border: "2px solid white",
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid white",
-                  },
-                },
                 }}
                 name="addr"
                 onKeyPress={gotoPwQInput}
@@ -713,16 +704,16 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                 비밀번호 찾기 질문
               </Typography>
               <SelectInput
-                 sx={{
+                sx={{
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "transparent",
-                  "& fieldset": {
-                    borderColor: "rgba(0, 0, 0, 0.23)",
+                    "& fieldset": {
+                      borderColor: "rgba(0, 0, 0, 0.23)",
+                    },
+                    "&.Mui-focused fieldset": {
+                      border: "2px solid white",
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid white",
-                  },
-                },
                 }}
                 onKeyPress={gotoPwAInput}
                 autoComplete="off"
@@ -742,22 +733,22 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
               </Typography>
 
               <TextField
-                 sx={{
-                   my: 1,
-                    width: "360px",
-                    color: "white",
-                    background: "#38393b",
-                    fontSize: "20px",
-                    borderRadius: 1,
+                sx={{
+                  my: 1,
+                  width: "360px",
+                  color: "white",
+                  background: "#38393b",
+                  fontSize: "20px",
+                  borderRadius: 1,
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "transparent",
-                  "& fieldset": {
-                    borderColor: "rgba(0, 0, 0, 0.23)",
+                    "& fieldset": {
+                      borderColor: "rgba(0, 0, 0, 0.23)",
+                    },
+                    "&.Mui-focused fieldset": {
+                      border: "2px solid white",
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid white",
-                  },
-                },
                 }}
                 name="pwA"
                 autoComplete="off"

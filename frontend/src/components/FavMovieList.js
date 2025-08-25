@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import Movie from "../components/Movie";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import axios from "axios";
 import config from "../config";
 import { FavListUpdateProvider } from "../store/FavListTriggerContext";

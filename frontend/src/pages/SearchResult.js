@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Movie from "../components/Movie";
 import Grid from "@mui/material/Grid";
-import fetchSummary from "../util/fetchSummary";
 import { getAllSearchMovies } from "../store/movie";
 
 const SearchResult = ({ search }) => {

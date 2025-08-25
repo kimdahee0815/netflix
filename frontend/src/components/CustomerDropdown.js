@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -12,14 +12,13 @@ import config from "../config";
 
 export default function PositionedMenu() {
   const memberId = window.sessionStorage.getItem("id");
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
 
   const location = useLocation();
 
-  const [user, setUser] = React.useState(window.sessionStorage.getItem("id"));
-  const [userName, setUserName] = React.useState("");
+  const user = useState(window.sessionStorage.getItem("id"));
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -45,7 +44,6 @@ export default function PositionedMenu() {
       })
       .then((res) => {
         if (res.data !== null) {
-          setUserName(res.data.member_name);
           // alert("정보 확인 성공!");
         } else {
           alert("정보 확인 실패!");

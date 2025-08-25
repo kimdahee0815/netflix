@@ -1,13 +1,11 @@
-import React from "react";
+import { useCallback, useState } from "react";
 import Container from "@mui/material/Container";
-import { Divider, Grid } from "@mui/material";
+import { Divider } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import CustomizedButton from "./CustomizedButton";
 import Box from "@mui/material/Box";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import OutlinedTextField from "./OutlinedTextField";
 import EmailChange from "./EmailChange";
 import PasswordChange from "./PasswordChange";
 import PhoneChange from "./PhoneChange";
@@ -23,11 +21,8 @@ const MyPageBody = () => {
   const [tel, setTel] = useState("");
   const [pw, setPw] = useState("");
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const isxSmallScreen = useMediaQuery(theme.breakpoints.down("xs"));
-  const isMiddleScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const [user, setUser] = React.useState(window.sessionStorage.getItem("id"));
-  const [userName, setUserName] = React.useState("");
-  const [profiles, setProfiles] = useState();
+  const user = window.sessionStorage.getItem("id");
+
   const [profileImg, setProfileImg] = useState("");
   const profileImages = [
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRVHHNwcCOQ4Y7ulfRG1cZb9joFo5CV921mN1Ha1skrsyRx7PJcLa1stsjBm79z7QV9pQ&usqp=CAU",
@@ -44,7 +39,6 @@ const MyPageBody = () => {
       })
       .then((res) => {
         if (res.data !== null) {
-          setUserName(res.data.member_name);
           // alert("정보 확인 성공!");
         } else {
           alert("정보 확인 실패!");
@@ -53,7 +47,7 @@ const MyPageBody = () => {
       .catch((e) => {
         console.error(e);
       });
-  }, []);
+  }, [user]);
   useEffect(() => {
     axios
       .post(`${config.API_URL}/selectMember`, {
@@ -73,39 +67,42 @@ const MyPageBody = () => {
       });
   }, [email, pw, tel]);
 
-  const [memberID, setMemberID] = useState(window.sessionStorage.getItem("id"));
+  const memberID = window.sessionStorage.getItem("id");
   const [profileNickname, setProfileNickName] =
     useState("저장된 프로필이 없습니다");
   const profileNum = window.localStorage.getItem("profile_num");
 
   useLayoutEffect(() => {
     loadProfiles(memberID);
-  }, [memberID]);
+  }, [loadProfiles, memberID]);
 
-  const loadProfiles = (memberID) => {
-    axios
-      .post(`${config.API_URL}/profiles`, {
-        member_id: memberID,
-      })
-      .then((res) => {
-        if (res.data.length > 0) {
-          if (profileNum !== undefined) {
-            setProfileNickName(res.data[profileNum - 1].nickname);
-            setProfileImg(profileImages[profileNum - 1]);
-          } else {
-            setProfileNickName(res.data[0].nickname);
-            setProfileImg(profileImages[0]);
+  const loadProfiles = useCallback(
+    (memberID) => {
+      axios
+        .post(`${config.API_URL}/profiles`, {
+          member_id: memberID,
+        })
+        .then((res) => {
+          if (res.data.length > 0) {
+            if (profileNum !== undefined) {
+              setProfileNickName(res.data[profileNum - 1].nickname);
+              setProfileImg(profileImages[profileNum - 1]);
+            } else {
+              setProfileNickName(res.data[0].nickname);
+              setProfileImg(profileImages[0]);
+            }
           }
-        }
-      })
-      .catch((error) => {
-        console.error("Error loading profiles:", error);
-      });
-  };
+        })
+        .catch((error) => {
+          console.error("Error loading profiles:", error);
+        });
+    },
+    [profileImages, profileNum]
+  );
 
-  const [openEmailModal, setOpenEmailModal] = React.useState(false);
-  const [openPwModal, setOpenPwModal] = React.useState(false);
-  const [openPhoneModal, setOpenPhoneModal] = React.useState(false);
+  const [openEmailModal, setOpenEmailModal] = useState(false);
+  const [openPwModal, setOpenPwModal] = useState(false);
+  const [openPhoneModal, setOpenPhoneModal] = useState(false);
 
   const handleEmailOpen = () => {
     setOpenEmailModal(true);

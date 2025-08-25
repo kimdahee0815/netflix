@@ -1,20 +1,18 @@
-import * as React from "react";
+import { forwardRef, cloneElement, useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import { useSpring, animated } from "@react-spring/web";
-import SelectInput from "./SelectInput";
-import CustomizedButton from "./CustomizedButton";
-import { useState } from "react";
 import { TextField } from "@mui/material";
 import FormHelperText from "@mui/material/FormHelperText";
-import axios from "axios";
-import { ThemeProvider } from "@mui/material/styles";
 import config from "../config";
+import SelectInput from "./SelectInput";
+import CustomizedButton from "./CustomizedButton";
 
-const Fade = React.forwardRef(function Fade(props, ref) {
+const Fade = forwardRef(function Fade(props, ref) {
   const {
     children,
     in: open,
@@ -41,7 +39,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
 
   return (
     <animated.div ref={ref} style={style} {...other}>
-      {React.cloneElement(children, { onClick })}
+      {cloneElement(children, { onClick })}
     </animated.div>
   );
 });
@@ -70,14 +68,6 @@ const style = {
   overflowY: "scroll",
 };
 
-const formStyle = {
-  my: 1,
-  width: "360px",
-  color: "white",
-  background: "#38393b",
-  fontSize: "20px",
-  borderRadius: 1,
-};
 const inputFormStyle = {
   display: "flex",
   flexWrap: "wrap",
@@ -91,7 +81,7 @@ export default function MemberUpdateForm({
   updateFormClose,
   info,
 }) {
-  const [open, setOpen] = React.useState(openMemberUpdateForm);
+  const [open, setOpen] = useState(openMemberUpdateForm);
 
   const handleClose2 = () => {
     setOpen(false);
@@ -106,7 +96,7 @@ export default function MemberUpdateForm({
     pw_answer: info.pw_answer,
     pw_question: info.pw_question,
   };
-  const [id, setId] = useState(info.member_id);
+  const id = info.member_id;
   const [name, setName] = useState(info.member_name);
   const [addr, setAddr] = useState(info.member_addr);
   const [tel, setTel] = useState(info.member_tel);
@@ -132,10 +122,6 @@ export default function MemberUpdateForm({
   const addrInput = document.querySelector("[name=memberaddr]");
   const pwQInput = document.querySelector("[name=pwQ]");
   const pwAInput = document.querySelector("[name=memberpwA]");
-
-  const emailFocus = () => {
-    emailInput.focus();
-  };
 
   const passwordFocus = () => {
     passwordInput.focus();

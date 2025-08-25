@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useCallback } from "react";
 import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import StickyHeader from "../components/StickyHeader";
@@ -31,7 +31,7 @@ export default function BoardModify() {
     setArticle({ ...article, board_content: event.target.value });
   };
 
-  const getDetail = () => {
+  const getDetail = useCallback(() => {
     axios
       .get(`${config.API_URL}/customer/detail?board_num=${board_num}`)
       .then((res) => {
@@ -42,7 +42,7 @@ export default function BoardModify() {
           board_content: data.board_content,
         });
       });
-  };
+  }, [board_num]);
 
   const handleModify = () => {
     axios
@@ -61,7 +61,7 @@ export default function BoardModify() {
 
   useEffect(() => {
     getDetail();
-  }, []);
+  }, [getDetail]);
 
   return (
     <div>

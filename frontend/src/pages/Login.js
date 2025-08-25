@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import { Button } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -42,8 +41,8 @@ function Login() {
 
   const [saveAccount, setSaveAccount] = useState(false);
 
-  const [emailLabel, setEmailLabel] = useState("이메일 주소");
-  const [pwLabel, setPwLabel] = useState("비밀번호");
+  const emailLabel = "이메일 주소";
+  const pwLabel = "비밀번호";
 
   const emailInput = document.querySelector("[name=email]");
   const passwordInput = document.querySelector("[name=password]");
@@ -63,7 +62,7 @@ function Login() {
   };
 
   useEffect(() => {
-    // emailFocus();
+    emailFocus();
     if (window.localStorage.getItem("id") !== null) {
       // alert("저장된 정보 있음!");
       setSaveAccount(true);
@@ -192,7 +191,7 @@ function Login() {
     }
   };
 
-  const [openModal, setOpenModal] = React.useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const handleOpen = () => {
     setOpenModal(true);
@@ -201,7 +200,7 @@ function Login() {
     setOpenModal(false);
   };
 
-  const [openSignUp, setOpenSignUp] = React.useState(false);
+  const [openSignUp, setOpenSignUp] = useState(false);
 
   const signUpOpen = () => {
     setOpenSignUp(true);

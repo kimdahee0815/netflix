@@ -8,25 +8,16 @@ import GoodMany from "./GoodMany";
 import NewDateAdd from "./NewDateAdd";
 import FavMovieList from "./FavMovieList";
 import { useLocation } from "react-router-dom";
-import { useMediaQuery, useTheme } from "@mui/material";
 import axios from "axios";
 import config from "../config";
 
 const Layout = () => {
-  const theme = useTheme();
   const [search, setSearch] = useState("");
   const [menuClick, setMenuClick] = useState(false);
   const [menuKind, setMenuKind] = useState("");
   const location = useLocation();
 
   let profile_num = location.pathname.slice(7);
-
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const footerLayout = isSmallScreen
-    ? {
-        display: "none",
-      }
-    : {};
 
   useEffect(() => {
     const handleResize = () => {

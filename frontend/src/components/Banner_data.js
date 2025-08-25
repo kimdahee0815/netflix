@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import React, { useLayoutEffect, useState } from "react";
 import YouTube from "react-youtube";
-import config from '../config';
+import config from "../config";
 
 function Banner_data({
   id,
@@ -43,7 +43,7 @@ function Banner_data({
     : {
         height: "350px",
         display: "flex",
-        justifyContent:"center"
+        justifyContent: "center",
       };
   const imgStyle = isMediumScreen
     ? {
@@ -100,25 +100,23 @@ function Banner_data({
         member_id: window.sessionStorage.getItem("id"),
       })
       .then((res) => {
-        if(res.data?.length){
+        if (res.data?.length) {
           setIsChecked(true);
-        }else{
+        } else {
           setIsChecked(false);
         }
       })
       .catch((e) => {
         console.error(e);
       });
-  }, []);
+  }, [title]);
 
   const handlelike = () => {
-
     if (ischecked) {
-
       axios
         .post(`${config.API_URL}/favmovie/delete`, {
-            member_id: window.sessionStorage.getItem("id"),
-            movie_title: title,
+          member_id: window.sessionStorage.getItem("id"),
+          movie_title: title,
         })
         .then((res) => {})
         .catch((e) => {
@@ -263,9 +261,7 @@ function Banner_data({
                 }}
               >
                 <h2 style={{ display: "block" }}>{title}</h2>
-                <p className="summary-scroll">
-                  {summary}
-                </p>
+                <p className="summary-scroll">{summary}</p>
               </div>
             </Typography>
           </div>
