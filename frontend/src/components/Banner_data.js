@@ -180,15 +180,7 @@ function Banner_data({ id, medium_cover_image, title, summary, yt_trailer_code, 
                             {memberId !== null ? (
                                 <Button
                                     variant="outlined"
-                                    style={{
-                                        color: "white",
-                                        backgroundColor: "#787777",
-                                        position: "absolute",
-                                        bottom: " 20px",
-                                    }}
-                                    onClick={() => {
-                                        handlelike();
-                                    }}
+                                    style={{ color: "white", backgroundColor: "#787777" }}
                                     startIcon={ischecked ? <StarIcon /> : <StarBorderIcon />}
                                 >
                                     찜하기
@@ -196,14 +188,9 @@ function Banner_data({ id, medium_cover_image, title, summary, yt_trailer_code, 
                             ) : (
                                 <Button
                                     variant="outlined"
-                                    style={{
-                                        color: "white",
-                                        backgroundColor: "#787777",
-                                        position: "absolute",
-                                        bottom: " 20px",
-                                    }}
-                                    disabled
+                                    style={{ color: "white", backgroundColor: "#787777" }}
                                     startIcon={<StarIcon />}
+                                    disabled
                                 >
                                     {likes}
                                 </Button>
