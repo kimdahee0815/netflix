@@ -188,7 +188,7 @@ function Banner_data({ id, medium_cover_image, title, summary, yt_trailer_code, 
                             ) : (
                                 <Button
                                     variant="outlined"
-                                    style={{ color: "white", backgroundColor: "#787777" }}
+                                    style={{ color: "white", backgroundColor: "#787777", width: "90px" }}
                                     startIcon={<StarIcon />}
                                     disabled
                                 >
