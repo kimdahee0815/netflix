@@ -2,9 +2,12 @@ package com.mysite.netflixProject.favmovie;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.mysite.netflixProject.board.Idchange;
 
 @Service
+@Transactional
 public class FavMovieServiceImpl implements FavMovieService {
     private final FavMovieMapper mapper;
     
