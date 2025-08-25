@@ -25,13 +25,7 @@ const NewDateAdd = () => {
                     <Grid container spacing={2} justifyContent="center">
                         {movies?.map((movie) => (
                             <Grid item xs={2} key={movie.id}>
-                                <Movie
-                                    id={movie.id}
-                                    medium_cover_image={movie.medium_cover_image}
-                                    title={movie.title}
-                                    summary={movie.summary ? movie.summary : movie.movie_summary}
-                                    genres={movie.genres}
-                                />
+                                <Movie {...movie} />
                             </Grid>
                         ))}
                     </Grid>
