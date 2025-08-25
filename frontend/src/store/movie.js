@@ -6,6 +6,7 @@ import config from "../config";
 const initialState = {
     movies: {},
     searchMovies: [],
+    bannerMovie: null,
     loading: {},
 };
 const movieSlice = createSlice({
@@ -23,6 +24,10 @@ const movieSlice = createSlice({
         searchMovies(state, action) {
             const { movies } = action.payload;
             state.searchMovies = movies;
+        },
+        setBannerMovie(state, action) {
+            const { movie } = action.payload;
+            state.bannerMovie = movie;
         },
     },
 });
@@ -105,6 +110,24 @@ export const getAllSearchMovies = (search) => {
         }));
         dispatch(movieActions.searchMovies({ movies: moviesWithLikes }));
         dispatch(movieActions.setLoading({ genre: "search", value: false }));
+    };
+};
+
+export const getBannerMovie = () => {
+    return async (dispatch) => {
+        const likesData = await fetchLikes();
+        const likesMap = Object.fromEntries(likesData.data.map((item) => [item.movie_title, item]));
+        const response = await fetch(
+            `https://yts.mx/api/v2/list_movies.json?limit=20&sort_by=download_count&order_by=desc`
+        );
+        const data = await response.json();
+        let updatedMovies = await fetchSummary(data.data);
+        const moviesWithLikes = updatedMovies.map((movie) => ({
+            ...movie,
+            likes: likesMap[movie.title]?.movie_count || 0,
+        }));
+        const randomNum = Math.floor(Math.random() * moviesWithLikes.length);
+        dispatch(movieActions.setBannerMovie(moviesWithLikes[randomNum]));
     };
 };
 

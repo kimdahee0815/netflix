@@ -1,45 +1,27 @@
 import Grid from "@mui/material/Grid";
-import * as React from "react";
-import { useState, useLayoutEffect } from "react";
+import { useEffect } from "react";
 import Banner_data from "./Banner_data";
-import fetchSummary from "../util/fetchSummary";
-import '../css/movie.css';
+import "../css/movie.css";
+import { getBannerMovie } from "../store/movie";
+import { useDispatch, useSelector } from "react-redux";
 
 function Banner() {
-  const [movie, setMovie] = useState();
-  const loadMysteryMovies = async () => {
-    const response = await fetch(
-      `https://yts.mx/api/v2/list_movies.json?limit=20&sort_by=download_count&order_by=desc`
+    const dispatch = useDispatch();
+    const movie = useSelector((state) => state.movie?.bannerMovie);
+
+    useEffect(() => {
+        dispatch(getBannerMovie());
+    }, [dispatch]);
+
+    return (
+        <div>
+            <Grid item xs={2}>
+                {movie && (
+                    // eslint-disable-next-line react/jsx-pascal-case
+                    <Banner_data {...movie} value="favmovielist" />
+                )}
+            </Grid>
+        </div>
     );
-    const data = await response.json();
-    let updatedMovies = await fetchSummary(data.data);
-    const movies = updatedMovies;
-    const randomNum = Math.floor(Math.random() * movies.length);
-    setMovie(movies[randomNum]);
-  };
-
-  useLayoutEffect(() => {
-    loadMysteryMovies();
-  }, []);
-
-  return (
-    <div>
-      <Grid item xs={2}>
-        {movie && (
-          <Banner_data
-            id={movie.id}
-            medium_cover_image={movie.medium_cover_image}
-            title={movie.title}
-            summary={movie.summary}
-            genres={movie.genres}
-            background={movie.background_image}
-            large_cover_image={movie.large_cover_image}
-            yt_trailer_code={movie.yt_trailer_code}
-            value="favmovielist"
-          />
-        )}
-      </Grid>
-    </div>
-  );
 }
 export default Banner;
