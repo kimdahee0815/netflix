@@ -48,11 +48,11 @@ function Login() {
   const passwordInput = document.querySelector("[name=password]");
 
   const emailFocus = () => {
-    emailInput.focus();
+    emailInput?.focus();
   };
 
   const passwordFocus = () => {
-    passwordInput.focus();
+    passwordInput?.focus();
   };
 
   const gotoPasswordInput = (e) => {
