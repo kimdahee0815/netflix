@@ -127,7 +127,7 @@ export const getBannerMovie = () => {
             likes: likesMap[movie.title]?.movie_count || 0,
         }));
         const randomNum = Math.floor(Math.random() * moviesWithLikes.length);
-        dispatch(movieActions.setBannerMovie(moviesWithLikes[randomNum]));
+        dispatch(movieActions.setBannerMovie({ movie: moviesWithLikes[randomNum] }));
     };
 };
 
