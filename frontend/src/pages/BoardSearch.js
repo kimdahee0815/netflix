@@ -66,7 +66,6 @@ export default function BoardSearch() {
             .then((res) => {
                 const { data } = res;
                 setBoardList(data);
-                console.log(data);
             })
             .catch((e) => {
                 console.error(e);

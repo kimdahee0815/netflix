@@ -14,7 +14,7 @@ import PhoneChange from "./PhoneChange";
 import axios from "axios";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useLayoutEffect, useEffect } from "react";
-import config from '../config';
+import config from "../config";
 
 const MyPageBody = () => {
   const theme = useTheme();
@@ -43,7 +43,6 @@ const MyPageBody = () => {
         member_id: user,
       })
       .then((res) => {
-        console.log("selectMember =>", res);
         if (res.data !== null) {
           setUserName(res.data.member_name);
           // alert("정보 확인 성공!");
@@ -61,7 +60,6 @@ const MyPageBody = () => {
         member_id: email,
       })
       .then((res) => {
-        console.log("selectMember =>", res);
         if (res.data !== null) {
           setTel(res.data.member_tel);
           setPw(res.data.member_pw);
@@ -85,20 +83,16 @@ const MyPageBody = () => {
   }, [memberID]);
 
   const loadProfiles = (memberID) => {
-    console.log("MEMBERID", memberID);
     axios
       .post(`${config.API_URL}/profiles`, {
         member_id: memberID,
       })
       .then((res) => {
-        console.log("res profiles", res.data);
         if (res.data.length > 0) {
           if (profileNum !== undefined) {
-            console.log("profileNum1", profileNum);
             setProfileNickName(res.data[profileNum - 1].nickname);
             setProfileImg(profileImages[profileNum - 1]);
           } else {
-            console.log("profileNum2", profileNum);
             setProfileNickName(res.data[0].nickname);
             setProfileImg(profileImages[0]);
           }
@@ -143,7 +137,6 @@ const MyPageBody = () => {
         member_id: email,
       })
       .then((res) => {
-        console.log("deleteMember =>", res);
         if (res.data === 1) {
           alert("회원 탈퇴되었습니다.");
           axios
@@ -208,170 +201,209 @@ const MyPageBody = () => {
   };
 
   return (
-<Container sx={{ paddingTop: "100px" }}>
-  <Typography sx={{ fontSize: 35, mb: 2 }}>계정</Typography>
-  <Divider />
-    {openEmailModal && (
-      <EmailChange
-        value="이메일 주소"
-        openModal={openEmailModal}
-        setOpenModal={setOpenEmailModal}
-        handleOpen={handleEmailOpen}
-        handleClose={handleEmailClose}
-        setEmail={setEmail}
-      />
-    )}
-    {openPwModal && (
-      <PasswordChange
-        label="마이페이지 비밀번호 변경"
-        openPwModal={openPwModal}
-        setOpenPwModal={setOpenPwModal}
-        handlePwOpen={handlePwOpen}
-        handlePwClose={handlePwClose}
-        setPasswordSearch={setPasswordSearch}
-        setPw={setPw}
-        pw={pw}
-      />
-    )}
-    {openPhoneModal && (
-      <PhoneChange
-        value="휴대폰 번호"
-        openModal={openPhoneModal}
-        setOpenModal={setOpenPhoneModal}
-        handleOpen={handlePhoneOpen}
-        handleClose={handlePhoneClose}
-        setTel={setTel}
-        tel={tel}
-      />
-    )}
-  {/* 멤버십 & 결제 정보 */}
-  <Box sx={{ m: 2 }}>
-    <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>
-      멤버십 & 결제 정보
-    </Typography>
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
-        <Typography sx={{ color: "gray" }}>이메일 주소 : {email}</Typography>
-        <Box sx={{ flexShrink: 0 }}> 
-          <CustomizedButton 
-            label="이메일 주소 변경" 
-            value="emailChange" 
-            onClick={handleEmailOpen} 
-          />
-        </Box>
-      </Box>
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
-        <Typography sx={{ color: "gray" }}>비밀번호 : {pw}</Typography>
-        <Box sx={{ flexShrink: 0 }}> 
-          <CustomizedButton 
-            label="비밀번호 변경" 
-            value="passwordChange" 
-            onClick={handlePwOpen} 
-          />
-        </Box>
-      </Box>
-
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%"}}>
-        <Typography sx={{ color: "gray" }}>휴대폰 번호 : {tel}</Typography>
-        <Box sx={{ flexShrink: 0 }}> 
-          <CustomizedButton 
-            label="휴대폰 번호 변경" 
-            value="phoneChange" 
-            onClick={handlePhoneOpen} 
-          />
-        </Box>
-      </Box>
-
-      <Divider sx={{ my: 2 }} />
-      <Typography>결제 정보가 없습니다</Typography>
-    </Box>
-  </Box>
-
-  <Divider />
-
-  {/* 멤버십 상세 정보 */}
-  <Box sx={{ m: 2 }}>
-    <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>
-      멤버십 상세 정보
-    </Typography>
-    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-      <Typography>스트리밍 멤버십에 가입하지 않으셨습니다.</Typography>
-      {!isSmallScreen && (
-        <Typography sx={{ fontSize: 14, color: "blue", textAlign: "right" }}>
-          스트리밍 멤버십 추가
-        </Typography>
-      )}
-    </Box>
-  </Box>
-
-  <Divider />
-
-  {/* 프로필 & 자녀 보호 설정 */}
-  <Box sx={{ m: 2 }}>
-    <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>
-      프로필 & 자녀 보호 설정
-    </Typography>
-    <Box sx={{ display: "flex", alignItems: "center" }}>
-      {profileImg === "" ? (
-        <AccountBoxIcon sx={{ fontSize: 80 }} />
-      ) : (
-        <Box
-          component="img"
-          sx={{
-            ml: 2,
-            mr: 3,
-            height: 100,
-            width: 100,
-            maxHeight: { xs: 70, md: 100 },
-            maxWidth: { xs: 70, md: 100 },
-          }}
-          src={profileImg}
+    <Container sx={{ paddingTop: "100px" }}>
+      <Typography sx={{ fontSize: 35, mb: 2 }}>계정</Typography>
+      <Divider />
+      {openEmailModal && (
+        <EmailChange
+          value="이메일 주소"
+          openModal={openEmailModal}
+          setOpenModal={setOpenEmailModal}
+          handleOpen={handleEmailOpen}
+          handleClose={handleEmailClose}
+          setEmail={setEmail}
         />
       )}
-      <Typography
+      {openPwModal && (
+        <PasswordChange
+          label="마이페이지 비밀번호 변경"
+          openPwModal={openPwModal}
+          setOpenPwModal={setOpenPwModal}
+          handlePwOpen={handlePwOpen}
+          handlePwClose={handlePwClose}
+          setPasswordSearch={setPasswordSearch}
+          setPw={setPw}
+          pw={pw}
+        />
+      )}
+      {openPhoneModal && (
+        <PhoneChange
+          value="휴대폰 번호"
+          openModal={openPhoneModal}
+          setOpenModal={setOpenPhoneModal}
+          handleOpen={handlePhoneOpen}
+          handleClose={handlePhoneClose}
+          setTel={setTel}
+          tel={tel}
+        />
+      )}
+      {/* 멤버십 & 결제 정보 */}
+      <Box sx={{ m: 2 }}>
+        <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>
+          멤버십 & 결제 정보
+        </Typography>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <Typography sx={{ color: "gray" }}>
+              이메일 주소 : {email}
+            </Typography>
+            <Box sx={{ flexShrink: 0 }}>
+              <CustomizedButton
+                label="이메일 주소 변경"
+                value="emailChange"
+                onClick={handleEmailOpen}
+              />
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <Typography sx={{ color: "gray" }}>비밀번호 : {pw}</Typography>
+            <Box sx={{ flexShrink: 0 }}>
+              <CustomizedButton
+                label="비밀번호 변경"
+                value="passwordChange"
+                onClick={handlePwOpen}
+              />
+            </Box>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <Typography sx={{ color: "gray" }}>휴대폰 번호 : {tel}</Typography>
+            <Box sx={{ flexShrink: 0 }}>
+              <CustomizedButton
+                label="휴대폰 번호 변경"
+                value="phoneChange"
+                onClick={handlePhoneOpen}
+              />
+            </Box>
+          </Box>
+
+          <Divider sx={{ my: 2 }} />
+          <Typography>결제 정보가 없습니다</Typography>
+        </Box>
+      </Box>
+
+      <Divider />
+
+      {/* 멤버십 상세 정보 */}
+      <Box sx={{ m: 2 }}>
+        <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>
+          멤버십 상세 정보
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography>스트리밍 멤버십에 가입하지 않으셨습니다.</Typography>
+          {!isSmallScreen && (
+            <Typography
+              sx={{ fontSize: 14, color: "blue", textAlign: "right" }}
+            >
+              스트리밍 멤버십 추가
+            </Typography>
+          )}
+        </Box>
+      </Box>
+
+      <Divider />
+
+      {/* 프로필 & 자녀 보호 설정 */}
+      <Box sx={{ m: 2 }}>
+        <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>
+          프로필 & 자녀 보호 설정
+        </Typography>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          {profileImg === "" ? (
+            <AccountBoxIcon sx={{ fontSize: 80 }} />
+          ) : (
+            <Box
+              component="img"
+              sx={{
+                ml: 2,
+                mr: 3,
+                height: 100,
+                width: 100,
+                maxHeight: { xs: 70, md: 100 },
+                maxWidth: { xs: 70, md: 100 },
+              }}
+              src={profileImg}
+            />
+          )}
+          <Typography
+            sx={{
+              pl: 2,
+              display: "flex",
+              alignItems: "center",
+              height: "80px",
+              fontWeight: "bold",
+              fontSize: "1.8em",
+            }}
+          >
+            {profileNickname}
+          </Typography>
+        </Box>
+      </Box>
+
+      <Divider />
+
+      {/* 설정 */}
+      <Box sx={{ m: 2 }}>
+        <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>
+          설정
+        </Typography>
+        <Typography sx={{ color: "blue" }}>마케팅 커뮤니케이션</Typography>
+      </Box>
+
+      <Divider />
+
+      {/* 버튼들 */}
+      <Box
         sx={{
-          pl: 2,
           display: "flex",
-          alignItems: "center",
-          height: "80px",
-          fontWeight: "bold",
-          fontSize: "1.8em",
+          flexDirection: isSmallScreen ? "column" : "row",
+          justifyContent: "end",
+          alignItems: isSmallScreen ? "end" : "center",
+          mt: 5,
+          gap: 2,
+          m: 2,
         }}
       >
-        {profileNickname}
-      </Typography>
-    </Box>
-  </Box>
-
-  <Divider />
-
-  {/* 설정 */}
-  <Box sx={{ m: 2 }}>
-    <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>설정</Typography>
-    <Typography sx={{ color: "blue" }}>마케팅 커뮤니케이션</Typography>
-  </Box>
-
-  <Divider />
-
-  {/* 버튼들 */}
-  <Box
-    sx={{
-      display: "flex",
-      flexDirection: isSmallScreen ? "column" : "row",
-      justifyContent: "end",
-      alignItems: isSmallScreen ? "end" : "center",
-      mt: 5,
-      gap: 2,
-      m: 2,
-    }}
-  >
-    {user === "admin@email.com" && (
-      <CustomizedButton label="넷플릭스 회원 관리하기" onClick={gotoMemberBoard} />
-    )}
-    <CustomizedButton label="로그인 정보 삭제하기" onClick={deleteLoginInfo} />
-    <CustomizedButton label="탈퇴하기" onClick={deleteAccount} />
-  </Box>
-</Container>
+        {user === "admin@email.com" && (
+          <CustomizedButton
+            label="넷플릭스 회원 관리하기"
+            onClick={gotoMemberBoard}
+          />
+        )}
+        <CustomizedButton
+          label="로그인 정보 삭제하기"
+          onClick={deleteLoginInfo}
+        />
+        <CustomizedButton label="탈퇴하기" onClick={deleteAccount} />
+      </Box>
+    </Container>
   );
 };
 

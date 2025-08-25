@@ -11,10 +11,8 @@ import { useState } from "react";
 import { TextField } from "@mui/material";
 import FormHelperText from "@mui/material/FormHelperText";
 import axios from "axios";
-import {
-  ThemeProvider,
-} from '@mui/material/styles';
-import config from '../config';
+import { ThemeProvider } from "@mui/material/styles";
+import config from "../config";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
@@ -117,7 +115,6 @@ export default function MemberUpdateForm({
   const [ConfirmPassword, setConfirmPassword] = useState(info.member_pw);
   const [passwordQuestion, setPasswordQuestion] = useState(info.pw_question);
 
-  const [idError, setIdError] = useState("");
   const [nameError, setNameError] = useState("");
   const [addrError, setAddrError] = useState("");
   const [pwCheckError, setPwCheckError] = useState("");
@@ -141,7 +138,6 @@ export default function MemberUpdateForm({
   };
 
   const passwordFocus = () => {
-    // console.log(passwordInput);
     passwordInput.focus();
   };
   const passwordConfirmFocus = () => {
@@ -159,7 +155,6 @@ export default function MemberUpdateForm({
     addrInput.focus();
   };
   const pwQFocus = () => {
-    console.log(pwQInput);
     pwQInput.focus();
   };
 
@@ -174,38 +169,32 @@ export default function MemberUpdateForm({
   };
   const gotoPasswordConfirmInput = (e) => {
     if (e.key === "Enter") {
-      console.log(passwordConfirmInput);
       passwordConfirmFocus();
     }
   };
   const gotoNameInput = (e) => {
     if (e.key === "Enter") {
-      console.log(nameInput);
       nameFocus();
     }
   };
   const gotoTelInput = (e) => {
-    console.log(telInput);
     if (e.key === "Enter") {
       telFocus();
     }
   };
   const gotoAddrInput = (e) => {
-    console.log(addrInput);
     if (e.key === "Enter") {
       e.preventDefault();
       addrFocus();
     }
   };
   const gotoPwQInput = (e) => {
-    console.log(pwQInput);
     if (e.key === "Enter") {
       e.preventDefault();
       pwQFocus();
     }
   };
   const gotoPwAInput = (e) => {
-    console.log(pwAInput);
     if (e.key === "Enter") {
       pwAFocus();
     }
@@ -227,7 +216,6 @@ export default function MemberUpdateForm({
   };
 
   const handlePasswordChange = (event) => {
-    console.log(event);
     setPassword(event.target.value);
     // setPassword 함수를 이용해 password 상태값을 업데이트한다.
     setPasswordError(
@@ -266,7 +254,7 @@ export default function MemberUpdateForm({
         .replace(/(\-{1,2})$/g, "")
         .slice(0, 13)
     );
-    console.log(event.target.value);
+
     setTelError(
       isValidatePhone(event.target.value)
         ? ""
@@ -335,7 +323,7 @@ export default function MemberUpdateForm({
     } else {
       setPwCheckError("");
     }
-    console.log("return check : " + check);
+
     return check;
   };
 
@@ -352,7 +340,6 @@ export default function MemberUpdateForm({
           pw_answer: pwCheck,
         })
         .then((res) => {
-          console.log("updateMember =>", res);
           if (res.data !== 0) {
             if (
               originalData.member_id === id &&
@@ -452,21 +439,21 @@ export default function MemberUpdateForm({
               </Typography>
               <TextField
                 sx={{
-                   my: 1,
-                    width: "360px",
-                    color: "white",
-                    background: "#38393b",
-                    fontSize: "20px",
-                    borderRadius: 1,
+                  my: 1,
+                  width: "360px",
+                  color: "white",
+                  background: "#38393b",
+                  fontSize: "20px",
+                  borderRadius: 1,
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "transparent",
-                  "& fieldset": {
-                    borderColor: "rgba(0, 0, 0, 0.23)",
+                    "& fieldset": {
+                      borderColor: "rgba(0, 0, 0, 0.23)",
+                    },
+                    "&.Mui-focused fieldset": {
+                      border: "2px solid white",
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid white",
-                  },
-                },
                 }}
                 autoComplete="off"
                 name="memberpassword"
@@ -492,22 +479,22 @@ export default function MemberUpdateForm({
                 비밀번호 확인
               </Typography>
               <TextField
-                 sx={{
-                   my: 1,
-                    width: "360px",
-                    color: "white",
-                    background: "#38393b",
-                    fontSize: "20px",
-                    borderRadius: 1,
+                sx={{
+                  my: 1,
+                  width: "360px",
+                  color: "white",
+                  background: "#38393b",
+                  fontSize: "20px",
+                  borderRadius: 1,
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "transparent",
-                  "& fieldset": {
-                    borderColor: "rgba(0, 0, 0, 0.23)",
+                    "& fieldset": {
+                      borderColor: "rgba(0, 0, 0, 0.23)",
+                    },
+                    "&.Mui-focused fieldset": {
+                      border: "2px solid white",
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid white",
-                  },
-                },
                 }}
                 autoComplete="off"
                 name="memberpasswordconfirm"
@@ -530,22 +517,22 @@ export default function MemberUpdateForm({
                 이름
               </Typography>
               <TextField
-                 sx={{
-                   my: 1,
-                    width: "360px",
-                    color: "white",
-                    background: "#38393b",
-                    fontSize: "20px",
-                    borderRadius: 1,
+                sx={{
+                  my: 1,
+                  width: "360px",
+                  color: "white",
+                  background: "#38393b",
+                  fontSize: "20px",
+                  borderRadius: 1,
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "transparent",
-                  "& fieldset": {
-                    borderColor: "rgba(0, 0, 0, 0.23)",
+                    "& fieldset": {
+                      borderColor: "rgba(0, 0, 0, 0.23)",
+                    },
+                    "&.Mui-focused fieldset": {
+                      border: "2px solid white",
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid white",
-                  },
-                },
                 }}
                 autoComplete="off"
                 name="membername"
@@ -569,22 +556,22 @@ export default function MemberUpdateForm({
                 전화번호
               </Typography>
               <TextField
-                 sx={{
-                   my: 1,
-                    width: "360px",
-                    color: "white",
-                    background: "#38393b",
-                    fontSize: "20px",
-                    borderRadius: 1,
+                sx={{
+                  my: 1,
+                  width: "360px",
+                  color: "white",
+                  background: "#38393b",
+                  fontSize: "20px",
+                  borderRadius: 1,
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "transparent",
-                  "& fieldset": {
-                    borderColor: "rgba(0, 0, 0, 0.23)",
+                    "& fieldset": {
+                      borderColor: "rgba(0, 0, 0, 0.23)",
+                    },
+                    "&.Mui-focused fieldset": {
+                      border: "2px solid white",
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid white",
-                  },
-                },
                 }}
                 autoComplete="off"
                 name="membertel"
@@ -607,22 +594,22 @@ export default function MemberUpdateForm({
                 주소
               </Typography>
               <TextField
-                 sx={{
-                   my: 1,
-                    width: "360px",
-                    color: "white",
-                    background: "#38393b",
-                    fontSize: "20px",
-                    borderRadius: 1,
+                sx={{
+                  my: 1,
+                  width: "360px",
+                  color: "white",
+                  background: "#38393b",
+                  fontSize: "20px",
+                  borderRadius: 1,
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "transparent",
-                  "& fieldset": {
-                    borderColor: "rgba(0, 0, 0, 0.23)",
+                    "& fieldset": {
+                      borderColor: "rgba(0, 0, 0, 0.23)",
+                    },
+                    "&.Mui-focused fieldset": {
+                      border: "2px solid white",
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid white",
-                  },
-                },
                 }}
                 autoComplete="off"
                 name="memberaddr"
@@ -649,22 +636,22 @@ export default function MemberUpdateForm({
                 비밀번호 찾기 질문
               </Typography>
               <SelectInput
-                 sx={{
-                   my: 1,
-                    width: "360px",
-                    color: "white",
-                    background: "#38393b",
-                    fontSize: "20px",
-                    borderRadius: 1,
+                sx={{
+                  my: 1,
+                  width: "360px",
+                  color: "white",
+                  background: "#38393b",
+                  fontSize: "20px",
+                  borderRadius: 1,
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "transparent",
-                  "& fieldset": {
-                    borderColor: "rgba(0, 0, 0, 0.23)",
+                    "& fieldset": {
+                      borderColor: "rgba(0, 0, 0, 0.23)",
+                    },
+                    "&.Mui-focused fieldset": {
+                      border: "2px solid white",
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid white",
-                  },
-                },
                 }}
                 autoComplete="off"
                 // name="memberpwQ"
@@ -687,22 +674,22 @@ export default function MemberUpdateForm({
               </Typography>
 
               <TextField
-                 sx={{
-                   my: 1,
-                    width: "360px",
-                    color: "white",
-                    background: "#38393b",
-                    fontSize: "20px",
-                    borderRadius: 1,
+                sx={{
+                  my: 1,
+                  width: "360px",
+                  color: "white",
+                  background: "#38393b",
+                  fontSize: "20px",
+                  borderRadius: 1,
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "transparent",
-                  "& fieldset": {
-                    borderColor: "rgba(0, 0, 0, 0.23)",
+                    "& fieldset": {
+                      borderColor: "rgba(0, 0, 0, 0.23)",
+                    },
+                    "&.Mui-focused fieldset": {
+                      border: "2px solid white",
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    border: "2px solid white",
-                  },
-                },
                 }}
                 autoComplete="off"
                 name="memberpwA"

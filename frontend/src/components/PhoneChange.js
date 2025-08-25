@@ -9,7 +9,7 @@ import OutlinedTextField from "./OutlinedTextField";
 import CustomizedButton from "./CustomizedButton";
 import axios from "axios";
 import FormHelperText from "@mui/material/FormHelperText";
-import config from '../config';
+import config from "../config";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
@@ -94,7 +94,6 @@ export default function PhoneChange({
           member_tel: newTel,
         })
         .then((res) => {
-          console.log("phoneUpdate =>", res);
           if (res.data === 1) {
             if (tel === newTel) {
               alert("동일한 휴대폰 번호입니다!");

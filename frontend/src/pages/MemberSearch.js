@@ -84,7 +84,6 @@ export default function MemberSearch() {
       .then((res) => {
         const { data } = res;
         setMemberList(data);
-        console.log(data);
       })
       .catch((e) => {
         console.error(e);
@@ -151,7 +150,6 @@ export default function MemberSearch() {
                 if (window.localStorage.getItem("id") === post.member_id) {
                   window.localStorage.clear();
                 }
-                console.log(post.member_id);
                 if (post.member_id === window.sessionStorage.getItem("id")) {
                   window.sessionStorage.clear();
                   navigate("/", { return: true });

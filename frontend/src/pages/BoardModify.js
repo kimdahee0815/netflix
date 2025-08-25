@@ -9,7 +9,7 @@ import { Paper } from "@mui/material";
 import axios from "axios";
 import Input from "@mui/material/Input";
 import TextField from "@mui/material/TextField";
-import config from '../config';
+import config from "../config";
 
 export default function BoardModify() {
   const [article, setArticle] = useState({
@@ -25,15 +25,11 @@ export default function BoardModify() {
   };
   const titleChange = (event) => {
     setArticle({ ...article, board_title: event.target.value });
-    console.log(article.board_title);
   };
 
   const contentChange = (event) => {
     setArticle({ ...article, board_content: event.target.value });
-    console.log(article.board_content);
   };
-
-
 
   const getDetail = () => {
     axios
@@ -46,7 +42,7 @@ export default function BoardModify() {
           board_content: data.board_content,
         });
       });
-  }
+  };
 
   const handleModify = () => {
     axios
@@ -56,20 +52,16 @@ export default function BoardModify() {
         board_num: board_num,
       })
       .then((res) => {
-        console.log("handleInsert=>", res);
         navigate("/board");
       })
       .catch((e) => {
         console.error(e);
       });
-
   };
-
 
   useEffect(() => {
     getDetail();
   }, []);
-
 
   return (
     <div>
@@ -124,7 +116,8 @@ export default function BoardModify() {
               sx={{ width: "100%" }}
               placeholder="제목"
               onChange={titleChange}
-              value={article.board_title} />
+              value={article.board_title}
+            />
           </Box>
           <Box
             sx={{

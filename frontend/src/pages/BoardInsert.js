@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { Paper } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import config from '../config';
+import config from "../config";
 
 export default function BoardInsert() {
   const [board_title, setTitle] = useState("");
@@ -27,7 +27,6 @@ export default function BoardInsert() {
         member_id: user,
       })
       .then((res) => {
-        console.log("selectMember =>", res);
         if (res.data !== null) {
           setUserName(res.data.member_name);
           // alert("정보 확인 성공!");
@@ -47,12 +46,10 @@ export default function BoardInsert() {
   };
   const titleChange = (event) => {
     setTitle(event.target.value);
-    console.log(board_title);
   };
 
   const contentChange = (event) => {
     setContent(event.target.value);
-    console.log(board_content);
   };
 
   const handleInsert = () => {
@@ -63,7 +60,6 @@ export default function BoardInsert() {
         board_content: board_content,
       })
       .then((res) => {
-        console.log("handleInsert=>", res);
         navigate("/board");
       })
       .catch((e) => {

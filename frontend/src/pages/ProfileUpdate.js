@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import { useParams, useNavigate } from "react-router-dom";
 import ProfileUpdateForm from "../components/ProfileUpdateForm";
 import TextField from "@mui/material/TextField";
-import config from '../config';
+import config from "../config";
 
 const renderProfileImage = (profileId) => {
   const images = [
@@ -38,7 +38,6 @@ const ProfileUpdate = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(profileId);
     axios
       .post(`${config.API_URL}/profileDetail`, {
         member_id: member_id,

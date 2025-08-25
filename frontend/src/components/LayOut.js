@@ -71,7 +71,6 @@ const Layout = () => {
         member_id: login_id,
       })
       .then((res) => {
-        // console.log("res profiles", res.data.length);
         if (res.data.length === 0) {
           window.localStorage.setItem("profile_num", 1);
         } else {

@@ -138,7 +138,6 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
     addrInput.focus();
   };
   const pwQFocus = () => {
-    console.log(pwQInput);
     pwQInput.focus();
   };
 
@@ -258,7 +257,6 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
         .replace(/(\-{1,2})$/g, "")
         .slice(0, 13)
     );
-    console.log(event.target.value);
     setTelError(
       isValidatePhone(event.target.value)
         ? ""
@@ -345,7 +343,6 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
     } else {
       setPwCheckError("");
     }
-    console.log("return check : " + check);
     return check;
   };
 
@@ -362,7 +359,6 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
           pw_answer: pwCheck,
         })
         .then((res) => {
-          console.log("insertMember =>", res);
           if (res.data === 1) {
             alert("회원가입 성공!");
             handleClose2();
@@ -384,7 +380,6 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
             member_id: id,
           })
           .then((res) => {
-            console.log("idDuplicateCheck =>", res);
             if (res.data === 1) {
               setIdError("아이디가 중복됩니다.");
               return false;

@@ -2,19 +2,18 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Movie from "../components/Movie";
 import Grid from "@mui/material/Grid";
-import fetchSummary from '../util/fetchSummary'
+import fetchSummary from "../util/fetchSummary";
 import { getAllSearchMovies } from "../store/movie";
 
 const SearchResult = ({ search }) => {
   const dispatch = useDispatch();
 
   const searchMovies = useSelector((state) => state.movie.searchMovies);
-  console.log(searchMovies)
   const loading = useSelector((state) => state.movie.loading.search);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      dispatch(getAllSearchMovies(search))
+      dispatch(getAllSearchMovies(search));
     }, 800);
     return () => clearTimeout(timer);
   }, [dispatch, search]);
@@ -28,7 +27,7 @@ const SearchResult = ({ search }) => {
             marginTop: "100px",
             color: "white",
             fontSize: "2.4em",
-            position: "fixed"
+            position: "fixed",
           }}
         >
           Searching...

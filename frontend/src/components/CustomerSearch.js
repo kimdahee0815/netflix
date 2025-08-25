@@ -45,7 +45,6 @@ export default function PrimarySearchAppBar({ kind }) {
   const navigate = useNavigate();
 
   const onchange = (event) => {
-    console.log(event.target.value);
     setSearch(event.target.value);
   };
 
@@ -57,15 +56,15 @@ export default function PrimarySearchAppBar({ kind }) {
 
   const onClick = () => {
     if (kind === "고객관리") {
-      if(search === "" || search === null || search === undefined) {
+      if (search === "" || search === null || search === undefined) {
         navigate(`/memberBoard`);
-      }else{
+      } else {
         navigate(`/memberSearch/${search}`);
       }
     } else {
-      if(search === "" || search === null || search === undefined) {
+      if (search === "" || search === null || search === undefined) {
         navigate(`/board`);
-      }else{
+      } else {
         navigate(`/boardSearch/${search}`);
       }
     }
@@ -87,19 +86,29 @@ export default function PrimarySearchAppBar({ kind }) {
       >
         {kind}
       </Typography>
-      <Box sx={{ display: "flex", alignItems: "center",justifyContent:"center", marginBottom: "10px", width: "100%" }}>
-       <Search sx={{ 
-        flexGrow: 1,
-        maxWidth: "800px" 
-      }}>
-        <StyledInputBase
-          onKeyPress={handleEnter}
-          placeholder="검색어를 입력하세요"
-          inputProps={{ "aria-label": "search" }}
-          onChange={onchange}
-          sx={{ width: "100%" }}
-        />
-      </Search>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: "10px",
+          width: "100%",
+        }}
+      >
+        <Search
+          sx={{
+            flexGrow: 1,
+            maxWidth: "800px",
+          }}
+        >
+          <StyledInputBase
+            onKeyPress={handleEnter}
+            placeholder="검색어를 입력하세요"
+            inputProps={{ "aria-label": "search" }}
+            onChange={onchange}
+            sx={{ width: "100%" }}
+          />
+        </Search>
         <CustomizedButton label="검색" value="search" onClick={onClick} />
       </Box>
     </Box>

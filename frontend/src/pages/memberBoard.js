@@ -17,7 +17,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Box from "@mui/material/Box";
 import MemberUpdateForm from "../components/memberUpdateForm";
-import config from '../config';
+import config from "../config";
 
 export default function StickyHeadTable() {
   const [openMemberUpdateForm, setOpenMemberUpdateForm] = React.useState(false);
@@ -90,7 +90,6 @@ export default function StickyHeadTable() {
   };
 
   const handleTableCellClick = (event, post) => {
-    // console.log(post);
     if (event.target.innerText === "수정") {
       axios
         .post(`${config.API_URL}/selectMember`, {
@@ -150,7 +149,6 @@ export default function StickyHeadTable() {
                 if (window.localStorage.getItem("id") === post.member_id) {
                   window.localStorage.clear();
                 }
-                console.log(post.member_id);
                 if (post.member_id === window.sessionStorage.getItem("id")) {
                   window.sessionStorage.clear();
                   navigate("/", { return: true });
@@ -221,7 +219,8 @@ export default function StickyHeadTable() {
                           return (
                             <TableCell key={column.id} align="center">
                               {column.id === "member_num"
-                                ? memberList.length - (page * rowsPerPage + index)
+                                ? memberList.length -
+                                  (page * rowsPerPage + index)
                                 : column.format
                                 ? column.format(post[column.id], post)
                                 : post[column.id]}

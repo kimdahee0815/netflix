@@ -79,7 +79,6 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
     const pwAInput2 = document.querySelector("[name=pwAInput2]");
 
     const pwQFocus = () => {
-        console.log(pwQInput2);
         pwQInput2.focus();
     };
 
@@ -105,7 +104,6 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
         setOpenPwModal(true);
     };
     const handlePwClose = () => {
-        console.log(openPwModal);
         setOpenPwModal(false);
     };
 
@@ -123,7 +121,6 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
                     pw_answer: passwordAnswer,
                 })
                 .then((res) => {
-                    console.log("passwordSearch =>", res);
                     if (res.data === 1) {
                         axios
                             .post(`${config.API_URL}/selectMember`, {

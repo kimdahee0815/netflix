@@ -28,7 +28,6 @@ export default function TemporaryDrawer({
     setMenuClick(true);
     setMenuKind(e.target.innerText);
     setSearch("");
-    // console.log(e.target.innerText);
   };
 
   return (

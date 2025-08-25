@@ -15,7 +15,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import config from '../config';
+import config from "../config";
 
 export default function StickyHeadTable() {
   const theme = useTheme();
@@ -28,9 +28,10 @@ export default function StickyHeadTable() {
     { id: "board_num", label: "번호", minWidth: 10 },
     { id: "member_id", label: "작성자", minWidth: 10 },
     {
-      id: "board_title", label: "제목", minWidth: 350,
-      format: (value, row) =>
-        row.board_reply ? `${value} (답변완료)` : value,
+      id: "board_title",
+      label: "제목",
+      minWidth: 350,
+      format: (value, row) => (row.board_reply ? `${value} (답변완료)` : value),
     },
     { id: "board_date", label: "날짜", minWidth: 40 },
   ];
@@ -56,15 +57,12 @@ export default function StickyHeadTable() {
   //배열 시작
   const [boardlist, setBoardList] = useState([]);
 
-
-
   const getList = () => {
     axios
       .get(`${config.API_URL}/customer/get`, {})
       .then((res) => {
         const { data } = res;
         setBoardList(data);
-        console.log(data);
       })
       .catch((e) => {
         console.error(e);
@@ -128,7 +126,8 @@ export default function StickyHeadTable() {
                           return (
                             <TableCell key={column.id} align="center">
                               {column.id === "board_num"
-                                ? boardlist.length - (page * rowsPerPage + index)
+                                ? boardlist.length -
+                                  (page * rowsPerPage + index)
                                 : column.format
                                 ? column.format(post[column.id], post)
                                 : post[column.id]}

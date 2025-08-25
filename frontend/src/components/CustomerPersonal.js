@@ -9,7 +9,7 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import { useEffect } from "react";
-import config from '../config';
+import config from "../config";
 
 const CustomerPersonal = () => {
   const theme = useTheme();
@@ -25,7 +25,6 @@ const CustomerPersonal = () => {
         member_id: user,
       })
       .then((res) => {
-        console.log("selectMember =>", res);
         if (res.data !== null) {
           setUserName(res.data.member_name);
           // alert("정보 확인 성공!");

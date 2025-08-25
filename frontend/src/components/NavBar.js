@@ -94,7 +94,6 @@ const NavBar = ({
   const showSearchResult = (e) => {
     setMenuClick(true);
     setMenuKind(e.target.value);
-    // console.log(e.target.value);
     setSearch("");
   };
 

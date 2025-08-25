@@ -44,7 +44,6 @@ export default function PositionedMenu() {
         member_id: user,
       })
       .then((res) => {
-        console.log("selectMember =>", res);
         if (res.data !== null) {
           setUserName(res.data.member_name);
           // alert("정보 확인 성공!");

@@ -16,7 +16,6 @@ export default function SelectInput({
   onKeyPress,
 }) {
   const handleChange = (event) => {
-    console.log(event);
     setPasswordQuestion((value) => event.target.value);
 
     if (event.target.value === "") {

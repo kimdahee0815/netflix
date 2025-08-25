@@ -98,7 +98,6 @@ function Login() {
   };
 
   const handleEmailChange = (event) => {
-    console.log(event.target.value);
     setEmail((value) => event.target.value);
     // setEmail 함수를 이용해 email 상태값을 업데이트한다.
     setEmailError(
@@ -123,7 +122,6 @@ function Login() {
     let validPassword = password.length >= 4 && password.length <= 60;
     if (!email) {
       setEmailError("이메일을 입력해주세요.");
-      console.log(emailRef);
       emailRef.current.focus();
     } else if (!validEmail) {
       setEmailError("정확한 이메일 주소를 입력해주세요.");
@@ -147,7 +145,6 @@ function Login() {
         member_id: email,
       })
       .then((res) => {
-        console.log(res);
         if (res.data) {
           axios
             .post(`${config.API_URL}/login`, {
@@ -155,7 +152,6 @@ function Login() {
               member_pw: password,
             })
             .then((res) => {
-              console.log("handleLogin =>", res);
               if (res.data === 1) {
                 window.sessionStorage.setItem("id", email);
                 window.localStorage.removeItem("profile_num");

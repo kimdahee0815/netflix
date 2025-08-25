@@ -37,7 +37,6 @@ function ProfileManager() {
         member_id: memberID,
       })
       .then((res) => {
-        console.log("res profiles", res.data);
         setProfiles(res.data);
       })
       .catch((error) => {

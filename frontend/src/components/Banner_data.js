@@ -145,7 +145,6 @@ function Banner_data({
               .then((res) => {})
               .catch((e) => {
                 console.error(e);
-                console.log("3" + title);
               });
           } else {
           }

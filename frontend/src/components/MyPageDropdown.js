@@ -38,7 +38,6 @@ const MypageDropDown = () => {
           member_id: memberID,
         })
         .then((res) => {
-          console.log("res profiles", res.data);
           if (res.data.length > 0) {
             if (profileNum !== undefined) {
               setProfileNickName(res.data[profileNum - 1].nickname);

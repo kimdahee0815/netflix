@@ -99,7 +99,6 @@ export default function EmailChange({
             member_id: newEmail,
           })
           .then((res) => {
-            console.log("idDuplicateCheck =>", res);
             if (res.data === 1) {
               setIdError("아이디가 중복됩니다.");
               return false;
@@ -143,7 +142,6 @@ export default function EmailChange({
       check = false;
     }
 
-    console.log("return check : " + check);
     return check;
   };
 
@@ -155,7 +153,6 @@ export default function EmailChange({
           member_new_id: newEmail,
         })
         .then((res) => {
-          console.log("emailUpdate =>", res);
           if (res.data === 1) {
             axios
               .post(`${config.API_URL}/profileEmailUpdate`, {

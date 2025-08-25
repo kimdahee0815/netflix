@@ -9,7 +9,7 @@ import OutlinedTextField from "./OutlinedTextField";
 import CustomizedButton from "./CustomizedButton";
 import axios from "axios";
 import FormHelperText from "@mui/material/FormHelperText";
-import config from '../config';
+import config from "../config";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const {
@@ -108,7 +108,6 @@ export default function PasswordChange({
           member_pw: newPw,
         })
         .then((res) => {
-          console.log("passwordUpdate =>", res);
           if (res.data === 1) {
             handleClose2();
             if (label === "마이페이지 비밀번호 변경") {
