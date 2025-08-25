@@ -65,7 +65,6 @@ const fetchAllMovies = async (genre) => {
 
 export async function fetchLikes() {
     const data = await axios.get(`${config.API_URL}/favmovie/chk`);
-    console.log(data);
     return data;
 }
 
@@ -73,7 +72,6 @@ export const getAllGenresMoviesData = (genres = []) => {
     return async (dispatch, getState) => {
         const likesData = await fetchLikes();
         const likesMap = Object.fromEntries(likesData.data.map((item) => [item.movie_title, item]));
-        console.log(likesMap);
         dispatch(movieActions.setLoading({ genre: "all", value: true }));
         for (let genre of genres) {
             const movieData = await fetchAllMovies(genre);
@@ -127,8 +125,6 @@ export const getBannerMovie = () => {
             likes: likesMap[movie.title]?.movie_count || 0,
         }));
         const randomNum = Math.floor(Math.random() * moviesWithLikes.length);
-        console.log("banner movie");
-        console.log(moviesWithLikes[randomNum]);
         dispatch(movieActions.setBannerMovie({ movie: moviesWithLikes[randomNum] }));
     };
 };
