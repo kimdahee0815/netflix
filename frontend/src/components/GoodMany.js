@@ -24,7 +24,7 @@ const GoodMany = () => {
             ) : (
                 <div style={{ marginTop: "100px" }}>
                     <Grid container spacing={2} justifyContent="center">
-                        {movies.map((movie) => (
+                        {movies?.map((movie) => (
                             <Grid item xs={2} key={movie.id}>
                                 <Movie {...movie} />
                             </Grid>
