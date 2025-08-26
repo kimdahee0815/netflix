@@ -17,7 +17,6 @@ const FavMovieList = () => {
             .get(`${config.API_URL}/favmovie/select?member_id=${id}`)
             .then((res) => {
                 const movies = [...res.data];
-                console.log(movies);
                 setMovies(movies);
                 setLoading(false);
             })
@@ -54,6 +53,7 @@ const FavMovieList = () => {
                             {movies.map((movie) => (
                                 <Grid key={movie.imdb_code} item xs={2}>
                                     <Movie
+                                        key={movie.imdb_code}
                                         title={movie.movie_title}
                                         summary={movie.movie_summary}
                                         medium_cover_image={movie.movie_image}
