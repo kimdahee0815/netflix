@@ -39,12 +39,10 @@ public class FavMovieContoller {
         return favMovieService.chkLike(favmovieVO);
     }
     
-    @PostMapping("/select")
-    public List<FavMovieVO> getFavMovielist(@RequestBody FavMovieVO favmovieVO) {
-        System.out.println("Member ID: " + favmovieVO.getMember_id());
-        List<FavMovieVO> result = favMovieService.getFavMovielist(favmovieVO);
-        System.out.println("Result size: " + result.size());
-        return favMovieService.getFavMovielist(favmovieVO);
+    @GetMapping("/select")
+    public List<FavMovieVO> getFavMovielist(@RequestParam("member_id") String memberId) {
+        List<FavMovieVO> result = favMovieService.getFavMovielist(memberId);
+        return favMovieService.getFavMovielist(memberId);
     }
     
     @PostMapping("/isDuplicateTitle")

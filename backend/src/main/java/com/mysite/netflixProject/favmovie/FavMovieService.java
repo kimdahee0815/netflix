@@ -11,7 +11,7 @@ import com.mysite.netflixProject.board.Idchange;
 public interface FavMovieService {
 	public int insertFavMovie(FavMovieVO favmovieVO);
 	
-	public List<FavMovieVO> getFavMovielist(FavMovieVO favmovieVO);
+	public List<FavMovieVO> getFavMovielist(String memberId);
 
 	public List<FavMovieVO> getAllFavMovieCount();
 	

@@ -15,7 +15,7 @@ public interface FavMovieMapper {
 	public List<FavMovieVO> chkLike(FavMovieVO favmovieVO);
 	
 	@Select("SELECT * FROM fav_movie WHERE member_id = #{member_id}")
-	public List<FavMovieVO> getFavMovielist(@Param("member_id") String memberId);
+	public List<FavMovieVO> getFavMovielist(String memberId);
 	
 	@Delete("delete from fav_movie where movie_title = #{movie_title} and member_id = #{member_id}")
 	public int deleteFavMovie(FavMovieVO favmovieVO);

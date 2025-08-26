@@ -34,9 +34,9 @@ public class FavMovieServiceImpl implements FavMovieService {
     }
 
     @Override
-    public List<FavMovieVO> getFavMovielist(FavMovieVO favmovieVO) {
+    public List<FavMovieVO> getFavMovielist(String memberId) {
           // Add logging
-        List<FavMovieVO> favmovie_list = mapper.getFavMovielist(favmovieVO.getMember_id());
+        List<FavMovieVO> favmovie_list = mapper.getFavMovielist(memberId);
         
         return favmovie_list;
     }
