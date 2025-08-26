@@ -52,7 +52,7 @@ const FavMovieList = () => {
                     {movies.length ? (
                         <Grid container spacing={2} justifyContent="center">
                             {movies.map((movie) => (
-                                <Grid key={movie.imdb_code} item xs={2}>
+                                <Grid item xs={2}>
                                     <Movie
                                         key={movie.imdb_code}
                                         title={movie.movie_title}
