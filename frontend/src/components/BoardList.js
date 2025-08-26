@@ -17,6 +17,7 @@ import CustomizedButton from "./CustomizedButton";
 import config from "../config";
 
 export default function StickyHeadTable() {
+    const memberID = window.sessionStorage.getItem("id");
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
     const [page, setPage] = useState(0);
@@ -80,7 +81,7 @@ export default function StickyHeadTable() {
             <Container sx={{ paddingTop: { paddingTop } }}>
                 <h2 style={{ display: "flex", alignItems: "center", color: "black" }}>
                     <span style={{ marginRight: "auto" }}>문의하기</span>
-                    <CustomizedButton onClick={handleClick} label="글 작성"></CustomizedButton>
+                    {memberID && <CustomizedButton onClick={handleClick} label="글 작성"></CustomizedButton>}
                 </h2>
 
                 <Paper sx={{ width: "100%", overflow: "hidden" }}>
