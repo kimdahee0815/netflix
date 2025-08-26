@@ -12,7 +12,7 @@ import config from "../config";
 import { FavListUpdateContext } from "../store/FavListTriggerContext";
 import "../css/movie.css";
 
-function Movie({ id, title, rating, genres, summary, medium_cover_image: image, likes }) {
+function Movie({ id, title, rating, genres, summary, medium_cover_image: image, likes, isChecked = false }) {
     const { favListUpdate } = useContext(FavListUpdateContext);
     const memberId = window.sessionStorage.getItem("id");
 
@@ -44,7 +44,7 @@ function Movie({ id, title, rating, genres, summary, medium_cover_image: image, 
         setIsHover(false);
     };
     const handleClose = () => setOpen(false);
-    const [ischecked, setIsChecked] = useState(false);
+    const [ischecked, setIsChecked] = useState(isChecked);
 
     const handlelike = () => {
         if (ischecked) {
