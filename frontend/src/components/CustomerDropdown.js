@@ -107,9 +107,12 @@ export default function PositionedMenu() {
                         고객센터
                     </MenuItem>
                 )}
-                <MenuItem component={Link} to="/profiles">
-                    프로필 관리
-                </MenuItem>
+                {memberId && (
+                    <MenuItem component={Link} to="/profiles">
+                        프로필 관리
+                    </MenuItem>
+                )}
+
                 <Divider />
                 {memberId !== null ? (
                     <MenuItem onClick={logout} component={Link} to="/">
