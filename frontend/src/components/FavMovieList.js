@@ -52,8 +52,9 @@ const FavMovieList = () => {
                     {movies.length ? (
                         <Grid container spacing={2} justifyContent="center">
                             {movies.map((movie) => (
-                                <Grid key={favListState} item xs={2}>
+                                <Grid item xs={2}>
                                     <Movie
+                                        key={`${movie.movie_title}`}
                                         title={movie.movie_title}
                                         summary={movie.movie_summary}
                                         medium_cover_image={movie.movie_image}
