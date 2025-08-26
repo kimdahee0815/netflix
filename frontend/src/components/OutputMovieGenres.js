@@ -1,8 +1,8 @@
 import { useEffect, useState, memo } from "react";
-import Movie from "../components/Movie";
 import { useSelector } from "react-redux";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
+import Movie from "../components/Movie";
 
 const OutputMovieGenres = memo(({ genre }) => {
     const movies = useSelector((state) => state.movie.movies);

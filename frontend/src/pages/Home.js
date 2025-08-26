@@ -1,10 +1,10 @@
-import "../components/OutputMovieGenres";
 import { useEffect, useMemo, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import OutputMovieGenres from "../components/OutputMovieGenres";
 import Banner from "../components/Banner";
 import { getBannerMovie } from "../store/movie";
-import { useDispatch, useSelector } from "react-redux";
 import { getAllGenresMoviesData } from "../store/movie";
+import "../components/OutputMovieGenres";
 
 const Home = () => {
     const movies = useSelector((state) => state.movie.movies);

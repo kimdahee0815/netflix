@@ -1,7 +1,7 @@
+import { useSelector } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Banner_data from "./Banner_data";
 import "../css/movie.css";
-import { useSelector } from "react-redux";
 
 function Banner() {
     const movie = useSelector((state) => state.movie?.bannerMovie);

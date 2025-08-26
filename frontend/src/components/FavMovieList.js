@@ -1,8 +1,8 @@
 /* eslint-disable array-callback-return */
 import { useEffect, useState } from "react";
-import Movie from "../components/Movie";
-import Grid from "@mui/material/Grid";
 import axios from "axios";
+import Grid from "@mui/material/Grid";
+import Movie from "../components/Movie";
 import config from "../config";
 import { FavListUpdateProvider } from "../store/FavListTriggerContext";
 

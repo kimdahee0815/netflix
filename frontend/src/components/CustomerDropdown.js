@@ -1,125 +1,124 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { Link, useNavigate, useLocation } from "react-router-dom";
 import Typography from "@mui/material/Typography";
-import axios from "axios";
-import { useEffect } from "react";
 import { Divider } from "@mui/material";
 import config from "../config";
 
 export default function PositionedMenu() {
-  const memberId = window.sessionStorage.getItem("id");
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const navigate = useNavigate();
+    const memberId = window.sessionStorage.getItem("id");
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const navigate = useNavigate();
 
-  const location = useLocation();
+    const location = useLocation();
 
-  const user = useState(window.sessionStorage.getItem("id"));
+    const user = useState(window.sessionStorage.getItem("id"));
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
-  const logout = () => {
-    window.sessionStorage.clear(); // 세션스토리지에 저장된 속성값 모두 삭제
-    window.localStorage.removeItem("profile_num");
-    navigate("/login", { replace: true }); // 로그인페이지로 이동
-  };
+    const logout = () => {
+        window.sessionStorage.clear(); // 세션스토리지에 저장된 속성값 모두 삭제
+        window.localStorage.removeItem("profile_num");
+        navigate("/login", { replace: true }); // 로그인페이지로 이동
+    };
 
-  const login = () => {
-    navigate("/login", { replace: true }); // 로그인페이지로 이동
-  };
+    const login = () => {
+        navigate("/login", { replace: true }); // 로그인페이지로 이동
+    };
 
-  useEffect(() => {
-    axios
-      .post(`${config.API_URL}/selectMember`, {
-        member_id: user,
-      })
-      .then((res) => {
-        if (res.data !== null) {
-          // alert("정보 확인 성공!");
-        } else {
-          alert("정보 확인 실패!");
-        }
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-  }, [user]);
+    useEffect(() => {
+        axios
+            .post(`${config.API_URL}/selectMember`, {
+                member_id: user,
+            })
+            .then((res) => {
+                if (res.data !== null) {
+                    // alert("정보 확인 성공!");
+                } else {
+                    alert("정보 확인 실패!");
+                }
+            })
+            .catch((e) => {
+                console.error(e);
+            });
+    }, [user]);
 
-  return (
-    <div>
-      <Button
-        id="demo-positioned-button"
-        aria-controls={open ? "demo-positioned-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-      >
-        <Typography
-          variant="h6"
-          noWrap
-          component="div"
-          sx={{
-            display: { sm: "block", md: "block" },
-            textAlign: "center",
-            fontFamily: "Georgia, serif",
-            fontWeight: 9,
-            fontSize: "1.3em",
-            color: "white",
-          }}
-          textTransform="none"
-        >
-          {user}
-        </Typography>
+    return (
+        <div>
+            <Button
+                id="demo-positioned-button"
+                aria-controls={open ? "demo-positioned-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+            >
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{
+                        display: { sm: "block", md: "block" },
+                        textAlign: "center",
+                        fontFamily: "Georgia, serif",
+                        fontWeight: 9,
+                        fontSize: "1.3em",
+                        color: "white",
+                    }}
+                    textTransform="none"
+                >
+                    {user}
+                </Typography>
 
-        <ArrowDropDownIcon style={{ fontSize: "3rem", color: "red" }} />
-      </Button>
-      <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
-        sx={{ mt: 6 }}
-      >
-        <MenuItem component={Link} to="/mypage">
-          마이페이지
-        </MenuItem>
-        {location.pathname === "/customercenter" ? null : (
-          <MenuItem component={Link} to="/customercenter">
-            고객센터
-          </MenuItem>
-        )}
-        <MenuItem component={Link} to="/profiles">
-          프로필 관리
-        </MenuItem>
-        <Divider />
-        {memberId !== null ? (
-          <MenuItem onClick={logout} component={Link} to="/">
-            로그아웃
-          </MenuItem>
-        ) : (
-          <MenuItem onClick={login} component={Link} to="/login">
-            로그인
-          </MenuItem>
-        )}
-      </Menu>
-    </div>
-  );
+                <ArrowDropDownIcon style={{ fontSize: "3rem", color: "red" }} />
+            </Button>
+            <Menu
+                id="demo-positioned-menu"
+                aria-labelledby="demo-positioned-button"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "center",
+                }}
+                transformOrigin={{
+                    vertical: "top",
+                    horizontal: "center",
+                }}
+                sx={{ mt: 6 }}
+            >
+                <MenuItem component={Link} to="/mypage">
+                    마이페이지
+                </MenuItem>
+                {location.pathname === "/customercenter" ? null : (
+                    <MenuItem component={Link} to="/customercenter">
+                        고객센터
+                    </MenuItem>
+                )}
+                <MenuItem component={Link} to="/profiles">
+                    프로필 관리
+                </MenuItem>
+                <Divider />
+                {memberId !== null ? (
+                    <MenuItem onClick={logout} component={Link} to="/">
+                        로그아웃
+                    </MenuItem>
+                ) : (
+                    <MenuItem onClick={login} component={Link} to="/login">
+                        로그인
+                    </MenuItem>
+                )}
+            </Menu>
+        </div>
+    );
 }

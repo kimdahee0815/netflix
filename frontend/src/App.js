@@ -1,12 +1,6 @@
-import React from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import SearchResult from "./pages/SearchResult";
@@ -26,49 +20,46 @@ import BoardSearch from "./pages/BoardSearch";
 import MemberSearch from "./pages/MemberSearch";
 
 const App = () => {
-  const location = useLocation();
+    const location = useLocation();
 
-  if (
-    location.pathname === "/login" ||
-    location.pathname === "/profiles" ||
-    location.pathname === "/" ||
-    location.pathname === "/search/" ||
-    location.pathname === "/profileupdate"
-  ) {
-    document.body.style.backgroundColor = "rgb(42, 43, 43)";
-  } else {
-    document.body.style.backgroundColor = "white";
-  }
+    if (
+        location.pathname === "/login" ||
+        location.pathname === "/profiles" ||
+        location.pathname === "/" ||
+        location.pathname === "/search/" ||
+        location.pathname === "/profileupdate"
+    ) {
+        document.body.style.backgroundColor = "rgb(42, 43, 43)";
+    } else {
+        document.body.style.backgroundColor = "white";
+    }
 
-  return (
-    <Routes>
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-      </Route>
-      <Route path="/login/:profile" element={<Layout />}>
-        <Route index element={<Home />} />
-      </Route>
-      <Route path="/search/" element={<SearchResult />} />
-      {/* SearchResult결과는 section3 컴포넌트 이용 */}
-      <Route path="/mypage" element={<MyPage />} />
-      <Route path="/profiles" element={<Profiles />} />
-      <Route
-        path="/profile/edit/:member_id/:profileId"
-        element={<ProfileUpdate />}
-      />
-      <Route path="/customercenter" element={<Customercenter />} />
-      <Route path="/customercenter/board" element={<Board />} />
-      <Route path="/board" element={<BoardList />} />
-      <Route path="/board/:board_num" element={<BoardDetail />} />
-      <Route path="/boardInsert" element={<BoardInsert />} />
-      <Route path="/boardModify/:board_num" element={<BoardModify />} />
-      <Route path="/boardSearch/:searchAny" element={<BoardSearch />} />
-      <Route path="/memberBoard" element={<MemberBoard />} />
-      <Route path="/memberSearch/:searchAny" element={<MemberSearch />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  );
+    return (
+        <Routes>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+            </Route>
+            <Route path="/login/:profile" element={<Layout />}>
+                <Route index element={<Home />} />
+            </Route>
+            <Route path="/search/" element={<SearchResult />} />
+            {/* SearchResult결과는 section3 컴포넌트 이용 */}
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/profiles" element={<Profiles />} />
+            <Route path="/profile/edit/:member_id/:profileId" element={<ProfileUpdate />} />
+            <Route path="/customercenter" element={<Customercenter />} />
+            <Route path="/customercenter/board" element={<Board />} />
+            <Route path="/board" element={<BoardList />} />
+            <Route path="/board/:board_num" element={<BoardDetail />} />
+            <Route path="/boardInsert" element={<BoardInsert />} />
+            <Route path="/boardModify/:board_num" element={<BoardModify />} />
+            <Route path="/boardSearch/:searchAny" element={<BoardSearch />} />
+            <Route path="/memberBoard" element={<MemberBoard />} />
+            <Route path="/memberSearch/:searchAny" element={<MemberSearch />} />
+            <Route path="*" element={<NotFound />} />
+        </Routes>
+    );
 };
 
 export default App;

@@ -1,6 +1,6 @@
-import Movie from "../components/Movie";
 import Grid from "@mui/material/Grid";
 import useSearchMovie from "../util/useSearchMovie";
+import Movie from "../components/Movie";
 
 const GoodMany = () => {
     const { loading, movies } = useSearchMovie(

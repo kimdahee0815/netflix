@@ -1,5 +1,5 @@
-import Movie from "../components/Movie";
 import Grid from "@mui/material/Grid";
+import Movie from "../components/Movie";
 import useSearchMovie from "../util/useSearchMovie";
 
 const NewDateAdd = () => {

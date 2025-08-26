@@ -1,16 +1,14 @@
 /* eslint-disable jsx-a11y/alt-text */
 import Modal from "@mui/material/Modal";
-import * as React from "react";
+import { useState, useContext } from "react";
+import axios from "axios";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Grid from "@mui/material/Grid";
-import axios from "axios";
-import { useState } from "react";
 import config from "../config";
-import { useContext } from "react";
 import { FavListUpdateContext } from "../store/FavListTriggerContext";
 import "../css/movie.css";
 
@@ -35,11 +33,11 @@ function Movie({ id, title, rating, genres, summary, medium_cover_image: image, 
         overflowY: "auto",
     };
 
-    const [isHover, setIsHover] = React.useState(false);
+    const [isHover, setIsHover] = useState(false);
     const handleHover = () => setIsHover(true);
     const handleLeave = () => setIsHover(false);
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = (e) => {
         // e.stopPropagation();
         setOpen(true);

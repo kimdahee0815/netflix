@@ -1,3 +1,6 @@
+import { useLayoutEffect, useState } from "react";
+import YouTube from "react-youtube";
+import axios from "axios";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
@@ -8,9 +11,6 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
-import axios from "axios";
-import React, { useLayoutEffect, useState } from "react";
-import YouTube from "react-youtube";
 import config from "../config";
 
 function Banner_data({ id, medium_cover_image, title, summary, yt_trailer_code, value, likes }) {
@@ -104,45 +104,35 @@ function Banner_data({ id, medium_cover_image, title, summary, yt_trailer_code, 
             });
     }, [title]);
 
-    const handlelike = () => {
+    const handlelike = async () => {
         if (ischecked) {
-            axios
-                .post(`${config.API_URL}/favmovie/delete`, {
+            try {
+                await axios.post(`${config.API_URL}/favmovie/delete`, {
                     member_id: window.sessionStorage.getItem("id"),
                     movie_title: title,
-                })
-                .then((res) => {})
-                .catch((e) => {
-                    console.error(e);
                 });
+            } catch (error) {
+                console.error(error);
+            }
             setIsChecked(false);
         } else {
-            axios
-                .post(`${config.API_URL}/favmovie/isDuplicateTitle`, {
+            try {
+                const { data } = await axios.post(`${config.API_URL}/favmovie/isDuplicateTitle`, {
                     member_id: window.sessionStorage.getItem("id"),
                     movie_title: title,
-                })
-                .then((res) => {
-                    if (res.data !== 1) {
-                        //제목이 중복되지 않을 때에만
-
-                        axios
-                            .post(`${config.API_URL}/favmovie/insert`, {
-                                member_id: window.sessionStorage.getItem("id"),
-                                movie_title: title,
-                                movie_summary: summary,
-                                movie_image: medium_cover_image,
-                            })
-                            .then((res) => {})
-                            .catch((e) => {
-                                console.error(e);
-                            });
-                    } else {
-                    }
-                })
-                .catch((e) => {
-                    console.error(e);
                 });
+                if (data !== 1) {
+                    //제목이 중복되지 않을 때에만
+                    await axios.post(`${config.API_URL}/favmovie/insert`, {
+                        member_id: window.sessionStorage.getItem("id"),
+                        movie_title: title,
+                        movie_summary: summary,
+                        movie_image: medium_cover_image,
+                    });
+                }
+            } catch (error) {
+                console.error(error);
+            }
             setIsChecked(true);
         }
     };
