@@ -14,7 +14,7 @@ const fetchSummary = async (data) => {
                     }
                     movie.rating = data.imdbRating;
                 } catch (error) {
-                    console.log(error);
+                    // console.log(error);
                 }
             }
             return movie;
