@@ -17,6 +17,7 @@ const FavMovieList = () => {
             .get(`${config.API_URL}/favmovie/select?member_id=${id}`)
             .then((res) => {
                 const movies = [...res.data];
+                console.log(movies);
                 setMovies(movies);
                 setLoading(false);
             })
