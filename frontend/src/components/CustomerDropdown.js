@@ -97,9 +97,11 @@ export default function PositionedMenu() {
                 }}
                 sx={{ mt: 6 }}
             >
-                <MenuItem component={Link} to="/mypage">
-                    마이페이지
-                </MenuItem>
+                {memberId && (
+                    <MenuItem component={Link} to="/mypage">
+                        마이페이지
+                    </MenuItem>
+                )}
                 {location.pathname === "/customercenter" ? null : (
                     <MenuItem component={Link} to="/customercenter">
                         고객센터
