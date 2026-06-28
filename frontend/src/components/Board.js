@@ -25,29 +25,32 @@ const Board = () => {
     const [posts, setPosts] = useState([
         {
             id: 1,
-            title: "영화를 클릭했는데 영화가 안나와요",
-            content: "이 사이트는 yts api를 이용하여, 영화의 이미지, 제목, 요약본을 보여주는 사이트입니다.",
+            title: "I clicked a movie but it won't play",
+            content:
+                "This site uses the TMDB API to display movie posters, titles, and summaries. It is not a streaming service, so movies cannot be played here.",
         },
         {
             id: 2,
-            title: "약간 렉이 걸리는거 같아요",
-            content: "죄송합니다. api와의 연동에서 영화와 관련된 사이트들은 약간 시간이 지체될 수 있습니다.",
+            title: "The site feels a bit laggy",
+            content:
+                "Sorry about that. Since movie data is loaded through an external API, there can be a slight delay while fetching information.",
         },
         {
             id: 3,
-            title: "게시글을 어떻게 입력하는지 모르겠어요",
+            title: "I don't know how to write a post",
             content:
-                "고객센터에서, 자주 하는 질문 버튼을 누르시면 이 사이트로 연동이 되니, 문의하기 버튼을 눌러주시기 바랍니다.",
+                "Go to the Help Center and click the FAQ button to reach this page, then click the Contact Us button to submit your question.",
         },
         {
             id: 4,
-            title: "이게 진짜 영화를 보는 사이트인가요?",
-            content: "이 사이트는 yts api를 이용하여, 영화의 이미지, 제목, 요약본을 보여주는 사이트입니다.",
+            title: "Is this a real movie streaming site?",
+            content:
+                "This site uses the TMDB API to display movie posters, titles, and summaries. It does not provide actual streaming.",
         },
         {
             id: 5,
-            title: "새로운 질문을 하고싶어요",
-            content: "고객센터에서, 문의하기 버튼을 누르시면 새로운 질문을 글 작성을 통해서 하실 수 있습니다.",
+            title: "I'd like to ask a new question",
+            content: "In the Help Center, click the Contact Us button to ask a new question by writing a post.",
         },
     ]);
     const [selectedPost, setSelectedPost] = useState(null);
@@ -67,7 +70,7 @@ const Board = () => {
 
     return (
         <div>
-            <StickyHeader kind="고객센터" />
+            <StickyHeader kind="Customer Center" />
             <Container sx={{ paddingTop: { paddingTop } }}>
                 {posts.map((post) => (
                     <Card

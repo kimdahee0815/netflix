@@ -22,7 +22,7 @@ export default function FadeMenu({ onClick }) {
     };
 
     const login = () => {
-        navigate("/login", { replace: true }); // 로그인페이지로 이동
+        navigate("/login", { replace: true });
     };
 
     return (
@@ -60,16 +60,16 @@ export default function FadeMenu({ onClick }) {
                 TransitionComponent={Fade}
             >
                 <MenuItem component={Link} to="/customercenter">
-                    <Typography textAlign="center">{"고객센터"}</Typography>
+                    <Typography textAlign="center">{"Customer Center"}</Typography>
                 </MenuItem>
 
                 {memberID && (
                     <>
                         <MenuItem component={Link} to="/mypage">
-                            <Typography textAlign="center">{"마이페이지"}</Typography>
+                            <Typography textAlign="center">{"My Page"}</Typography>
                         </MenuItem>
                         <MenuItem component={Link} to="/profiles">
-                            <Typography textAlign="center">{"프로필 변경"}</Typography>
+                            <Typography textAlign="center">{"Change Profile"}</Typography>
                         </MenuItem>
                     </>
                 )}
@@ -77,11 +77,11 @@ export default function FadeMenu({ onClick }) {
                 <Divider />
                 {memberID !== null ? (
                     <MenuItem onClick={onClick} component={Link} to="/">
-                        <Typography textAlign="center">{"로그아웃"}</Typography>
+                        <Typography textAlign="center">{"Logout"}</Typography>
                     </MenuItem>
                 ) : (
                     <MenuItem onClick={login} component={Link} to="/login">
-                        <Typography textAlign="center">{"로그인"}</Typography>
+                        <Typography textAlign="center">{"Login"}</Typography>
                     </MenuItem>
                 )}
             </Menu>

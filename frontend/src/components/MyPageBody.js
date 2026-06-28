@@ -38,9 +38,8 @@ const MyPageBody = () => {
             })
             .then((res) => {
                 if (res.data !== null) {
-                    // alert("정보 확인 성공!");
                 } else {
-                    alert("정보 확인 실패!");
+                    alert("Failed to confirm info!");
                 }
             })
             .catch((e) => {
@@ -56,9 +55,8 @@ const MyPageBody = () => {
                 if (res.data !== null) {
                     setTel(res.data.member_tel);
                     setPw(res.data.member_pw);
-                    // alert("정보 확인 성공!");
                 } else {
-                    alert("정보 확인 실패!");
+                    alert("Failed to confirm info!");
                 }
             })
             .catch((e) => {
@@ -67,7 +65,7 @@ const MyPageBody = () => {
     }, [email, pw, tel]);
 
     const memberID = window.sessionStorage.getItem("id");
-    const [profileNickname, setProfileNickName] = useState("저장된 프로필이 없습니다");
+    const [profileNickname, setProfileNickName] = useState("No Profile.");
     const profileNum = window.localStorage.getItem("profile_num");
 
     useLayoutEffect(() => {
@@ -95,7 +93,7 @@ const MyPageBody = () => {
                     console.error("Error loading profiles:", error);
                 });
         },
-        [profileImages, profileNum]
+        [profileImages, profileNum],
     );
 
     const [openEmailModal, setOpenEmailModal] = useState(false);
@@ -133,7 +131,7 @@ const MyPageBody = () => {
             })
             .then((res) => {
                 if (res.data === 1) {
-                    alert("회원 탈퇴되었습니다.");
+                    alert("Account deleted successfully.");
                     axios
                         .post(`${config.API_URL}/favmovie/remove`, {
                             member_id: window.sessionStorage.getItem("id"),
@@ -168,7 +166,7 @@ const MyPageBody = () => {
 
                     navigate("/", { return: true });
                 } else {
-                    alert("회원 탈퇴 실패!");
+                    alert("Failed to delete account!");
                 }
             })
             .catch((e) => {
@@ -180,22 +178,22 @@ const MyPageBody = () => {
         if (window.localStorage.getItem("id") !== null) {
             if (window.sessionStorage.getItem("id") === window.localStorage.getItem("id")) {
                 window.localStorage.clear();
-                alert("로그인 정보가 삭제되었습니다!");
+                alert("Login info deleted!");
             } else {
-                alert("로그인 정보 삭제 권한이 없습니다!");
+                alert("You do not have permission to delete login info!");
             }
         } else {
-            alert("저장된 로그인 정보가 없습니다!");
+            alert("No saved login info found!");
         }
     };
 
     return (
         <Container sx={{ paddingTop: "100px" }}>
-            <Typography sx={{ fontSize: 35, mb: 2 }}>계정</Typography>
+            <Typography sx={{ fontSize: 35, mb: 2 }}>Account</Typography>
             <Divider />
             {openEmailModal && (
                 <EmailChange
-                    value="이메일 주소"
+                    value="Email Address"
                     openModal={openEmailModal}
                     setOpenModal={setOpenEmailModal}
                     handleOpen={handleEmailOpen}
@@ -205,7 +203,7 @@ const MyPageBody = () => {
             )}
             {openPwModal && (
                 <PasswordChange
-                    label="마이페이지 비밀번호 변경"
+                    label="Change Password"
                     openPwModal={openPwModal}
                     setOpenPwModal={setOpenPwModal}
                     handlePwOpen={handlePwOpen}
@@ -217,7 +215,7 @@ const MyPageBody = () => {
             )}
             {openPhoneModal && (
                 <PhoneChange
-                    value="휴대폰 번호"
+                    value="Phone Number"
                     openModal={openPhoneModal}
                     setOpenModal={setOpenPhoneModal}
                     handleOpen={handlePhoneOpen}
@@ -226,9 +224,9 @@ const MyPageBody = () => {
                     tel={tel}
                 />
             )}
-            {/* 멤버십 & 결제 정보 */}
+            {/* Membership & Payment Info */}
             <Box sx={{ m: 2 }}>
-                <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>멤버십 & 결제 정보</Typography>
+                <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>Membership & Payment Info</Typography>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                     <Box
                         sx={{
@@ -238,9 +236,9 @@ const MyPageBody = () => {
                             width: "100%",
                         }}
                     >
-                        <Typography sx={{ color: "gray" }}>이메일 주소 : {email}</Typography>
+                        <Typography sx={{ color: "gray" }}>Email Address: {email}</Typography>
                         <Box sx={{ flexShrink: 0 }}>
-                            <CustomizedButton label="이메일 주소 변경" value="emailChange" onClick={handleEmailOpen} />
+                            <CustomizedButton label="Change Email" value="emailChange" onClick={handleEmailOpen} />
                         </Box>
                     </Box>
                     <Box
@@ -251,9 +249,9 @@ const MyPageBody = () => {
                             width: "100%",
                         }}
                     >
-                        <Typography sx={{ color: "gray" }}>비밀번호 : {pw}</Typography>
+                        <Typography sx={{ color: "gray" }}>Password: {pw}</Typography>
                         <Box sx={{ flexShrink: 0 }}>
-                            <CustomizedButton label="비밀번호 변경" value="passwordChange" onClick={handlePwOpen} />
+                            <CustomizedButton label="Change Password" value="passwordChange" onClick={handlePwOpen} />
                         </Box>
                     </Box>
 
@@ -265,22 +263,22 @@ const MyPageBody = () => {
                             width: "100%",
                         }}
                     >
-                        <Typography sx={{ color: "gray" }}>휴대폰 번호 : {tel}</Typography>
+                        <Typography sx={{ color: "gray" }}>Phone Number: {tel}</Typography>
                         <Box sx={{ flexShrink: 0 }}>
-                            <CustomizedButton label="휴대폰 번호 변경" value="phoneChange" onClick={handlePhoneOpen} />
+                            <CustomizedButton label="Change Phone Number" value="phoneChange" onClick={handlePhoneOpen} />
                         </Box>
                     </Box>
 
                     <Divider sx={{ my: 2 }} />
-                    <Typography>결제 정보가 없습니다</Typography>
+                    <Typography>No payment information</Typography>
                 </Box>
             </Box>
 
             <Divider />
 
-            {/* 멤버십 상세 정보 */}
+            {/* Membership Details */}
             <Box sx={{ m: 2 }}>
-                <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>멤버십 상세 정보</Typography>
+                <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>Membership Details</Typography>
                 <Box
                     sx={{
                         display: "flex",
@@ -288,10 +286,10 @@ const MyPageBody = () => {
                         alignItems: "center",
                     }}
                 >
-                    <Typography>스트리밍 멤버십에 가입하지 않으셨습니다.</Typography>
+                    <Typography>You are not subscribed to a streaming membership.</Typography>
                     {!isSmallScreen && (
                         <Typography sx={{ fontSize: 14, color: "blue", textAlign: "right" }}>
-                            스트리밍 멤버십 추가
+                            Add Streaming Membership
                         </Typography>
                     )}
                 </Box>
@@ -299,9 +297,9 @@ const MyPageBody = () => {
 
             <Divider />
 
-            {/* 프로필 & 자녀 보호 설정 */}
+            {/* Profile & Parental Control Settings */}
             <Box sx={{ m: 2 }}>
-                <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>프로필 & 자녀 보호 설정</Typography>
+                <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>Profile & Parental Control Settings</Typography>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                     {profileImg === "" ? (
                         <AccountBoxIcon sx={{ fontSize: 80 }} />
@@ -336,15 +334,15 @@ const MyPageBody = () => {
 
             <Divider />
 
-            {/* 설정 */}
+            {/* Settings */}
             <Box sx={{ m: 2 }}>
-                <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>설정</Typography>
-                <Typography sx={{ color: "blue" }}>마케팅 커뮤니케이션</Typography>
+                <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>Settings</Typography>
+                <Typography sx={{ color: "blue" }}>Marketing Communications</Typography>
             </Box>
 
             <Divider />
 
-            {/* 버튼들 */}
+            {/* Buttons */}
             <Box
                 sx={{
                     display: "flex",
@@ -357,10 +355,10 @@ const MyPageBody = () => {
                 }}
             >
                 {user === "admin@email.com" && (
-                    <CustomizedButton label="넷플릭스 회원 관리하기" onClick={gotoMemberBoard} />
+                    <CustomizedButton label="Manage Netflix Members" onClick={gotoMemberBoard} />
                 )}
-                <CustomizedButton label="로그인 정보 삭제하기" onClick={deleteLoginInfo} />
-                <CustomizedButton label="탈퇴하기" onClick={deleteAccount} />
+                <CustomizedButton label="Delete Login Info" onClick={deleteLoginInfo} />
+                <CustomizedButton label="Delete Account" onClick={deleteAccount} />
             </Box>
         </Container>
     );

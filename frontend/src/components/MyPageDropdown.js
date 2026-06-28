@@ -27,7 +27,7 @@ const MypageDropDown = () => {
             "https://external-preview.redd.it/0dTT-3SprPcsNCqo1GTCI-nqGM9EdZYwqyYr_pZ-baE.jpg?auto=webp&s=a1e8532d326f5aa122df2f31694bf142f117fc06",
             "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png",
         ],
-        []
+        [],
     );
 
     const loadProfiles = useCallback(
@@ -51,7 +51,7 @@ const MypageDropDown = () => {
                     console.error("Error loading profiles:", error);
                 });
         },
-        [profileImages, profileNum]
+        [profileImages, profileNum],
     );
 
     useEffect(() => {
@@ -66,13 +66,13 @@ const MypageDropDown = () => {
     };
 
     const login = () => {
-        navigate("/login", { replace: true }); // 로그인페이지로 이동
+        navigate("/login", { replace: true });
     };
 
     const logout = () => {
-        window.sessionStorage.clear(); // 세션스토리지에 저장된 속성값 모두 삭제
+        window.sessionStorage.clear();
         window.localStorage.removeItem("profile_num");
-        navigate("/login", { replace: true }); // 로그인페이지로 이동
+        navigate("/login", { replace: true });
     };
 
     return (
@@ -183,21 +183,21 @@ const MypageDropDown = () => {
             >
                 {memberID && (
                     <MenuItem component={Link} to="/profiles">
-                        프로필 관리
+                        Manage Profile
                     </MenuItem>
                 )}
 
                 <MenuItem component={Link} to="/customercenter">
-                    고객 센터
+                    Customer Center
                 </MenuItem>
                 <Divider />
                 {memberID !== null ? (
                     <MenuItem onClick={logout} component={Link} to="/">
-                        로그아웃
+                        Logout
                     </MenuItem>
                 ) : (
                     <MenuItem onClick={login} component={Link} to="/login">
-                        로그인
+                        Login
                     </MenuItem>
                 )}
             </Menu>

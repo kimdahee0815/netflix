@@ -69,8 +69,6 @@ function Movie({ id, title, rating, genres, summary, medium_cover_image: image, 
                 })
                 .then((res) => {
                     if (res.data !== 1) {
-                        //제목이 중복되지 않을 때에만
-
                         axios
                             .post(`${config.API_URL}/favmovie/insert`, {
                                 member_id: window.sessionStorage.getItem("id"),
@@ -198,7 +196,7 @@ function Movie({ id, title, rating, genres, summary, medium_cover_image: image, 
                                         }}
                                         startIcon={ischecked ? <StarIcon /> : <StarBorderIcon />}
                                     >
-                                        찜하기
+                                        Like
                                     </Button>
                                 ) : (
                                     <Button

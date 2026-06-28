@@ -27,13 +27,13 @@ export default function PositionedMenu() {
     };
 
     const logout = () => {
-        window.sessionStorage.clear(); // 세션스토리지에 저장된 속성값 모두 삭제
+        window.sessionStorage.clear();
         window.localStorage.removeItem("profile_num");
-        navigate("/login", { replace: true }); // 로그인페이지로 이동
+        navigate("/login", { replace: true });
     };
 
     const login = () => {
-        navigate("/login", { replace: true }); // 로그인페이지로 이동
+        navigate("/login", { replace: true });
     };
 
     useEffect(() => {
@@ -43,9 +43,8 @@ export default function PositionedMenu() {
             })
             .then((res) => {
                 if (res.data !== null) {
-                    // alert("정보 확인 성공!");
                 } else {
-                    alert("정보 확인 실패!");
+                    alert("Failed to confirm info!");
                 }
             })
             .catch((e) => {
@@ -99,28 +98,28 @@ export default function PositionedMenu() {
             >
                 {memberId && (
                     <MenuItem component={Link} to="/mypage">
-                        마이페이지
+                        My Page
                     </MenuItem>
                 )}
                 {location.pathname === "/customercenter" ? null : (
                     <MenuItem component={Link} to="/customercenter">
-                        고객센터
+                        Customer Center
                     </MenuItem>
                 )}
                 {memberId && (
                     <MenuItem component={Link} to="/profiles">
-                        프로필 관리
+                        Manage Profile
                     </MenuItem>
                 )}
 
                 <Divider />
                 {memberId !== null ? (
                     <MenuItem onClick={logout} component={Link} to="/">
-                        로그아웃
+                        Logout
                     </MenuItem>
                 ) : (
                     <MenuItem onClick={login} component={Link} to="/login">
-                        로그인
+                        Login
                     </MenuItem>
                 )}
             </Menu>

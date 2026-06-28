@@ -27,17 +27,17 @@ function Banner_data({ id, medium_cover_image, title, summary, yt_trailer_code, 
               flexDirection: "column",
           }
         : isMediumScreen
-        ? {
-              height: "350px",
-              display: "flex",
-              marginLeft: "8.5%",
-              justifyContent: "space-between",
-          }
-        : {
-              height: "350px",
-              display: "flex",
-              justifyContent: "center",
-          };
+          ? {
+                height: "350px",
+                display: "flex",
+                marginLeft: "8.5%",
+                justifyContent: "space-between",
+            }
+          : {
+                height: "350px",
+                display: "flex",
+                justifyContent: "center",
+            };
     const imgStyle = isMediumScreen
         ? {
               display: "none",
@@ -122,7 +122,6 @@ function Banner_data({ id, medium_cover_image, title, summary, yt_trailer_code, 
                     movie_title: title,
                 });
                 if (data !== 1) {
-                    //제목이 중복되지 않을 때에만
                     await axios.post(`${config.API_URL}/favmovie/insert`, {
                         member_id: window.sessionStorage.getItem("id"),
                         movie_title: title,
@@ -173,7 +172,7 @@ function Banner_data({ id, medium_cover_image, title, summary, yt_trailer_code, 
                                     style={{ color: "white", backgroundColor: "#787777" }}
                                     startIcon={ischecked ? <StarIcon /> : <StarBorderIcon />}
                                 >
-                                    찜하기
+                                    Like
                                 </Button>
                             ) : (
                                 <Button
@@ -193,7 +192,7 @@ function Banner_data({ id, medium_cover_image, title, summary, yt_trailer_code, 
                                 onClick={handleOpen}
                                 style={{ color: "white", backgroundColor: "#787777" }}
                             >
-                                상세정보
+                                Details
                             </Button>
                         </Grid>
                     </Grid>
