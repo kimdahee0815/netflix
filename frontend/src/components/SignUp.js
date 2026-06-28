@@ -402,7 +402,7 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                             }}
                         >
                             <Typography sx={{ width: "150px", mr: 5, mt: 3 }} variant="h10" component="h4">
-                                Email
+                                Email Address
                             </Typography>
                             <div
                                 style={{
