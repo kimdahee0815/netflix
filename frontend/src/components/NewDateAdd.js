@@ -17,7 +17,7 @@ const NewDateAdd = () => {
         );
         observer.observe(el);
         return () => observer.disconnect();
-    }, [loadMore]);
+    }, [loadMore, loading, movies.length]);
 
     return (
         <div>
