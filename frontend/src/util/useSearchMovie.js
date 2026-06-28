@@ -2,13 +2,14 @@ import { useEffect, useState, useCallback } from "react";
 import { fetchMovieList } from "./tmdb";
 import { fetchLikes } from "../store/movie";
 
-// apiUrl 대신 sortBy 문자열을 받음 (ex: "popularity.desc")
 export default function useSearchMovie(sortBy) {
     const [loading, setLoading] = useState(true);
     const [movies, setMovies] = useState([]);
 
     const searchMovies = useCallback(async () => {
-        return await fetchMovieList(sortBy);
+        const pages = [1, 2, 3, 4, 5];
+        const results = await Promise.all(pages.map((page) => fetchMovieList(sortBy, page)));
+        return results.flat();
     }, [sortBy]);
 
     const getLikesData = async () => {
