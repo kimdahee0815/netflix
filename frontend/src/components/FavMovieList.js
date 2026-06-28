@@ -1,7 +1,6 @@
 /* eslint-disable array-callback-return */
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Grid from "@mui/material/Grid";
 import Movie from "../components/Movie";
 import config from "../config";
 import { FavListUpdateProvider } from "../store/FavListTriggerContext";
@@ -39,28 +38,35 @@ const FavMovieList = () => {
             {loading ? (
                 <div
                     style={{
+                        marginLeft: "30px",
+                        marginTop: "100px",
                         color: "white",
                         fontSize: "2.4em",
-                        marginLeft: "30px",
+                        position: "fixed",
                     }}
                 >
-                    loading...
+                    Loading...
                 </div>
             ) : (
-                <div style={{ marginTop: "100px", padding: "0 8px" }}>
+                <div style={{ marginTop: "100px", padding: "0 40px" }}>
                     {movies.length ? (
-                        <Grid container spacing={1}>
+                        <div
+                            style={{
+                                display: "grid",
+                                gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
+                                gap: "16px",
+                            }}
+                        >
                             {movies.map((movie) => (
-                                <Grid item xs={4} sm={3} md={2} key={movie.movie_title}>
-                                    <Movie
-                                        title={movie.movie_title}
-                                        summary={movie.movie_summary}
-                                        medium_cover_image={movie.movie_image}
-                                        isChecked={true}
-                                    />
-                                </Grid>
+                                <Movie
+                                    key={movie.movie_title}
+                                    title={movie.movie_title}
+                                    summary={movie.movie_summary}
+                                    medium_cover_image={movie.movie_image}
+                                    isChecked={true}
+                                />
                             ))}
-                        </Grid>
+                        </div>
                     ) : (
                         <div
                             style={{
