@@ -33,7 +33,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins(
                     "http://localhost:3000", 
-                    "https://net-flix-clone-dahee-kim.netlify.app"
+                    "https://net-flix-and-chill.netlify.app"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")

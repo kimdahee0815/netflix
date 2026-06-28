@@ -21,7 +21,7 @@ public class CORSInterceptor implements Filter {
         
         String origin = request.getHeader("Origin");
         if ("http://localhost:3000".equals(origin) || 
-            "https://net-flix-clone-dahee-kim.netlify.app".equals(origin)) {
+            "https://net-flix-and-chill.netlify.app".equals(origin)) {
             response.setHeader("Access-Control-Allow-Origin", origin);
         }
 

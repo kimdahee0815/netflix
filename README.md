@@ -34,7 +34,7 @@ A Netflix-inspired full-stack streaming platform built with **React**, **Spring 
 
 ## 🚀 Live Demo
 
-👉 [Search Your Favorite Movies on Netflix And Chill](https://net-flix-clone-dahee-kim.netlify.app/)
+👉 [Search Your Favorite Movies on Netflix And Chill](https://net-flix-and-chill.netlify.app)
 
 ---
 
