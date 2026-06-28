@@ -17,7 +17,7 @@ RUN chmod +x mvnw
 RUN mvn clean package -DskipTests
 
 # Final image
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /app
 COPY --from=backend-build /app/backend/target/*.jar ./app.jar
 COPY --from=frontend-build /app/frontend/build ./app/frontend/build
