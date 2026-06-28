@@ -107,9 +107,9 @@ const Layout = () => {
                 ) : search === "" ? (
                     menuName === "Most Downloaded" ? (
                         <DownLoadmany />
-                    ) : menuName === "Most Likes" ? (
+                    ) : menuName === "Most Liked" ? (
                         <GoodMany />
-                    ) : menuName === "최근 추가 된 영화" ? (
+                    ) : menuName === "Recently Added" ? (
                         <NewDateAdd />
                     ) : (
                         <FavMovieList />
