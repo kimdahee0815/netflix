@@ -10,8 +10,10 @@ const NewDateAdd = () => {
         const el = sentinelRef.current;
         if (!el) return;
         const observer = new IntersectionObserver(
-            ([entry]) => { if (entry.isIntersecting) loadMore(); },
-            { rootMargin: "400px" }
+            ([entry]) => {
+                if (entry.isIntersecting) loadMore();
+            },
+            { rootMargin: "400px", threshold: 0 },
         );
         observer.observe(el);
         return () => observer.disconnect();
