@@ -444,7 +444,7 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                                 />
 
                                 <CustomizedButton
-                                    label="Check Duplicate"
+                                    label="Check"
                                     value="check"
                                     onClick={idDuplicateCheck}
                                 ></CustomizedButton>
