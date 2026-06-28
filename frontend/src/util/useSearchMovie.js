@@ -1,38 +1,34 @@
 import { useEffect, useState, useCallback } from "react";
-import fetchSummary from "./fetchSummary";
+import { fetchMovieList } from "./tmdb";
 import { fetchLikes } from "../store/movie";
 
-export default function useSearchMovie(apiUrl) {
-  const [loading, setLoading] = useState(true);
-  const [movies, setMovies] = useState([]);
+// apiUrl 대신 sortBy 문자열을 받음 (ex: "popularity.desc")
+export default function useSearchMovie(sortBy) {
+    const [loading, setLoading] = useState(true);
+    const [movies, setMovies] = useState([]);
 
-  const searchMovies = useCallback(async () => {
-    const json = await (await fetch(apiUrl)).json();
-    let updatedMovies = await fetchSummary(json.data);
-    return updatedMovies;
-  }, [apiUrl]);
+    const searchMovies = useCallback(async () => {
+        return await fetchMovieList(sortBy);
+    }, [sortBy]);
 
-  const getLikesData = async () => {
-    const likesData = await fetchLikes();
-    const likesMap = Object.fromEntries(
-      likesData.data.map((item) => [item.movie_title, item])
-    );
-    return likesMap;
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const movies = await searchMovies();
-      const likesMap = await getLikesData();
-      const moviesWithLikes = movies.map((movie) => ({
-        ...movie,
-        likes: likesMap[movie.title]?.movie_count || 0,
-      }));
-      setMovies(moviesWithLikes);
-      setLoading(false);
+    const getLikesData = async () => {
+        const likesData = await fetchLikes();
+        return Object.fromEntries(likesData.data.map((item) => [item.movie_title, item]));
     };
-    fetchData();
-  }, [apiUrl, searchMovies]);
 
-  return { loading, movies };
+    useEffect(() => {
+        const fetchData = async () => {
+            const movies = await searchMovies();
+            const likesMap = await getLikesData();
+            const moviesWithLikes = movies.map((movie) => ({
+                ...movie,
+                likes: likesMap[movie.title]?.movie_count || 0,
+            }));
+            setMovies(moviesWithLikes);
+            setLoading(false);
+        };
+        fetchData();
+    }, [sortBy, searchMovies]);
+
+    return { loading, movies };
 }

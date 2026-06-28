@@ -3,9 +3,8 @@ import Movie from "../components/Movie";
 import useSearchMovie from "../util/useSearchMovie";
 
 const NewDateAdd = () => {
-    const { loading, movies } = useSearchMovie(
-        `https://yts.mx/api/v2/list_movies.json?sort_by=date_added&order_by=desc&limit=48&minimum_rating=8`
-    );
+    const { loading, movies } = useSearchMovie("primary_release_date.desc");
+
     return (
         <div>
             {loading ? (

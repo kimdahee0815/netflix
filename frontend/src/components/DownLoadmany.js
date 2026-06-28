@@ -3,9 +3,7 @@ import useSearchMovie from "../util/useSearchMovie";
 import Movie from "../components/Movie";
 
 const DownLoadmany = () => {
-    const { loading, movies } = useSearchMovie(
-        `https://yts.mx/api/v2/list_movies.json?sort_by=download_count&order_by=desc&limit=48`
-    );
+    const { loading, movies } = useSearchMovie("popularity.desc");
 
     return (
         <div>
