@@ -94,7 +94,7 @@ function Movie({ id, title, rating, genres, summary, medium_cover_image: image, 
             style={{
                 position: "relative",
                 width: "100%",
-                height: "100%",
+                overflow: "hidden",
             }}
             onMouseEnter={handleHover}
             onMouseLeave={handleLeave}
@@ -104,8 +104,8 @@ function Movie({ id, title, rating, genres, summary, medium_cover_image: image, 
                 title={title}
                 style={{
                     width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
+                    height: "auto",
+                    display: "block",
                     transition: "all 0.3s ease-out",
                     transform: isHover ? "scale(1.1)" : "scale(1)",
                     cursor: "pointer",
@@ -122,17 +122,16 @@ function Movie({ id, title, rating, genres, summary, medium_cover_image: image, 
                     }}
                     style={{
                         position: "absolute",
-                        top: 9,
-                        left: 7,
-                        width: "95%",
-                        height: "95%",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
                         zIndex: 10,
                         backgroundColor: "rgba(0,0,0,0.8)",
                         cursor: "pointer",
-                        transformOrigin: "center",
                     }}
                 >
                     <Typography
