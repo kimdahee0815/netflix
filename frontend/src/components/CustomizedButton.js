@@ -37,21 +37,11 @@ const BootstrapButton = styled(Button)({
 });
 
 export default function CustomizedButton(props) {
-    const { value, label } = props;
+    const { value } = props;
 
     return (
         <div>
-            {label === "Change Password" ? (
-                <BootstrapButton
-                    value={value}
-                    onClick={props.onClick}
-                    variant="contained"
-                    disableRipple
-                    sx={{ width: 142 }}
-                >
-                    {props.label}
-                </BootstrapButton>
-            ) : value === "delete-login-info" ? (
+            {value === "delete-login-info" ? (
                 <BootstrapButton
                     value={value}
                     onClick={props.onClick}

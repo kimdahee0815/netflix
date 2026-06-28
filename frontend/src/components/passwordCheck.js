@@ -147,7 +147,7 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
         let check = true;
         let validEmail =
             /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(
-                id
+                id,
             );
 
         if (!id) {
@@ -195,12 +195,7 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
             >
                 <Fade in={open}>
                     <Box sx={style}>
-                        <Typography
-                            sx={{ width: 160, mx: "auto", mb: 3 }}
-                            id="spring-modal-title"
-                            variant="h5"
-                            component="h2"
-                        >
+                        <Typography sx={{ mx: "auto", mb: 3 }} id="spring-modal-title" variant="h5" component="h2">
                             Forgot Password
                         </Typography>
                         <Box sx={{ display: "flex" }}>
