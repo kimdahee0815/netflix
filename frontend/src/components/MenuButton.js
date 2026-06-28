@@ -141,7 +141,7 @@ export default function TemporaryDrawer({ search, setSearch, menuClick, setMenuC
                                                 },
                                             }}
                                         >
-                                            찜목록
+                                            Favorites
                                         </Typography>
                                     }
                                 />
