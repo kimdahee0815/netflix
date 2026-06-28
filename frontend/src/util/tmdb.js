@@ -68,3 +68,11 @@ export const fetchMovieList = (sortBy, page = 1) =>
         "vote_count.gte": 100,
         page,
     });
+
+export const fetchMovieTrailer = async (movieId) => {
+    const query = new URLSearchParams({ api_key: TMDB_KEY, language: "en-US" }).toString();
+    const res = await fetch(`${TMDB_BASE}/movie/${movieId}/videos?${query}`);
+    const data = await res.json();
+    const trailer = (data.results || []).find((v) => v.type === "Trailer" && v.site === "YouTube");
+    return trailer?.key || null;
+};

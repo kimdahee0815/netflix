@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useEffect, useState } from "react";
 import YouTube from "react-youtube";
 import axios from "axios";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -12,8 +12,9 @@ import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import config from "../config";
+import { fetchMovieTrailer } from "../util/tmdb";
 
-function Banner_data({ id, medium_cover_image, title, summary, yt_trailer_code, value, likes }) {
+function Banner_data({ id, medium_cover_image, title, summary, likes }) {
     const theme = useTheme();
     const memberId = window.sessionStorage.getItem("id");
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -44,6 +45,9 @@ function Banner_data({ id, medium_cover_image, title, summary, yt_trailer_code, 
           }
         : {
               backgroundImage: `url(${medium_cover_image})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
               width: "230px",
               height: "345px",
               marginLeft: "10px",
@@ -77,6 +81,16 @@ function Banner_data({ id, medium_cover_image, title, summary, yt_trailer_code, 
         display: "flex",
         zIndex: 9999,
     };
+
+    const [trailerKey, setTrailerKey] = useState(null);
+
+    useEffect(() => {
+        if (id) {
+            fetchMovieTrailer(id).then((key) => {
+                if (key) setTrailerKey(key);
+            });
+        }
+    }, [id]);
 
     const [open, setOpen] = useState(false);
     const handleOpen = (e) => {
@@ -199,21 +213,37 @@ function Banner_data({ id, medium_cover_image, title, summary, yt_trailer_code, 
                 </Box>
                 <Box style={imgStyle} />
                 <Box style={playerStyle}>
-                    <YouTube
-                        videoId={yt_trailer_code}
-                        opts={{
-                            width: "580",
-                            height: "345",
-                            playerVars: {
-                                autoplay: 0,
-                                rel: 0,
-                                modestbranding: 1,
-                            },
-                        }}
-                        onEnd={(e) => {
-                            e.target.stopVideo(0);
-                        }}
-                    />
+                    {trailerKey ? (
+                        <YouTube
+                            videoId={trailerKey}
+                            opts={{
+                                width: "580",
+                                height: "345",
+                                playerVars: {
+                                    autoplay: 0,
+                                    rel: 0,
+                                    modestbranding: 1,
+                                },
+                            }}
+                            onEnd={(e) => {
+                                e.target.stopVideo(0);
+                            }}
+                        />
+                    ) : (
+                        <Box
+                            sx={{
+                                width: "580px",
+                                height: "345px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                backgroundColor: "#111",
+                                color: "#aaa",
+                            }}
+                        >
+                            No trailer available
+                        </Box>
+                    )}
                 </Box>
             </Container>
             <Modal keepMounted open={open} onClose={handleClose}>
