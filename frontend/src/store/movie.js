@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchMoviesByGenre, searchTmdbMovies, fetchMovieList } from "../util/tmdb";
+import { fetchMoviesByGenre, searchTmdbMovies, fetchMovieList, fetchMovieTrailer } from "../util/tmdb";
 import config from "../config";
 
 const initialState = {
@@ -96,8 +96,13 @@ export const getBannerMovie = () => {
             ...movie,
             likes: likesMap[movie.title]?.movie_count || 0,
         }));
-        const randomNum = Math.floor(Math.random() * moviesWithLikes.length);
-        dispatch(movieActions.setBannerMovie({ movie: moviesWithLikes[randomNum] }));
+        const trailerKeys = await Promise.all(moviesWithLikes.map((m) => fetchMovieTrailer(m.id)));
+        const moviesWithTrailers = moviesWithLikes
+            .map((movie, i) => ({ ...movie, trailerKey: trailerKeys[i] }))
+            .filter((movie) => movie.trailerKey);
+        if (moviesWithTrailers.length === 0) return;
+        const randomNum = Math.floor(Math.random() * moviesWithTrailers.length);
+        dispatch(movieActions.setBannerMovie({ movie: moviesWithTrailers[randomNum] }));
     };
 };
 

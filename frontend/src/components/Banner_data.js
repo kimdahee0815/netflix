@@ -1,4 +1,4 @@
-import { useLayoutEffect, useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import YouTube from "react-youtube";
 import axios from "axios";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -12,9 +12,8 @@ import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import config from "../config";
-import { fetchMovieTrailer } from "../util/tmdb";
 
-function Banner_data({ id, medium_cover_image, title, summary, likes }) {
+function Banner_data({ medium_cover_image, title, summary, likes, trailerKey: initialTrailerKey }) {
     const theme = useTheme();
     const memberId = window.sessionStorage.getItem("id");
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -82,15 +81,7 @@ function Banner_data({ id, medium_cover_image, title, summary, likes }) {
         zIndex: 9999,
     };
 
-    const [trailerKey, setTrailerKey] = useState(null);
-
-    useEffect(() => {
-        if (id) {
-            fetchMovieTrailer(id).then((key) => {
-                if (key) setTrailerKey(key);
-            });
-        }
-    }, [id]);
+    const [trailerKey] = useState(initialTrailerKey || null);
 
     const [open, setOpen] = useState(false);
     const handleOpen = (e) => {
