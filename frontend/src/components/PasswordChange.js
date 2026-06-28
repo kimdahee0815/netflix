@@ -148,7 +148,7 @@ export default function PasswordChange({
                 <Fade in={open}>
                     <Box sx={style}>
                         <Typography
-                            sx={{ width: 270, mx: "auto", mb: 3 }}
+                            sx={{ textAlign: "center", mx: "auto", mb: 3 }}
                             id="spring-modal-title"
                             variant="h5"
                             component="h2"
