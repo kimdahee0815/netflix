@@ -13,7 +13,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 import SettingsDropdown from "./SettingDropdown";
 import MenuButton from "./MenuButton";
 
-const pages = ["다운로드 가장 많은 영화", "좋아요 가장 많은 영화", "최근 추가 된 영화", "찜목록"];
+const pages = ["Most Downloaded", "Most Liked", "Recently Added", "Favorites"];
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
