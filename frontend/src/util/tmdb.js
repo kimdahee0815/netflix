@@ -46,7 +46,7 @@ const tmdbFetch = async (path, params = {}) => {
     }).toString();
     const res = await fetch(`${TMDB_BASE}${path}?${query}`);
     const data = await res.json();
-    return (data.results || []).map(toYtsShape);
+    return (data.results || []).map(toYtsShape).filter((m) => m.medium_cover_image);
 };
 
 // 장르별 영화

@@ -1,12 +1,25 @@
+import { useRef, useEffect } from "react";
 import useSearchMovie from "../util/useSearchMovie";
 import Movie from "../components/Movie";
 
 const GoodMany = () => {
-    const { loading, movies } = useSearchMovie("vote_average.desc");
+    const { loading, movies, loadMore } = useSearchMovie("vote_average.desc");
+    const sentinelRef = useRef(null);
+
+    useEffect(() => {
+        const el = sentinelRef.current;
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) loadMore(); },
+            { rootMargin: "400px" }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [loadMore]);
 
     return (
         <div>
-            {loading ? (
+            {movies.length === 0 && loading ? (
                 <div
                     style={{
                         marginLeft: "30px",
@@ -28,9 +41,15 @@ const GoodMany = () => {
                         gap: "16px",
                     }}
                 >
-                    {movies?.map((movie) => (
+                    {movies.map((movie) => (
                         <Movie {...movie} key={movie.id} />
                     ))}
+                </div>
+            )}
+            <div ref={sentinelRef} style={{ height: 1 }} />
+            {loading && movies.length > 0 && (
+                <div style={{ color: "white", textAlign: "center", padding: "20px", fontSize: "1.2em" }}>
+                    Loading more...
                 </div>
             )}
         </div>
