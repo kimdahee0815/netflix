@@ -86,7 +86,7 @@ export default function BoardModify() {
                             variant="h6"
                             component="h4"
                         >
-                            작성자
+                            Author
                         </Typography>
                         <Typography
                             sx={{ width: "150px", mr: 3, mt: 1, fontWeight: "bold" }}
@@ -107,11 +107,11 @@ export default function BoardModify() {
                             variant="h6"
                             component="h4"
                         >
-                            제목
+                            Title
                         </Typography>
                         <Input
                             sx={{ width: "100%" }}
-                            placeholder="제목"
+                            placeholder="Title"
                             onChange={titleChange}
                             value={article.board_title}
                         />
@@ -123,7 +123,7 @@ export default function BoardModify() {
                         }}
                     >
                         <Typography sx={{ width: "140px", mt: 3, fontWeight: "bold" }} variant="h6" component="h4">
-                            내용
+                            Content
                         </Typography>
                         <TextField
                             sx={{ width: 630, mt: 3 }}
@@ -136,10 +136,10 @@ export default function BoardModify() {
                     </Box>
                     <Box sx={{ display: "flex", ml: "auto" }}>
                         <Box sx={{ width: 100, ml: 79, mr: 3 }}>
-                            <CustomizedButton label="취소" value="cancel" onClick={goBack}></CustomizedButton>
+                            <CustomizedButton label="Cancel" value="cancel" onClick={goBack}></CustomizedButton>
                         </Box>
                         <Box sx={{ width: 100 }}>
-                            <CustomizedButton label="확인" value="insert" onClick={handleModify}></CustomizedButton>
+                            <CustomizedButton label="Confirm" value="insert" onClick={handleModify}></CustomizedButton>
                         </Box>
                     </Box>
                 </Box>

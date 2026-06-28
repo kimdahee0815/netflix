@@ -38,11 +38,11 @@ export default function BasicCard() {
                     </Box>
                     <Grid item xs={10}>
                         <Typography sx={{ fontSize: 16, m: 0.3 }} fontWeight="bold">
-                            넷플릭스 비밀번호를 변경하는 방법
+                            How to Change Your Netflix Password
                         </Typography>
                         <Typography sx={{ fontSize: 14, m: 0.3 }} color="text.secondary" gutterBottom>
-                            넷플릭스 이메일 주소 또는 비밀번호가 기억나지 않는 경우 이 문서에서 계정에 다시 액세스 하는
-                            방법을 알아보세요.
+                            If you don't remember your Netflix email address or password, learn how to regain access to
+                            your account in this article.
                         </Typography>
                     </Grid>
                 </Grid>

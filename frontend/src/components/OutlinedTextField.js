@@ -18,30 +18,30 @@ export default function OutlinedTextField({
   const phoneRegex = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
   const changeVal = (e) => {
     if (
-      label === "변경할 이메일 주소를 입력해주세요" ||
-      label === "이메일 주소를 입력해주세요"
+      label === "Enter the new email address" ||
+      label === "Enter your email address"
     ) {
       onChange(e.target.value);
       setIdError(
-        isValidId(e.target.value) ? "" : "정확한 이메일 주소를 입력해주세요."
+        isValidId(e.target.value) ? "" : "Please enter a valid email address."
       );
       if (e.target.value === "") {
-        setIdError("이메일 주소를 입력해주세요.");
+        setIdError("Please enter an email address.");
       }
     } else if (
-      label === "변경할 비밀번호를 입력해주세요" ||
-      label === "비밀번호를 입력해주세요"
+      label === "Enter new password" ||
+      label === "Enter your password"
     ) {
       onChange(e.target.value);
       setPasswordError(
         isValidPassword(e.target.value)
           ? ""
-          : "비밀번호는 4~20자 사이여야 합니다."
+          : "Password must be 4-20 characters."
       );
       if (e.target.value === "") {
-        setPasswordError("비밀번호를 입력해주세요.");
+        setPasswordError("Please enter your password.");
       }
-    } else if (label === "변경할 휴대폰 번호를 입력해주세요") {
+    } else if (label === "Enter new phone number") {
       onChange(
         e.target.value
           .replace(/[^0-9]/g, "")
@@ -52,17 +52,17 @@ export default function OutlinedTextField({
       setTelError(
         phoneRegex.test(e.target.value.slice(0, 13))
           ? ""
-          : "올바른 휴대폰 번호를 입력하세요."
+          : "Please enter a valid phone number."
       );
 
       if (e.target.value === "") {
-        setTelError("휴대폰 번호를 입력하세요.");
+        setTelError("Please enter your phone number.");
       }
-    } else if (label === "비밀번호 찾기 질문에 대한 답을 입력해주세요") {
+    } else if (label === "Enter the answer to your security question") {
       onChange(e.target.value);
 
       if (e.target.value === "") {
-        setPwAnsError("비밀번호 찾기 답을 입력해주세요");
+        setPwAnsError("Please enter your security answer.");
       } else {
         setPwAnsError("");
       }

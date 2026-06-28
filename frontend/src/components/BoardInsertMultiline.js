@@ -8,7 +8,7 @@ export default function BoardInsertMultiline() {
                 id="outlined-multiline-static"
                 multiline
                 rows={10}
-                placeholder="내용을 입력하세요"
+                placeholder="Enter content"
             />
         </div>
     );

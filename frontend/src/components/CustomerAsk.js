@@ -51,13 +51,13 @@ const CustomerAsk = () => {
                                 fontWeight: "bold",
                             }}
                         >
-                            고객 센터에 문의하시겠어요?
+                            Have a question for Customer Support?
                         </Typography>
                         <Box sx={{ mr: 3, display: "flex", flexDirection: "row" }}>
                             <Box sx={{ mr: 4 }}>
-                                <CustomizedButton onClick={gotoFAQ} label="자주 묻는 질문들"></CustomizedButton>
+                                <CustomizedButton onClick={gotoFAQ} label="FAQ"></CustomizedButton>
                             </Box>
-                            <CustomizedButton onClick={gotoBoard} label="문의하기"></CustomizedButton>
+                            <CustomizedButton onClick={gotoBoard} label="Contact Us"></CustomizedButton>
                         </Box>
                     </Box>
                 </Container>
@@ -84,13 +84,13 @@ const CustomerAsk = () => {
                         }}
                     >
                         <Typography flexGrow="1" sx={{ fontSize: 24, fontWeight: "bold" }}>
-                            고객 센터에 문의하시겠어요?
+                            Have a question for Customer Support?
                         </Typography>
                         <Box sx={{ mr: 3 }}>
-                            <CustomizedButton onClick={gotoFAQ} label="자주 묻는 질문들"></CustomizedButton>
+                            <CustomizedButton onClick={gotoFAQ} label="FAQ"></CustomizedButton>
                         </Box>
 
-                        <CustomizedButton onClick={gotoBoard} label="문의하기"></CustomizedButton>
+                        <CustomizedButton onClick={gotoBoard} label="Contact Us"></CustomizedButton>
                     </Box>
                 </Container>
             </div>

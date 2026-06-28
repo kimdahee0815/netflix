@@ -41,7 +41,7 @@ export default function CustomizedButton(props) {
 
     return (
         <div>
-            {label === "비밀번호 변경" ? (
+            {label === "Change Password" ? (
                 <BootstrapButton
                     value={value}
                     onClick={props.onClick}
@@ -51,7 +51,7 @@ export default function CustomizedButton(props) {
                 >
                     {props.label}
                 </BootstrapButton>
-            ) : value === "로그인 정보 삭제하기2" ? (
+            ) : value === "delete-login-info" ? (
                 <BootstrapButton
                     value={value}
                     onClick={props.onClick}
@@ -61,7 +61,7 @@ export default function CustomizedButton(props) {
                 >
                     {props.label}
                 </BootstrapButton>
-            ) : value === "탈퇴하기2" ? (
+            ) : value === "delete-account" ? (
                 <BootstrapButton
                     value={value}
                     onClick={props.onClick}

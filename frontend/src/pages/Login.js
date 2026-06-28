@@ -33,16 +33,14 @@ function Login() {
     window.profile_num = { profile_num };
 
     const [email, setEmail] = useState("");
-    //email 상태값 업데이트
     const [password, setPassword] = useState("");
-    //password 상태값 업데이트
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
     const [saveAccount, setSaveAccount] = useState(false);
 
-    const emailLabel = "이메일 주소";
-    const pwLabel = "비밀번호";
+    const emailLabel = "Email Address";
+    const pwLabel = "Password";
 
     const emailInput = document.querySelector("[name=email]");
     const passwordInput = document.querySelector("[name=password]");
@@ -64,7 +62,6 @@ function Login() {
     useEffect(() => {
         emailFocus();
         if (window.localStorage.getItem("id") !== null) {
-            // alert("저장된 정보 있음!");
             setSaveAccount(true);
             setEmail(window.localStorage.getItem("id"));
             axios
@@ -85,44 +82,38 @@ function Login() {
     const isValidEmail = (email) => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return emailRegex.test(email);
-        // 이메일 주소의 유효성을 검사하는 코드를 작성한다.
-        // 유효한 이메일 주소인 경우 true, 그렇지 않은 경우 false를 반환한다.
     };
 
     const isValidPassword = (password) => {
         const passwordRegex = password.length >= 4 && password.length <= 20;
         return passwordRegex;
-        // 패스워드의 유효성을 검사하는 코드를 작성한다.
-        // 유효한 패스워드인 경우 true, 그렇지 않은 경우 false를 반환한다.
     };
 
     const handleEmailChange = (event) => {
         setEmail((value) => event.target.value);
-        // setEmail 함수를 이용해 email 상태값을 업데이트한다.
-        setEmailError(isValidEmail(event.target.value) ? "" : "정확한 이메일 주소를 입력해주세요.");
+        setEmailError(isValidEmail(event.target.value) ? "" : "Please enter a valid email address.");
     };
 
     const handlePasswordChange = (event) => {
         setPassword((value) => event.target.value);
-        // setPassword 함수를 이용해 password 상태값을 업데이트한다.
-        setPasswordError(isValidPassword(event.target.value) ? "" : "비밀번호는 4~20자 사이여야 합니다.");
+        setPasswordError(isValidPassword(event.target.value) ? "" : "Password must be 4-20 characters.");
     };
 
     const checkSubmit = (event) => {
         let validEmail = /\S+@\S+.\S+/.test(email);
         let validPassword = password.length >= 4 && password.length <= 60;
         if (!email) {
-            setEmailError("이메일을 입력해주세요.");
+            setEmailError("Please enter your email.");
             emailRef.current.focus();
         } else if (!validEmail) {
-            setEmailError("정확한 이메일 주소를 입력해주세요.");
+            setEmailError("Please enter a valid email address.");
             emailRef.current.focus();
         }
         if (!password) {
-            setPasswordError("비밀번호를 입력해주세요.");
+            setPasswordError("Please enter your password.");
             pwRef.current.focus();
         } else if (!validPassword) {
-            setPasswordError("비밀번호는 4~20자 사이여야 합니다.");
+            setPasswordError("Password must be 4-20 characters.");
             pwRef.current.focus();
         }
         if (validEmail && validPassword) {
@@ -147,7 +138,6 @@ function Login() {
                                 window.sessionStorage.setItem("id", email);
                                 window.localStorage.removeItem("profile_num");
                                 if (saveAccount === true) {
-                                    // 로그인 정보 저장 버튼을 누르면 localstorage에 로그인 정보 저장
                                     window.localStorage.clear();
                                     window.localStorage.setItem("id", email);
                                 } else {
@@ -160,7 +150,7 @@ function Login() {
                                 }
                                 navigate("/");
                             } else {
-                                alert("비밀번호가 다릅니다!");
+                                alert("Incorrect password!");
                                 navigate("/login");
                             }
                         })
@@ -168,7 +158,7 @@ function Login() {
                             console.error(e);
                         });
                 } else {
-                    alert("일치하는 이메일 주소가 없습니다!");
+                    alert("No matching email address found!");
                 }
             })
             .catch((e) => {
@@ -237,7 +227,7 @@ function Login() {
                     }}
                 >
                     <Typography component="h1" variant="h5" sx={{ mt: "30px", mb: "30px" }}>
-                        로그인
+                        Sign In
                     </Typography>
                     <TextField
                         autoComplete="off"
@@ -254,7 +244,6 @@ function Login() {
                         sx={{
                             my: 1,
                             background: "#38393b",
-                            // border: "1.5px solid white",
                             "&:hover": {
                                 border: "none",
                             },
@@ -266,7 +255,6 @@ function Login() {
                         required
                         value={email}
                         onChange={handleEmailChange}
-                        // 이메일 주소 입력란의 값이 변경될때마다 이 함수가 호출됨
                     />
                     <FormHelperText sx={{ padding: "1px", color: "red" }}>{emailError}</FormHelperText>
 
@@ -321,7 +309,7 @@ function Login() {
                                             name="saveAccount"
                                         />
                                     }
-                                    label="로그인 정보 저장"
+                                    label="Remember me"
                                     sx={{ mr: "auto" }}
                                 />
                             </Typography>
@@ -329,8 +317,8 @@ function Login() {
                         <Box sx={{ display: "flex", width: "50%", justifyContent: "end" }}>
                             <Box>
                                 <CustomizedButton
-                                    label="비밀번호 찾기"
-                                    value="비밀번호 찾기"
+                                    label="Forgot Password"
+                                    value="forgot-password"
                                     onClick={handleOpen}
                                 ></CustomizedButton>
                             </Box>
@@ -352,7 +340,7 @@ function Login() {
                         sx={{ background: "#e50914", mt: "24px", mb: "16px" }}
                         onClick={checkSubmit}
                     >
-                        로그인
+                        Sign In
                     </Button>
 
                     <Box lg={{ display: "flex", alignItems: "center" }}>
@@ -365,8 +353,8 @@ function Login() {
                             }}
                         >
                             <CustomizedButton
-                                label="지금 가입하세요"
-                                value="지금 가입하세요"
+                                label="Sign Up Now"
+                                value="sign-up"
                                 onClick={signUpOpen}
                             ></CustomizedButton>
                             {openSignUp ? (

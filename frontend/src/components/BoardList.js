@@ -24,15 +24,15 @@ export default function StickyHeadTable() {
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
     const columns = [
-        { id: "board_num", label: "번호", minWidth: 10 },
-        { id: "member_id", label: "작성자", minWidth: 10 },
+        { id: "board_num", label: "No.", minWidth: 10 },
+        { id: "member_id", label: "Author", minWidth: 10 },
         {
             id: "board_title",
-            label: "제목",
+            label: "Title",
             minWidth: 350,
-            format: (value, row) => (row.board_reply ? `${value} (답변완료)` : value),
+            format: (value, row) => (row.board_reply ? `${value} (Replied)` : value),
         },
-        { id: "board_date", label: "날짜", minWidth: 40 },
+        { id: "board_date", label: "Date", minWidth: 40 },
     ];
 
     let paddingTop = "200px";
@@ -53,7 +53,6 @@ export default function StickyHeadTable() {
         navigate("/boardInsert");
     };
 
-    //배열 시작
     const [boardlist, setBoardList] = useState([]);
 
     const getList = () => {
@@ -77,11 +76,11 @@ export default function StickyHeadTable() {
     }, []);
     return (
         <div>
-            <StickyHeader kind="고객센터" />
+            <StickyHeader kind="Customer Center" />
             <Container sx={{ paddingTop: { paddingTop } }}>
                 <h2 style={{ display: "flex", alignItems: "center", color: "black" }}>
-                    <span style={{ marginRight: "auto" }}>문의하기</span>
-                    {memberID && <CustomizedButton onClick={handleClick} label="글 작성"></CustomizedButton>}
+                    <span style={{ marginRight: "auto" }}>Contact Center</span>
+                    {memberID && <CustomizedButton onClick={handleClick} label="Write Post"></CustomizedButton>}
                 </h2>
 
                 <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -124,8 +123,8 @@ export default function StickyHeadTable() {
                                                             {column.id === "board_num"
                                                                 ? boardlist.length - (page * rowsPerPage + index)
                                                                 : column.format
-                                                                ? column.format(post[column.id], post)
-                                                                : post[column.id]}
+                                                                  ? column.format(post[column.id], post)
+                                                                  : post[column.id]}
                                                         </TableCell>
                                                     );
                                                 })}

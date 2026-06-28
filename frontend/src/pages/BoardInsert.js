@@ -24,9 +24,8 @@ export default function BoardInsert() {
             .then((res) => {
                 if (res.data !== null) {
                     setUserName(res.data.member_name);
-                    // alert("정보 확인 성공!");
                 } else {
-                    alert("정보 확인 실패!");
+                    alert("Failed to confirm info!");
                 }
             })
             .catch((e) => {
@@ -84,7 +83,7 @@ export default function BoardInsert() {
                         }}
                     >
                         <Typography sx={{ width: "150px", mt: 1, fontWeight: "bold" }} variant="h6" component="h4">
-                            작성자
+                            Author
                         </Typography>
                         <Typography sx={{ width: "120px", mt: 1, fontWeight: "bold" }} variant="h6" component="h4">
                             {user}
@@ -101,9 +100,9 @@ export default function BoardInsert() {
                             variant="h6"
                             component="h4"
                         >
-                            제목
+                            Title
                         </Typography>
-                        <Input sx={{ width: "100%", mt: 2 }} placeholder="제목" onChange={titleChange} />
+                        <Input sx={{ width: "100%", mt: 2 }} placeholder="Title" onChange={titleChange} />
                     </Box>
 
                     <Box
@@ -113,23 +112,23 @@ export default function BoardInsert() {
                         }}
                     >
                         <Typography sx={{ width: "140px", mt: 3, fontWeight: "bold" }} variant="h6" component="h4">
-                            내용
+                            Content
                         </Typography>
                         <TextField
                             sx={{ width: 630, mt: 3 }}
                             id="outlined-multiline-static"
                             multiline
                             rows={10}
-                            placeholder="내용을 입력하세요"
+                            placeholder="Enter content"
                             onChange={contentChange}
                         />
                     </Box>
                     <Box sx={{ display: "flex", ml: "auto" }}>
                         <Box sx={{ width: 100, ml: 79, mr: 3 }}>
-                            <CustomizedButton label="취소" value="cancel" onClick={goBack}></CustomizedButton>
+                            <CustomizedButton label="Cancel" value="cancel" onClick={goBack}></CustomizedButton>
                         </Box>
                         <Box sx={{ width: 100 }}>
-                            <CustomizedButton label="확인" value="insert" onClick={handleInsert}></CustomizedButton>
+                            <CustomizedButton label="Confirm" value="insert" onClick={handleInsert}></CustomizedButton>
                         </Box>
                     </Box>
                 </Box>

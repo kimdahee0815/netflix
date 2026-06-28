@@ -72,8 +72,6 @@ export default function EmailChange({ openModal, handleOpen, handleClose, setEma
         const idRegex =
             /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
         return idRegex.test(id);
-        // 이메일 주소의 유효성을 검사하는 코드를 작성한다.
-        // 유효한 이메일 주소인 경우 true, 그렇지 않은 경우 false를 반환한다.
     };
 
     const idDuplicateCheck = () => {
@@ -85,10 +83,10 @@ export default function EmailChange({ openModal, handleOpen, handleClose, setEma
                     })
                     .then((res) => {
                         if (res.data === 1) {
-                            setIdError("아이디가 중복됩니다.");
+                            setIdError("This email is already in use.");
                             return false;
                         } else {
-                            setIdError("사용가능한 아이디입니다.");
+                            setIdError("This email is available.");
                             return true;
                         }
                     })
@@ -96,10 +94,10 @@ export default function EmailChange({ openModal, handleOpen, handleClose, setEma
                         console.error(e);
                     });
             } else {
-                setIdError("정확한 이메일 주소를 입력해주세요.");
+                setIdError("Please enter a valid email address.");
             }
         } else {
-            setIdError("이메일 주소를 입력하세요.");
+            setIdError("Please enter an email address.");
         }
     };
 
@@ -108,9 +106,9 @@ export default function EmailChange({ openModal, handleOpen, handleClose, setEma
 
         idDuplicateCheck();
         if (idError === "") {
-            alert("아이디 중복확인 해주세요.");
+            alert("Please check for duplicate email first.");
             check = false;
-        } else if (idError === "아이디가 중복됩니다.") {
+        } else if (idError === "This email is already in use.") {
             check = false;
         }
 
@@ -120,10 +118,10 @@ export default function EmailChange({ openModal, handleOpen, handleClose, setEma
             );
 
         if (!newEmail) {
-            setIdError("이메일을 입력해주세요.");
+            setIdError("Please enter your email.");
             check = false;
         } else if (!validId) {
-            setIdError("정확한 이메일 주소를 입력해주세요.");
+            setIdError("Please enter a valid email address.");
             check = false;
         }
 
@@ -172,14 +170,14 @@ export default function EmailChange({ openModal, handleOpen, handleClose, setEma
                             window.localStorage.setItem("id", newEmail);
                         }
 
-                        alert("이메일 주소 업데이트 성공!");
+                        alert("Email address updated successfully!");
                         window.sessionStorage.setItem("id", newEmail);
 
                         setEmail(newEmail);
 
                         handleClose2();
                     } else {
-                        alert("이메일 주소 업데이트 실패!");
+                        alert("Failed to update email address!");
                         handleClose2();
                     }
                 })
@@ -218,11 +216,11 @@ export default function EmailChange({ openModal, handleOpen, handleClose, setEma
                             variant="h5"
                             component="h2"
                         >
-                            이메일 주소 변경하기
+                            Change Email Address
                         </Typography>
                         <Box sx={{ display: "flex" }}>
                             <Typography sx={{ width: "150px", mr: 5, mt: 3 }} variant="h10" component="h4">
-                                이메일 주소 입력
+                                Enter Email Address
                             </Typography>
                             <Box sx={{ display: "flex", flexDirection: "column" }}>
                                 <OutlinedTextField
@@ -230,7 +228,7 @@ export default function EmailChange({ openModal, handleOpen, handleClose, setEma
                                     onChange={setNewEmail}
                                     isValidId={isValidId}
                                     setIdError={setIdError}
-                                    label="변경할 이메일 주소를 입력해주세요"
+                                    label="Enter the new email address"
                                     onKeyPress={checkenterSubmit}
                                 />
                                 <FormHelperText sx={{ mt: -2, fontSize: "1em", color: "red" }}>
@@ -241,10 +239,10 @@ export default function EmailChange({ openModal, handleOpen, handleClose, setEma
 
                         <Box sx={{ display: "flex", mt: 2, ml: 47 }}>
                             <Box sx={{ mr: 3 }}>
-                                <CustomizedButton label="중복확인" onClick={idDuplicateCheck}></CustomizedButton>
+                                <CustomizedButton label="Check Duplicate" onClick={idDuplicateCheck}></CustomizedButton>
                             </Box>
                             <CustomizedButton
-                                label="확인"
+                                label="Confirm"
                                 value="updateDelete"
                                 onClick={handleUpdate}
                             ></CustomizedButton>

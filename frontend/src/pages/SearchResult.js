@@ -43,7 +43,7 @@ const SearchResult = ({ search }) => {
                                     fontSize: "2.4em",
                                 }}
                             >
-                                검색결과가 존재하지 않습니다!
+                                No results found!
                             </div>
                         ) : (
                             searchMovies?.map((movie) => (

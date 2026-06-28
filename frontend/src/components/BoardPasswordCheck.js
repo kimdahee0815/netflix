@@ -66,8 +66,6 @@ export default function BoardPasswordCheck({ openModal, handleOpen, handleClose,
     const isValidPassword = (password) => {
         const passwordRegex = password.length >= 4 && password.length <= 20;
         return passwordRegex;
-        // 패스워드의 유효성을 검사하는 코드를 작성한다.
-        // 유효한 패스워드인 경우 true, 그렇지 않은 경우 false를 반환한다.
     };
 
     const handleClose2 = () => {
@@ -86,15 +84,15 @@ export default function BoardPasswordCheck({ openModal, handleOpen, handleClose,
                     .then((res) => {
                         if (res.data === 1) {
                             if (window.sessionStorage.getItem("id") === owner) {
-                                alert("정보확인 성공!");
+                                alert("Identity confirmed!");
                                 navigate(`/boardModify/${boardnum}`);
                             } else {
-                                alert("수정 권한이 없습니다!");
+                                alert("You don't have permission to edit!");
                             }
 
                             handleClose2();
                         } else {
-                            alert("정보확인 실패!");
+                            alert("Identity confirmation failed!");
                             handleClose2();
                         }
                     })
@@ -102,7 +100,7 @@ export default function BoardPasswordCheck({ openModal, handleOpen, handleClose,
                         console.error(e);
                     });
             } else if (password === "") {
-                setPasswordError("비밀번호를 입력해주세요.");
+                setPasswordError("Please enter your password.");
             }
         } else if (remove === true) {
             if (isValidPassword(password)) {
@@ -117,18 +115,18 @@ export default function BoardPasswordCheck({ openModal, handleOpen, handleClose,
                                 axios
                                     .get(`${config.API_URL}/customer/delete?board_num=${boardnum}`)
                                     .then((res) => {
-                                        alert("정보 삭제 성공!");
+                                        alert("Deleted successfully!");
                                         navigate("/board");
                                     })
                                     .catch((e) => {
-                                        alert("정보 삭제 실패!");
+                                        alert("Failed to delete!");
                                     });
                             } else {
-                                alert("삭제 권한이 없습니다!");
+                                alert("You don't have permission to delete!");
                                 handleClose2();
                             }
                         } else {
-                            alert("정보확인 실패!");
+                            alert("Identity confirmation failed!");
                             handleClose2();
                         }
                     })
@@ -136,7 +134,7 @@ export default function BoardPasswordCheck({ openModal, handleOpen, handleClose,
                         console.error(e);
                     });
             } else if (password === "") {
-                setPasswordError("비밀번호를 입력해주세요.");
+                setPasswordError("Please enter your password.");
             }
         }
     };
@@ -171,11 +169,11 @@ export default function BoardPasswordCheck({ openModal, handleOpen, handleClose,
                             variant="h5"
                             component="h2"
                         >
-                            게시판 수정 및 삭제하기
+                            Edit / Delete Post
                         </Typography>
                         <Box sx={{ display: "flex" }}>
                             <Typography sx={{ width: "150px", mr: 5, mt: 3 }} variant="h10" component="h4">
-                                비밀번호 입력
+                                Enter Password
                             </Typography>
                             <Box sx={{ display: "flex", flexDirection: "column" }}>
                                 <OutlinedTextField
@@ -184,7 +182,7 @@ export default function BoardPasswordCheck({ openModal, handleOpen, handleClose,
                                     setPasswordError={setPasswordError}
                                     isValidPassword={isValidPassword}
                                     onKeyPress={checkenterSubmit}
-                                    label="비밀번호를 입력해주세요"
+                                    label="Enter your password"
                                 />
                                 <FormHelperText sx={{ mt: -2, fontSize: "1em", color: "red" }}>
                                     {passwordError}
@@ -194,7 +192,7 @@ export default function BoardPasswordCheck({ openModal, handleOpen, handleClose,
 
                         <Box sx={{ ml: 60 }}>
                             <CustomizedButton
-                                label="확인"
+                                label="Confirm"
                                 value="updateDelete"
                                 onClick={handleUpdateDelete}
                             ></CustomizedButton>

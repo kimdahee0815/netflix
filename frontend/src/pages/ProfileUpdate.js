@@ -18,7 +18,7 @@ const renderProfileImage = (profileId) => {
     return (
         <img
             src={images[profileId - 1]}
-            alt={`프로필 ${profileId}`}
+            alt={`Profile ${profileId}`}
             style={{
                 width: "180px",
                 height: "180px",
@@ -60,10 +60,10 @@ const ProfileUpdate = () => {
             })
             .then((res) => {
                 if (res.data !== null) {
-                    alert("프로필 변경 성공!");
+                    alert("Profile updated successfully!");
                     navigate("/profiles");
                 } else {
-                    alert("프로필 변경 실패!");
+                    alert("Failed to update profile!");
                 }
             })
             .catch((error) => {
@@ -112,7 +112,7 @@ const ProfileUpdate = () => {
                     color: "#fff",
                 }}
             >
-                <h1 style={{ fontSize: "4rem" }}>프로필 변경</h1>
+                <h1 style={{ fontSize: "4rem" }}>Edit Profile</h1>
                 <div
                     style={{
                         display: "flex",
@@ -126,7 +126,7 @@ const ProfileUpdate = () => {
                     <TextField
                         value={nickname}
                         autoComplete="off"
-                        label="수정하실 닉네임을 적어주세요."
+                        label="Enter new nickname"
                         variant="outlined"
                         onChange={(e) => setNickname(e.target.value)}
                         sx={{
@@ -170,7 +170,7 @@ const ProfileUpdate = () => {
                             },
                         }}
                     >
-                        저장
+                        Save
                     </Button>
                     <Button
                         onClick={handleDelete}
@@ -186,7 +186,7 @@ const ProfileUpdate = () => {
                             },
                         }}
                     >
-                        삭제
+                        Delete
                     </Button>
                     <Button
                         onClick={handleCancel}
@@ -202,7 +202,7 @@ const ProfileUpdate = () => {
                             },
                         }}
                     >
-                        취소
+                        Cancel
                     </Button>
                 </div>
             </Box>

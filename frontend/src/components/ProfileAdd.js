@@ -49,7 +49,7 @@ const ProfileAdd = ({ onAddProfile }) => {
                         color: "#fff",
                     }}
                 >
-                    프로필 추가
+                    Add Profile
                 </DialogTitle>
                 <DialogContent
                     sx={{
@@ -115,7 +115,7 @@ const ProfileAdd = ({ onAddProfile }) => {
                             },
                         }}
                     >
-                        닫기
+                        Close
                     </Button>
                     <Button
                         onClick={handleSave}
@@ -130,7 +130,7 @@ const ProfileAdd = ({ onAddProfile }) => {
                             },
                         }}
                     >
-                        저장
+                        Save
                     </Button>
                 </DialogActions>
             </Dialog>

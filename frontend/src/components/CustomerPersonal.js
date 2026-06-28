@@ -25,9 +25,8 @@ const CustomerPersonal = () => {
             .then((res) => {
                 if (res.data !== null) {
                     setUserName(res.data.member_name);
-                    // alert("정보 확인 성공!");
                 } else {
-                    alert("정보 확인 실패!");
+                    alert("Failed to confirm info!");
                 }
             })
             .catch((e) => {
@@ -42,11 +41,11 @@ const CustomerPersonal = () => {
     return (
         <Container sx={{ paddingTop: { paddingTop } }}>
             <Typography variant={"h1"} sx={{ fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" } }} fontWeight="bold">
-                {userName} 님, 안녕하세요.
+                Hello, {userName}.
             </Typography>
             <PersonalHelpCard />
             <Typography variant="h6" sx={{ mt: 3, mb: 3 }}>
-                도움이 될 만한 문서
+                Helpful Documents
             </Typography>
 
             <Grid container spacing={2} sx={{ mb: 3 }}>
@@ -71,7 +70,7 @@ const CustomerPersonal = () => {
                         >
                             <DescriptionIcon sx={{ m: 1 }} />
                             <Typography style={{ whiteSpace: "nowrap", display: "flex" }} fontWeight="bold">
-                                넷플릭스에 가입하는 방법
+                                How to Sign Up for Netflix
                             </Typography>
                         </Box>
                     </Card>
@@ -97,7 +96,7 @@ const CustomerPersonal = () => {
                         >
                             <DescriptionIcon sx={{ m: 1 }} />
                             <Typography style={{ whiteSpace: "nowrap", display: "flex" }} fontWeight="bold">
-                                멤버십 및 요금
+                                Membership & Pricing
                             </Typography>
                         </Box>
                     </Card>
@@ -123,7 +122,7 @@ const CustomerPersonal = () => {
                         >
                             <DescriptionIcon sx={{ m: 1 }} />
                             <Typography style={{ display: "flex" }} fontWeight="bold">
-                                넷플릭스에 로그인할 수 없는 경우
+                                Unable to Log In to Netflix
                             </Typography>
                         </Box>
                     </Card>

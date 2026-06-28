@@ -68,10 +68,6 @@ const MyPageBody = () => {
     const [profileNickname, setProfileNickName] = useState("No Profile.");
     const profileNum = window.localStorage.getItem("profile_num");
 
-    useLayoutEffect(() => {
-        loadProfiles(memberID);
-    }, [loadProfiles, memberID]);
-
     const loadProfiles = useCallback(
         (memberID) => {
             axios
@@ -95,6 +91,10 @@ const MyPageBody = () => {
         },
         [profileImages, profileNum],
     );
+
+    useLayoutEffect(() => {
+        loadProfiles(memberID);
+    }, [loadProfiles, memberID]);
 
     const [openEmailModal, setOpenEmailModal] = useState(false);
     const [openPwModal, setOpenPwModal] = useState(false);
@@ -265,7 +265,11 @@ const MyPageBody = () => {
                     >
                         <Typography sx={{ color: "gray" }}>Phone Number: {tel}</Typography>
                         <Box sx={{ flexShrink: 0 }}>
-                            <CustomizedButton label="Change Phone Number" value="phoneChange" onClick={handlePhoneOpen} />
+                            <CustomizedButton
+                                label="Change Phone Number"
+                                value="phoneChange"
+                                onClick={handlePhoneOpen}
+                            />
                         </Box>
                     </Box>
 
@@ -299,7 +303,9 @@ const MyPageBody = () => {
 
             {/* Profile & Parental Control Settings */}
             <Box sx={{ m: 2 }}>
-                <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>Profile & Parental Control Settings</Typography>
+                <Typography sx={{ fontSize: 19, fontWeight: "bold", mb: 2 }}>
+                    Profile & Parental Control Settings
+                </Typography>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                     {profileImg === "" ? (
                         <AccountBoxIcon sx={{ fontSize: 80 }} />

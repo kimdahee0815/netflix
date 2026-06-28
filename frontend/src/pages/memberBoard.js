@@ -33,15 +33,15 @@ export default function StickyHeadTable() {
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
     const columns = [
-        { id: "member_num", label: "번호", minWidth: 10 },
-        { id: "member_id", label: "아이디", minWidth: 10 },
-        { id: "member_pw", label: "패스워드", minWidth: 10 },
-        { id: "member_name", label: "이름", minWidth: 20 },
-        { id: "member_tel", label: "휴대폰번호", minWidth: 20 },
-        { id: "member_addr", label: "주소", minWidth: 30 },
-        { id: "pw_question", label: "비밀번호 질문", minWidth: 10 },
-        { id: "pw_answer", label: "비밀번호 답", minWidth: 10 },
-        { id: "signup_date", label: "가입날짜", minWidth: 10 },
+        { id: "member_num", label: "No.", minWidth: 10 },
+        { id: "member_id", label: "ID", minWidth: 10 },
+        { id: "member_pw", label: "Password", minWidth: 10 },
+        { id: "member_name", label: "Name", minWidth: 20 },
+        { id: "member_tel", label: "Phone", minWidth: 20 },
+        { id: "member_addr", label: "Address", minWidth: 30 },
+        { id: "pw_question", label: "Security Question", minWidth: 10 },
+        { id: "pw_answer", label: "Security Answer", minWidth: 10 },
+        { id: "signup_date", label: "Sign-up Date", minWidth: 10 },
     ];
 
     let paddingTop = "200px";
@@ -59,7 +59,6 @@ export default function StickyHeadTable() {
     };
     const navigate = useNavigate();
 
-    //배열 시작
     const [memberList, setMemberList] = useState([]);
 
     const [info, setInfo] = useState({
@@ -87,7 +86,7 @@ export default function StickyHeadTable() {
     };
 
     const handleTableCellClick = (event, post) => {
-        if (event.target.innerText === "수정") {
+        if (event.target.innerText === "Edit") {
             axios
                 .post(`${config.API_URL}/selectMember`, {
                     member_id: post.member_id,
@@ -107,20 +106,20 @@ export default function StickyHeadTable() {
                             signup_date: post.signup_date,
                         });
                     } else {
-                        alert("회원 정보 수정 실패!");
+                        alert("Failed to update member info!");
                     }
                 })
                 .catch((e) => {
                     console.error(e);
                 });
-        } else if (event.target.innerText === "삭제") {
+        } else if (event.target.innerText === "Delete") {
             axios
                 .post(`${config.API_URL}/deleteMember`, {
                     member_id: post.member_id,
                 })
                 .then((res) => {
                     if (res.data === 1) {
-                        alert("회원 정보가 삭제되었습니다!");
+                        alert("Member deleted successfully!");
                         axios
                             .post(`${config.API_URL}/favmovie/remove`, {
                                 member_id: post.member_id,
@@ -155,7 +154,7 @@ export default function StickyHeadTable() {
                                 console.error(e);
                             });
                     } else {
-                        alert("회원 정보 삭제 실패!");
+                        alert("Failed to delete member!");
                     }
                 })
                 .catch((e) => {
@@ -169,10 +168,10 @@ export default function StickyHeadTable() {
     });
     return (
         <div>
-            <StickyHeader kind="고객관리" />
+            <StickyHeader kind="Admin" />
             <Container sx={{ paddingTop: { paddingTop } }}>
                 <h2 style={{ display: "flex", alignItems: "center", color: "black" }}>
-                    <span style={{ marginRight: "auto" }}>넷플릭스 회원 목록</span>
+                    <span style={{ marginRight: "auto" }}>Netflix Member List</span>
                 </h2>
 
                 <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -189,7 +188,7 @@ export default function StickyHeadTable() {
                                             {column.label}
                                         </TableCell>
                                     ))}
-                                    <TableCell style={{ width: 50, textAlign: "center" }}>수정 및 삭제</TableCell>
+                                    <TableCell style={{ width: 50, textAlign: "center" }}>Edit / Delete</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -226,7 +225,7 @@ export default function StickyHeadTable() {
                                                         <Box sx={{ mr: 1 }}>
                                                             <CustomizedButton
                                                                 onClick={handleTableCellClick}
-                                                                label="수정"
+                                                                label="Edit"
                                                             ></CustomizedButton>
                                                         </Box>
                                                         {openMemberUpdateForm ? (
@@ -240,7 +239,7 @@ export default function StickyHeadTable() {
                                                         ) : null}
                                                         <CustomizedButton
                                                             onClick={handleTableCellClick}
-                                                            label="삭제"
+                                                            label="Delete"
                                                         ></CustomizedButton>
                                                     </Box>
                                                 </TableCell>

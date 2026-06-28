@@ -18,7 +18,7 @@ export default function SelectInput({
         setPasswordQuestion((value) => event.target.value);
 
         if (event.target.value === "") {
-            setPwQError("비밀번호 질문을 선택해주세요.");
+            setPwQError("Please select a security question.");
         } else {
             setPwQError("");
         }
@@ -27,11 +27,6 @@ export default function SelectInput({
     if (kind === "memberupdate") {
         setPasswordQuestion((value) => pw_question);
     }
-
-    // const handleKeyPress = (event) => {
-    //   onKeyPress();
-    //   setPasswordQuestion("자신의 보물 제1호는?");
-    // };
 
     return (
         <Box sx={{ minWidth: 120 }}>
@@ -68,9 +63,9 @@ export default function SelectInput({
                         },
                     }}
                 >
-                    <MenuItem value="자신의 보물 제1호는?">자신의 보물 제1호는?</MenuItem>
-                    <MenuItem value="추억하고 싶은 날짜가 있다면?">추억하고 싶은 날짜가 있다면?</MenuItem>
-                    <MenuItem value="인상 깊게 읽은 책 이름은?">인상 깊게 읽은 책 이름은?</MenuItem>
+                    <MenuItem value="What is your most treasured possession?">What is your most treasured possession?</MenuItem>
+                    <MenuItem value="Is there a date you want to remember?">Is there a date you want to remember?</MenuItem>
+                    <MenuItem value="What is the name of a book that impressed you?">What is the name of a book that impressed you?</MenuItem>
                 </Select>
             </FormControl>
         </Box>

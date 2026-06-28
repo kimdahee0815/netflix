@@ -65,7 +65,6 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
     const [open, setOpen] = useState(openModal);
 
     const [id, setId] = useState("");
-    //email 상태값 업데이트
     const [idError, setIdError] = useState("");
     const [passwordQuestion, setPasswordQuestion] = useState("");
     const [pwQError, setPwQError] = useState("");
@@ -130,7 +129,7 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
                         setPasswordSearch(true);
                         handlePwOpen();
                     } else {
-                        alert("관련 정보 없음!");
+                        alert("No matching information found!");
                     }
                 })
                 .catch((e) => {
@@ -142,8 +141,6 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
         const emailRegex =
             /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
         return emailRegex.test(email);
-        // 이메일 주소의 유효성을 검사하는 코드를 작성한다.
-        // 유효한 이메일 주소인 경우 true, 그렇지 않은 경우 false를 반환한다.
     };
 
     const handlePasswordCheck = (event) => {
@@ -154,20 +151,20 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
             );
 
         if (!id) {
-            setIdError("이메일을 입력해주세요.");
+            setIdError("Please enter your email.");
             check = false;
         } else if (!validEmail) {
-            setIdError("정확한 이메일 주소를 입력해주세요.");
+            setIdError("Please enter a valid email address.");
             check = false;
         }
         if (passwordAnswer === "") {
-            setPwAnsError("비밀번호 질문에 대한 답을 입력해주세요.");
+            setPwAnsError("Please enter your security answer.");
             check = false;
         } else {
             setPwAnsError("");
         }
         if (passwordQuestion === "") {
-            setPwQError("비밀번호 질문을 선택해주세요.");
+            setPwQError("Please select a security question.");
             check = false;
         } else {
             setPwQError("");
@@ -204,11 +201,11 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
                             variant="h5"
                             component="h2"
                         >
-                            비밀번호 찾기
+                            Forgot Password
                         </Typography>
                         <Box sx={{ display: "flex" }}>
                             <Typography sx={{ width: "150px", mr: 5, mt: 3 }} variant="h10" component="h4">
-                                이메일 주소
+                                Email Address
                             </Typography>
                             <Box sx={{ display: "flex", flexDirection: "column" }}>
                                 <OutlinedTextField
@@ -219,7 +216,7 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
                                     value={id}
                                     onChange={setId}
                                     setIdError={setIdError}
-                                    label="이메일 주소를 입력해주세요"
+                                    label="Enter your email address"
                                 />
                                 <FormHelperText sx={{ mt: -3, mb: 2, color: "red", fontSize: "0.9em" }}>
                                     {idError}
@@ -228,7 +225,7 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
                         </Box>
                         <Box sx={{ display: "flex" }}>
                             <Typography sx={{ width: "150px", mr: 5, mt: 3 }} variant="h10" component="h4">
-                                비밀번호 찾기 질문
+                                Security Question
                             </Typography>
                             <Box sx={{ display: "flex", flexDirection: "column" }}>
                                 <SelectInput
@@ -246,7 +243,7 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
                         </Box>
                         <Box sx={{ display: "flex" }}>
                             <Typography sx={{ width: "150px", mr: 5, mt: 3 }} variant="h10" component="h4">
-                                비밀번호 찾기 답변
+                                Security Answer
                             </Typography>
                             <Box sx={{ display: "flex", flexDirection: "column", mt: -1 }}>
                                 <OutlinedTextField
@@ -256,7 +253,7 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
                                     setPwAnsError={setPwAnsError}
                                     onChange={setPasswordAnswer}
                                     onKeyPress={checkenterSubmit}
-                                    label="비밀번호 찾기 질문에 대한 답을 입력해주세요"
+                                    label="Enter the answer to your security question"
                                 />
                                 <FormHelperText sx={{ mt: -2, mb: 2, color: "red", fontSize: "0.9em" }}>
                                     {pwAnsError}
@@ -265,13 +262,13 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
                         </Box>
                         <Box sx={{ mx: "auto", width: 50 }}>
                             <CustomizedButton
-                                label="찾기"
+                                label="Find"
                                 value="passwordAnswer"
                                 onClick={passwordSearchSubmit}
                             ></CustomizedButton>
                             {passwordSearch ? (
                                 <PasswordChange
-                                    label="비밀번호 찾기 변경"
+                                    label="forgot-password"
                                     passwordChangeEmail={id}
                                     setPasswordSearch={setPasswordSearch}
                                     openPwModal={openPwModal}

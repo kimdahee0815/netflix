@@ -17,7 +17,7 @@ const PageTitle = ({ manageMode }) => {
                 paddingTop: "120px",
             }}
         >
-            {manageMode ? "프로필 관리" : "넷플릭스를 시청할 프로필을 선택하세요. "}
+            {manageMode ? "Manage Profiles" : "Select a profile to watch Netflix."}
         </div>
     );
 };
@@ -171,7 +171,7 @@ function ProfileManager() {
                                             fontWeight: "bold",
                                         }}
                                     >
-                                        수정
+                                        Edit
                                     </div>
                                 </div>
                             )}
@@ -213,14 +213,14 @@ function ProfileManager() {
                                     textAlign: "center",
                                 }}
                             >
-                                프로필 추가
+                                Add Profile
                             </Typography>
                         </Box>
                     </Grid>
                 )}
             </div>
             <div style={{ textAlign: "center", paddingTop: "40px" }}>
-                <ProfilesManageBtn onClick={toggleManageMode} label={manageMode ? "완료" : "프로필 관리"} />
+                <ProfilesManageBtn onClick={toggleManageMode} label={manageMode ? "Done" : "Manage Profiles"} />
             </div>
         </div>
     );

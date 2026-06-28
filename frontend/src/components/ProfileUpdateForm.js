@@ -19,7 +19,7 @@ const ProfileUpdateForm = () => {
                     }}
                 />
                 <div style={{ display: "flex", alignItems: "center" }}>
-                    <label style={{ marginRight: "10px", color: "#fff" }}>언어 선택:</label>
+                    <label style={{ marginRight: "10px", color: "#fff" }}>Language:</label>
                     <select
                         sx={{
                             borderRadius: "10px",
@@ -29,9 +29,9 @@ const ProfileUpdateForm = () => {
                             padding: "5px",
                         }}
                     >
-                        <option value="ko">한국어</option>
+                        <option value="ko">Korean</option>
                         <option value="en">English</option>
-                        <option value="ch">중국어</option>
+                        <option value="ch">Chinese</option>
                     </select>
                 </div>
             </div>
@@ -42,12 +42,12 @@ const ProfileUpdateForm = () => {
                     marginTop: "10px",
                 }}
             />
-            <p style={{ color: "#fff", marginTop: "20px" }}>관리 수준 설정:</p>
+            <p style={{ color: "#fff", marginTop: "20px" }}>Maturity Settings:</p>
             <p style={{ color: "#fff", marginBottom: "10px" }}>
-                <span style={{ color: "gray" }}>모든 관람등급</span>
+                <span style={{ color: "gray" }}>All Ratings</span>
             </p>
             <p style={{ color: "#fff", marginBottom: "20px" }}>
-                이 프로필에서는 모든 성숙도 수준의 콘텐츠가 표시됩니다.
+                This profile displays content of all maturity levels.
             </p>
             <Button
                 variant="outlined"
@@ -62,7 +62,7 @@ const ProfileUpdateForm = () => {
                     },
                 }}
             >
-                수정
+                Edit
             </Button>
             <hr
                 style={{
@@ -71,7 +71,7 @@ const ProfileUpdateForm = () => {
                     marginTop: "20px",
                 }}
             />
-            <h3 style={{ color: "#fff", marginTop: "20px" }}>자동 재생 설정</h3>
+            <h3 style={{ color: "#fff", marginTop: "20px" }}>Autoplay Settings</h3>
             <FormControlLabel
                 control={
                     <Checkbox
@@ -80,7 +80,7 @@ const ProfileUpdateForm = () => {
                         }}
                     />
                 }
-                label="모든 디바이스에서 시리즈의 다음 화 자동 재생"
+                label="Autoplay next episode of a series on all devices"
                 labelPlacement="end"
                 sx={{
                     color: "#fff",
@@ -94,7 +94,7 @@ const ProfileUpdateForm = () => {
                         }}
                     />
                 }
-                label="모든 디바이스에서 탐색 중 미리보기 자동 재생"
+                label="Autoplay previews while browsing on all devices"
                 labelPlacement="end"
                 sx={{
                     color: "#fff",

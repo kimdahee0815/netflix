@@ -96,23 +96,23 @@ export default function PhoneChange({
         .then((res) => {
           if (res.data === 1) {
             if (tel === newTel) {
-              alert("동일한 휴대폰 번호입니다!");
+              alert("This is the same phone number!");
             } else {
-              alert("휴대폰 번호 업데이트 성공!");
+              alert("Phone number updated successfully!");
             }
             handleClose2();
             setTel(newTel);
           } else {
-            alert("휴대폰 번호 업데이트 실패!");
+            alert("Failed to update phone number!");
           }
         })
         .catch((e) => {
           console.error(e);
         });
     } else if (newTel === "") {
-      setTelError("휴대폰 번호를 입력해주세요.");
+      setTelError("Please enter your phone number.");
     } else {
-      setTelError("올바른 휴대폰 번호를 입력해주세요.");
+      setTelError("Please enter a valid phone number.");
     }
   };
 
@@ -146,7 +146,7 @@ export default function PhoneChange({
               variant="h5"
               component="h2"
             >
-              휴대폰 번호 변경하기
+              Change Phone Number
             </Typography>
             <Box sx={{ display: "flex" }}>
               <Typography
@@ -154,14 +154,14 @@ export default function PhoneChange({
                 variant="h10"
                 component="h4"
               >
-                휴대폰 번호 입력
+                Enter Phone Number
               </Typography>
               <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <OutlinedTextField
                   value={newTel}
                   onChange={setNewTel}
                   setTelError={setTelError}
-                  label="변경할 휴대폰 번호를 입력해주세요"
+                  label="Enter new phone number"
                   onKeyPress={checkenterSubmit}
                 />
                 <FormHelperText sx={{ mt: -2, fontSize: "1em", color: "red" }}>
@@ -171,7 +171,7 @@ export default function PhoneChange({
             </Box>
             <Box sx={{ ml: 60 }}>
               <CustomizedButton
-                label="확인"
+                label="Confirm"
                 value="updateDelete"
                 onClick={handleUpdate}
               ></CustomizedButton>

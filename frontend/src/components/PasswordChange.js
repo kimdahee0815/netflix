@@ -74,14 +74,13 @@ export default function PasswordChange({
     const [passwordError, setPasswordError] = useState("");
     const [email, setEmail] = useState(window.sessionStorage.getItem("id"));
     if (email === null) {
-        //비밃번호 찾기 일 경우에는 session에 저장된 아이디 없음.
         setEmail(passwordChangeEmail);
     }
     const handleClose2 = () => {
         setPasswordSearch(false);
         handlePwClose();
         setOpen(false);
-        if (label === "비밀번호 찾기 변경") {
+        if (label === "forgot-password") {
             handleCloseAll();
         }
     };
@@ -89,8 +88,6 @@ export default function PasswordChange({
     const isValidPassword = (password) => {
         const passwordRegex = password.length >= 4 && password.length <= 20;
         return passwordRegex;
-        // 패스워드의 유효성을 검사하는 코드를 작성한다.
-        // 유효한 패스워드인 경우 true, 그렇지 않은 경우 false를 반환한다.
     };
     const handlePwUpdate = (e) => {
         if (isValidPassword(newPw)) {
@@ -102,18 +99,18 @@ export default function PasswordChange({
                 .then((res) => {
                     if (res.data === 1) {
                         handleClose2();
-                        if (label === "마이페이지 비밀번호 변경") {
+                        if (label === "Change Password") {
                             if (pw === newPw) {
-                                alert("동일한 비밀번호 입니다!");
+                                alert("This is the same password!");
                             } else {
-                                alert("비밀번호 업데이트 성공!");
+                                alert("Password updated successfully!");
                             }
                             setPw(newPw);
                         } else {
                             if (password === newPw) {
-                                alert("동일한 비밀번호 입니다!");
+                                alert("This is the same password!");
                             } else {
-                                alert("비밀번호 업데이트 성공!");
+                                alert("Password updated successfully!");
                             }
                             setPw(newPw);
                         }
@@ -123,7 +120,7 @@ export default function PasswordChange({
                     console.error(e);
                 });
         } else if (newPw === "") {
-            setPasswordError("비밀번호를 입력해주세요.");
+            setPasswordError("Please enter your password.");
         }
     };
 
@@ -156,11 +153,11 @@ export default function PasswordChange({
                             variant="h5"
                             component="h2"
                         >
-                            비밀번호 변경하기
+                            Change Password
                         </Typography>
                         <Box sx={{ display: "flex" }}>
                             <Typography sx={{ width: "150px", mr: 5, mt: 3 }} variant="h10" component="h4">
-                                비밀번호 입력
+                                Enter Password
                             </Typography>
                             <Box sx={{ display: "flex", flexDirection: "column" }}>
                                 <OutlinedTextField
@@ -168,7 +165,7 @@ export default function PasswordChange({
                                     onChange={setNewPw}
                                     isValidPassword={isValidPassword}
                                     setPasswordError={setPasswordError}
-                                    label="변경할 비밀번호를 입력해주세요"
+                                    label="Enter new password"
                                     onKeyPress={checkenterSubmit}
                                 />
                                 <FormHelperText sx={{ mt: -2, fontSize: "1em", color: "red" }}>
@@ -179,7 +176,7 @@ export default function PasswordChange({
 
                         <Box sx={{ ml: 60 }}>
                             <CustomizedButton
-                                label="확인"
+                                label="Confirm"
                                 value="updateDelete"
                                 onClick={handlePwUpdate}
                             ></CustomizedButton>
