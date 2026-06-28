@@ -414,7 +414,7 @@ export default function SignUp({ openSignUp, signUpOpen, signUpClose }) {
                                 <TextField
                                     sx={{
                                         my: 1,
-                                        width: "255px",
+                                        width: "275px",
                                         color: "white",
                                         background: "#38393b",
                                         fontSize: "20px",
