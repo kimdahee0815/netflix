@@ -72,7 +72,7 @@ export default function TemporaryDrawer({ search, setSearch, menuClick, setMenuC
                                                 },
                                             }}
                                         >
-                                            다운로드 가장 많은 영화
+                                            Most Downloaded
                                         </Typography>
                                     }
                                 />
@@ -95,7 +95,7 @@ export default function TemporaryDrawer({ search, setSearch, menuClick, setMenuC
                                                 },
                                             }}
                                         >
-                                            좋아요 가장 많은 영화
+                                            Most Liked
                                         </Typography>
                                     }
                                 />
@@ -118,7 +118,7 @@ export default function TemporaryDrawer({ search, setSearch, menuClick, setMenuC
                                                 },
                                             }}
                                         >
-                                            최근 추가 된 영화
+                                            Recently Added
                                         </Typography>
                                     }
                                 />

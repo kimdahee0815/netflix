@@ -105,9 +105,9 @@ const Layout = () => {
                         <SearchResult search={search} />
                     )
                 ) : search === "" ? (
-                    menuName === "다운로드 가장 많은 영화" ? (
+                    menuName === "Most Downloaded" ? (
                         <DownLoadmany />
-                    ) : menuName === "좋아요 가장 많은 영화" ? (
+                    ) : menuName === "Most Likes" ? (
                         <GoodMany />
                     ) : menuName === "최근 추가 된 영화" ? (
                         <NewDateAdd />
