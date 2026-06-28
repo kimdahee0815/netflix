@@ -24,7 +24,7 @@ public interface ProfileMapper {
 	@Insert("INSERT INTO profile (member_id, profile_id, nickname) VALUES (#{member_id}, #{profile_id}, #{nickname})")
     public int insertNickname(@Param("member_id") String member_id, @Param("profile_id") int profile_id, @Param("nickname") String nickname);
 	
-	@Select("SELECT IFNULL(MAX(profile_id), 0) + 1 FROM profile WHERE member_id = #{member_id}")
+	@Select("SELECT COALESCE(MAX(profile_id), 0) + 1 FROM profile WHERE member_id = #{memberId}")
 	int getNextProfileId(@Param("member_id") String member_id);
 
 	@Update("UPDATE profile SET nickname = #{nickname} WHERE member_id = #{member_id} AND profile_id = #{profile_id}")
