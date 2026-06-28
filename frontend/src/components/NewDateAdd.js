@@ -1,4 +1,5 @@
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import Movie from "../components/Movie";
 import useSearchMovie from "../util/useSearchMovie";
 
@@ -20,11 +21,15 @@ const NewDateAdd = () => {
                     Searching...
                 </div>
             ) : (
-                <div style={{ marginTop: "100px" }}>
-                    <Grid container spacing={2} justifyContent="center">
+                <div style={{ marginTop: "100px", padding: "0 8px" }}>
+                    <Grid container spacing={1}>
                         {movies?.map((movie) => (
-                            <Grid item xs={2} key={movie.id}>
-                                <Movie {...movie} />
+                            <Grid item xs={4} sm={3} md={2} key={movie.id}>
+                                <Box sx={{ position: "relative", paddingTop: "150%", overflow: "hidden" }}>
+                                    <Box sx={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}>
+                                        <Movie {...movie} />
+                                    </Box>
+                                </Box>
                             </Grid>
                         ))}
                     </Grid>

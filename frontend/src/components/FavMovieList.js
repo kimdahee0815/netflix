@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import Movie from "../components/Movie";
 import config from "../config";
 import { FavListUpdateProvider } from "../store/FavListTriggerContext";
@@ -47,18 +48,21 @@ const FavMovieList = () => {
                     loading...
                 </div>
             ) : (
-                <div style={{ marginTop: "100px" }}>
+                <div style={{ marginTop: "100px", padding: "0 8px" }}>
                     {movies.length ? (
-                        <Grid container spacing={2} justifyContent="center">
+                        <Grid container spacing={1}>
                             {movies.map((movie) => (
-                                <Grid item xs={2}>
-                                    <Movie
-                                        key={`${movie.movie_title}`}
-                                        title={movie.movie_title}
-                                        summary={movie.movie_summary}
-                                        medium_cover_image={movie.movie_image}
-                                        isChecked={true}
-                                    />
+                                <Grid item xs={4} sm={3} md={2} key={movie.movie_title}>
+                                    <Box sx={{ position: "relative", paddingTop: "150%", overflow: "hidden" }}>
+                                        <Box sx={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}>
+                                            <Movie
+                                                title={movie.movie_title}
+                                                summary={movie.movie_summary}
+                                                medium_cover_image={movie.movie_image}
+                                                isChecked={true}
+                                            />
+                                        </Box>
+                                    </Box>
                                 </Grid>
                             ))}
                         </Grid>
