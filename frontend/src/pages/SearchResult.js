@@ -46,11 +46,19 @@ const SearchResult = ({ search }) => {
                                 No results found!
                             </div>
                         ) : (
-                            searchMovies?.map((movie) => (
-                                <Grid item xs={2} key={movie.id} justifyContent="center">
-                                    <Movie {...movie} />
-                                </Grid>
-                            ))
+                            <div
+                                style={{
+                                    marginTop: "100px",
+                                    padding: "0 40px",
+                                    display: "grid",
+                                    gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
+                                    gap: "16px",
+                                }}
+                            >
+                                {searchMovies?.map((movie) => (
+                                    <Movie {...movie} key={movie.id} />
+                                ))}
+                            </div>
                         )}
                     </Grid>
                 </div>
