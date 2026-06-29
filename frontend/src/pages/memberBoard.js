@@ -164,7 +164,7 @@ export default function StickyHeadTable() {
 
     useEffect(() => {
         getList();
-    });
+    }, []);
     return (
         <div>
             <StickyHeader kind="Admin" />
