@@ -160,8 +160,8 @@ function BoardDetail() {
                                     flexShrink: 0,
                                 }}
                             >
-                                Content&nbsp;&nbsp; &nbsp;:
-                                <Box sx={{ ml: "8px", flex: 1, width: "90%", height: "100%" }}>
+                                Content&nbsp;:
+                                <Box sx={{ ml: "8px", flex: 1, width: "90%", height: "100%", whiteSpace: "pre-wrap" }}>
                                     {article.board_content}
                                 </Box>
                             </Typography>
@@ -173,7 +173,11 @@ function BoardDetail() {
                                 &nbsp; &nbsp;
                                 <CustomizedButton label="Edit" value="update" onClick={clickModify}></CustomizedButton>
                                 &nbsp; &nbsp;
-                                <CustomizedButton label="Delete" value="delete" onClick={clickDelete}></CustomizedButton>
+                                <CustomizedButton
+                                    label="Delete"
+                                    value="delete"
+                                    onClick={clickDelete}
+                                ></CustomizedButton>
                                 &nbsp;&nbsp;&nbsp;
                                 {window.sessionStorage.getItem("id") === "admin@email.com" ? (
                                     <CustomizedButton
@@ -196,7 +200,9 @@ function BoardDetail() {
                                     <Typography variant="h4" sx={{ fontWeight: "bold", mb: "16px" }}>
                                         Reply to {article.member_id}'s inquiry
                                     </Typography>
-                                    <Typography sx={{ height: "40vh" }}>{article.board_reply}</Typography>
+                                    <Typography sx={{ height: "40vh", whiteSpace: "pre-wrap" }}>
+                                        {article.board_reply}
+                                    </Typography>
                                     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                                         <CustomizedButton
                                             label="Back"
