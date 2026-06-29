@@ -221,7 +221,7 @@ export default function MemberUpdateForm({
                 .replace(/[^0-9]/g, "")
                 .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})(\d{0,1})$/g, "$1-$2-$3")
                 .replace(/(\-{1,2})$/g, "")
-                .slice(0, 13)
+                .slice(0, 13),
         );
 
         setTelError(isValidatePhone(event.target.value) ? "" : "Please enter a valid phone number.");
@@ -352,7 +352,7 @@ export default function MemberUpdateForm({
                 <Fade in={open}>
                     <Box sx={style}>
                         <Typography
-                            sx={{ width: "207px", mx: "auto", mb: 3 }}
+                            sx={{ textAlign: "center", mx: "auto", mb: 3 }}
                             id="spring-modal-title"
                             variant="h5"
                             component="h2"
