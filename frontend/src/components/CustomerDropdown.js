@@ -17,8 +17,6 @@ export default function PositionedMenu() {
 
     const location = useLocation();
 
-    const user = useState(window.sessionStorage.getItem("id"));
-
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -38,7 +36,7 @@ export default function PositionedMenu() {
 
     useEffect(() => {
         axios
-            .get(`${config.API_URL}/selectMember?member_id=${user}`)
+            .get(`${config.API_URL}/selectMember?member_id=${memberId}`)
             .then((res) => {
                 if (res.data !== null) {
                 } else {
@@ -48,7 +46,7 @@ export default function PositionedMenu() {
             .catch((e) => {
                 console.error(e);
             });
-    }, [user]);
+    }, [memberId]);
 
     return (
         <div>
@@ -73,7 +71,7 @@ export default function PositionedMenu() {
                     }}
                     textTransform="none"
                 >
-                    {user}
+                    {memberId}
                 </Typography>
 
                 <ArrowDropDownIcon style={{ fontSize: "3rem", color: "red" }} />
