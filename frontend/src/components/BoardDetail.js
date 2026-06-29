@@ -167,7 +167,7 @@ function BoardDetail() {
                             </Typography>
                         </Box>
                         &nbsp; &nbsp;
-                        {article.board_reply === null || "" ? (
+                        {!article.board_reply ? (
                             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                                 <CustomizedButton label="Back" value="goBack" onClick={goBack}></CustomizedButton>
                                 &nbsp; &nbsp;
@@ -184,7 +184,7 @@ function BoardDetail() {
                                 ) : null}
                             </Box>
                         ) : null}
-                        {article.board_reply === null || "" ? null : (
+                        {!article.board_reply ? null : (
                             <div>
                                 <Box
                                     sx={{
