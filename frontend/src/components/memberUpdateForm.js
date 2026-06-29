@@ -72,6 +72,7 @@ export default function MemberUpdateForm({
     updateFormOpen,
     updateFormClose,
     info,
+    getList,
 }) {
     const [open, setOpen] = useState(openMemberUpdateForm);
 
@@ -104,7 +105,6 @@ export default function MemberUpdateForm({
     const [passwordError, setPasswordError] = useState("");
     const [pwQError, setPwQError] = useState("");
 
-    const emailInput = document.querySelector("[name=memberemail]");
     const passwordInput = document.querySelector("[name=memberpassword]");
     const passwordConfirmInput = document.querySelector("[name=memberpasswordconfirm]");
     const nameInput = document.querySelector("[name=membername]");
@@ -138,11 +138,6 @@ export default function MemberUpdateForm({
         pwAInput.focus();
     };
 
-    const gotoPasswordInput = (e) => {
-        if (e.key === "Enter") {
-            passwordFocus();
-        }
-    };
     const gotoPasswordConfirmInput = (e) => {
         if (e.key === "Enter") {
             passwordConfirmFocus();
@@ -238,7 +233,7 @@ export default function MemberUpdateForm({
         }
     };
 
-    const loginCheck = (event) => {
+    const loginCheck = () => {
         let check = true;
         if (password !== ConfirmPassword && password !== "") {
             alert("Passwords do not match.");
@@ -290,42 +285,44 @@ export default function MemberUpdateForm({
         return check;
     };
 
-    const infoChange = (e) => {
-        if (loginCheck()) {
-            axios
-                .post(`${config.API_URL}/updateMembers`, {
-                    member_id: id,
-                    member_pw: password,
-                    member_name: name,
-                    member_tel: tel,
-                    member_addr: addr,
-                    pw_question: passwordQuestion,
-                    pw_answer: pwCheck,
-                })
-                .then((res) => {
-                    if (res.data !== 0) {
-                        if (
-                            originalData.member_id === id &&
-                            originalData.member_pw === password &&
-                            originalData.member_name === name &&
-                            originalData.member_tel === tel &&
-                            originalData.member_addr === addr &&
-                            originalData.pw_question === passwordQuestion &&
-                            originalData.pw_answer === pwCheck
-                        ) {
-                            alert("No changes detected!");
-                        } else {
-                            alert("Member info updated successfully!");
-                        }
-                        handleClose2();
-                    } else {
-                        alert("Failed to update member info!");
-                        handleClose2();
-                    }
-                })
-                .catch((e) => {
-                    console.error(e);
-                });
+    const infoChange = async () => {
+        if (!loginCheck()) {
+            return;
+        }
+        try {
+            const res = await axios.post(`${config.API_URL}/updateMembers`, {
+                member_id: id,
+                member_pw: password,
+                member_name: name,
+                member_tel: tel,
+                member_addr: addr,
+                pw_question: passwordQuestion,
+                pw_answer: pwCheck,
+            });
+            if (res.data !== 0) {
+                if (
+                    originalData.member_id === id &&
+                    originalData.member_pw === password &&
+                    originalData.member_name === name &&
+                    originalData.member_tel === tel &&
+                    originalData.member_addr === addr &&
+                    originalData.pw_question === passwordQuestion &&
+                    originalData.pw_answer === pwCheck
+                ) {
+                    alert("No changes detected!");
+                } else {
+                    alert("Member info updated successfully!");
+                }
+                if (getList) {
+                    getList(); // 수정 끝난 뒤 목록 새로고침
+                }
+                handleClose2();
+            } else {
+                alert("Failed to update member info!");
+                handleClose2();
+            }
+        } catch (e) {
+            console.error(e);
         }
     };
 
@@ -631,3 +628,12 @@ export default function MemberUpdateForm({
         </div>
     );
 }
+
+MemberUpdateForm.propTypes = {
+    openMemberUpdateForm: PropTypes.bool,
+    setOpenMemberUpdateForm: PropTypes.func,
+    updateFormOpen: PropTypes.func,
+    updateFormClose: PropTypes.func,
+    info: PropTypes.object,
+    getList: PropTypes.func,
+};

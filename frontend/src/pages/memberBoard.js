@@ -85,80 +85,67 @@ export default function StickyHeadTable() {
             });
     };
 
-    const handleTableCellClick = (event, post) => {
+    const handleTableCellClick = async (event, post) => {
         event.stopPropagation();
         if (event.target.innerText === "Edit") {
-            axios
-                .get(`${config.API_URL}/selectMember?member_id=${post.member_id}`)
-                .then((res) => {
-                    if (res.data !== null) {
-                        updateFormOpen();
-                        setInfo({
-                            member_id: post.member_id,
-                            member_num: post.member_num,
-                            member_name: post.member_name,
-                            member_addr: post.member_addr,
-                            member_pw: post.member_pw,
-                            member_tel: post.member_tel,
-                            pw_answer: post.pw_answer,
-                            pw_question: post.pw_question,
-                            signup_date: post.signup_date,
-                        });
-                    } else {
-                        alert("Failed to update member info!");
-                    }
-                })
-                .catch((e) => {
-                    console.error(e);
-                });
+            try {
+                const res = await axios.get(`${config.API_URL}/selectMember?member_id=${post.member_id}`);
+                if (res.data !== null) {
+                    setInfo({
+                        member_id: post.member_id,
+                        member_num: post.member_num,
+                        member_name: post.member_name,
+                        member_addr: post.member_addr,
+                        member_pw: post.member_pw,
+                        member_tel: post.member_tel,
+                        pw_answer: post.pw_answer,
+                        pw_question: post.pw_question,
+                        signup_date: post.signup_date,
+                    });
+                    updateFormOpen();
+                } else {
+                    alert("Failed to update member info!");
+                }
+            } catch (e) {
+                console.error(e);
+            }
         } else if (event.target.innerText === "Delete") {
-            axios
-                .post(`${config.API_URL}/deleteMember`, {
+            try {
+                const res = await axios.post(`${config.API_URL}/deleteMember`, {
                     member_id: post.member_id,
-                })
-                .then((res) => {
-                    if (res.data === 1) {
-                        alert("Member deleted successfully!");
-                        axios
-                            .post(`${config.API_URL}/favmovie/remove`, {
-                                member_id: post.member_id,
-                            })
-                            .then((res) => {})
-                            .catch((e) => {
-                                console.error(e);
-                            });
-                        axios
-                            .post(`${config.API_URL}/customer/deletebyid`, {
-                                member_id: post.member_id,
-                            })
-                            .then((res) => {})
-                            .catch((e) => {
-                                console.error(e);
-                            });
-                        axios
-                            .post(`${config.API_URL}/deleteProfileMember`, {
-                                member_id: post.member_id,
-                            })
-                            .then((res) => {
-                                window.localStorage.removeItem("profile_num");
-                                if (window.localStorage.getItem("id") === post.member_id) {
-                                    window.localStorage.clear();
-                                }
-                                if (post.member_id === window.sessionStorage.getItem("id")) {
-                                    window.sessionStorage.clear();
-                                    navigate("/", { return: true });
-                                }
-                            })
-                            .catch((e) => {
-                                console.error(e);
-                            });
-                    } else {
-                        alert("Failed to delete member!");
-                    }
-                })
-                .catch((e) => {
-                    console.error(e);
                 });
+                if (res.data !== 1) {
+                    alert("Failed to delete member!");
+                    return;
+                }
+                alert("Member deleted successfully!");
+
+                await Promise.all([
+                    axios.post(`${config.API_URL}/favmovie/remove`, {
+                        member_id: post.member_id,
+                    }),
+                    axios.post(`${config.API_URL}/customer/deletebyid`, {
+                        member_id: post.member_id,
+                    }),
+                    axios.post(`${config.API_URL}/deleteProfileMember`, {
+                        member_id: post.member_id,
+                    }),
+                ]);
+
+                window.localStorage.removeItem("profile_num");
+                if (window.localStorage.getItem("id") === post.member_id) {
+                    window.localStorage.clear();
+                }
+                if (post.member_id === window.sessionStorage.getItem("id")) {
+                    window.sessionStorage.clear();
+                    navigate("/", { return: true });
+                    return; // 자기 자신 삭제 후 페이지 떠나면 갱신 불필요
+                }
+
+                getList(); // 삭제 끝난 뒤 목록 새로고침
+            } catch (e) {
+                console.error(e);
+            }
         }
     };
 
@@ -180,8 +167,8 @@ export default function StickyHeadTable() {
                                 <TableRow>
                                     {columns.map((column) => (
                                         <TableCell
-                                            key={column.board_num}
-                                            aalign={column.align || "center"}
+                                            key={column.id}
+                                            align={column.align || "center"}
                                             style={{ minWidth: column.minWidth, textAlign: "center" }}
                                         >
                                             {column.label}
@@ -227,15 +214,6 @@ export default function StickyHeadTable() {
                                                                 label="Edit"
                                                             ></CustomizedButton>
                                                         </Box>
-                                                        {openMemberUpdateForm ? (
-                                                            <MemberUpdateForm
-                                                                openMemberUpdateForm={openMemberUpdateForm}
-                                                                setOpenMemberUpdateForm={setOpenMemberUpdateForm}
-                                                                updateFormOpen={updateFormOpen}
-                                                                updateFormClose={updateFormClose}
-                                                                info={info}
-                                                            ></MemberUpdateForm>
-                                                        ) : null}
                                                         <CustomizedButton
                                                             onClick={(event) => handleTableCellClick(event, post)}
                                                             label="Delete"
@@ -257,6 +235,17 @@ export default function StickyHeadTable() {
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </Paper>
+
+                {openMemberUpdateForm && (
+                    <MemberUpdateForm
+                        openMemberUpdateForm={openMemberUpdateForm}
+                        setOpenMemberUpdateForm={setOpenMemberUpdateForm}
+                        updateFormOpen={updateFormOpen}
+                        updateFormClose={updateFormClose}
+                        info={info}
+                        getList={getList}
+                    ></MemberUpdateForm>
+                )}
             </Container>
         </div>
     );
