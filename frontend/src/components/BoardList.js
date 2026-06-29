@@ -91,7 +91,7 @@ export default function StickyHeadTable() {
                                     {columns.map((column) => (
                                         <TableCell
                                             key={column.board_num}
-                                            align={column.align || "left"}
+                                            align={column.align || "center"}
                                             style={{ minWidth: column.minWidth }}
                                         >
                                             {column.label}

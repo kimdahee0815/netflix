@@ -2,6 +2,7 @@ import { useCallback, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -84,13 +85,13 @@ export default function BoardSearch() {
 
                 <Paper sx={{ width: "100%", overflow: "hidden" }}>
                     <TableContainer sx={{ maxHeight: 640 }}>
-                        <TableContainer stickyHeader aria-label="sticky table">
+                        <Table stickyHeader aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
                                     {columns.map((column) => (
                                         <TableCell
-                                            key={column.board_num}
-                                            align={column.board_title}
+                                            key={column.id}
+                                            align={column.align || "center"}
                                             style={{ minWidth: column.minWidth }}
                                         >
                                             {column.label}
@@ -118,10 +119,12 @@ export default function BoardSearch() {
                                             >
                                                 {columns.map((column) => {
                                                     return (
-                                                        <TableCell key={column.board_num} align={column.board_title}>
-                                                            {column.format
-                                                                ? column.format(post[column.id], post)
-                                                                : post[column.id]}
+                                                        <TableCell key={column.id} align="center">
+                                                            {column.id === "board_num"
+                                                                ? boardlist.length - (page * rowsPerPage + index)
+                                                                : column.format
+                                                                  ? column.format(post[column.id], post)
+                                                                  : post[column.id]}
                                                         </TableCell>
                                                     );
                                                 })}
@@ -129,7 +132,7 @@ export default function BoardSearch() {
                                         );
                                     })}
                             </TableBody>
-                        </TableContainer>
+                        </Table>
                     </TableContainer>
                     <TablePagination
                         component="div"

@@ -180,7 +180,7 @@ export default function StickyHeadTable() {
                                     {columns.map((column) => (
                                         <TableCell
                                             key={column.board_num}
-                                            align={column.board_title}
+                                            aalign={column.align || "center"}
                                             style={{ minWidth: column.minWidth, textAlign: "center" }}
                                         >
                                             {column.label}
@@ -213,8 +213,8 @@ export default function StickyHeadTable() {
                                                             {column.id === "member_num"
                                                                 ? memberList.length - (page * rowsPerPage + index)
                                                                 : column.format
-                                                                ? column.format(post[column.id], post)
-                                                                : post[column.id]}
+                                                                  ? column.format(post[column.id], post)
+                                                                  : post[column.id]}
                                                         </TableCell>
                                                     );
                                                 })}

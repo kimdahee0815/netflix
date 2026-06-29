@@ -183,7 +183,7 @@ export default function MemberSearch() {
                                     {columns.map((column) => (
                                         <TableCell
                                             key={column.board_num}
-                                            align={column.board_title}
+                                            align={column.align || "center"}
                                             style={{ minWidth: column.minWidth, textAlign: "center" }}
                                         >
                                             {column.label}
