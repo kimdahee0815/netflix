@@ -86,7 +86,7 @@ export default function StickyHeadTable() {
     };
 
     const handleTableCellClick = (event, post) => {
-        console.log(post);
+        event.stopPropagation();
         if (event.target.innerText === "Edit") {
             axios
                 .get(`${config.API_URL}/selectMember?member_id=${post.member_id}`)
@@ -223,7 +223,7 @@ export default function StickyHeadTable() {
                                                     <Box sx={{ display: "flex" }}>
                                                         <Box sx={{ mr: 1 }}>
                                                             <CustomizedButton
-                                                                onClick={handleTableCellClick}
+                                                                onClick={(event) => handleTableCellClick(event, post)}
                                                                 label="Edit"
                                                             ></CustomizedButton>
                                                         </Box>
@@ -237,7 +237,7 @@ export default function StickyHeadTable() {
                                                             ></MemberUpdateForm>
                                                         ) : null}
                                                         <CustomizedButton
-                                                            onClick={handleTableCellClick}
+                                                            onClick={(event) => handleTableCellClick(event, post)}
                                                             label="Delete"
                                                         ></CustomizedButton>
                                                     </Box>
