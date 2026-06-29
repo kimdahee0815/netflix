@@ -38,13 +38,13 @@ const MypageDropDown = () => {
                 })
                 .then((res) => {
                     if (res.data.length > 0) {
-                        if (profileNum !== undefined) {
-                            setProfileNickName(res.data[profileNum - 1].nickname);
-                            setProfileImg(profileImages[profileNum - 1]);
-                        } else {
-                            setProfileNickName(res.data[0].nickname);
-                            setProfileImg(profileImages[0]);
-                        }
+                        // localStorage는 null 또는 문자열 => 숫자로 변환
+                        const idx = profileNum != null ? Number(profileNum) - 1 : 0;
+                        // 범위 안이면 그 프로필, 아니면 첫 번째로 폴백
+                        const profile = res.data[idx] ?? res.data[0];
+
+                        setProfileNickName(profile.nickname);
+                        setProfileImg(profileImages[idx] ?? profileImages[0]);
                     }
                 })
                 .catch((error) => {
