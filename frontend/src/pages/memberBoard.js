@@ -75,7 +75,7 @@ export default function StickyHeadTable() {
 
     const getList = () => {
         axios
-            .post(`${config.API_URL}/getMembers`, {})
+            .get(`${config.API_URL}/getMembers`, {})
             .then((res) => {
                 const { data } = res;
                 setMemberList(data);
