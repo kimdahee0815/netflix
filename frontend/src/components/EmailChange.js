@@ -60,7 +60,7 @@ const style = {
 export default function EmailChange({ openModal, handleOpen, handleClose, setEmail }) {
     const [open, setOpen] = useState(openModal);
     const [newEmail, setNewEmail] = useState("");
-    const email2 = useState(window.sessionStorage.getItem("id"));
+    const email2 = window.sessionStorage.getItem("id");
 
     const [idError, setIdError] = useState("");
 
@@ -114,7 +114,7 @@ export default function EmailChange({ openModal, handleOpen, handleClose, setEma
 
         let validId =
             /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(
-                newEmail
+                newEmail,
             );
 
         if (!newEmail) {
@@ -211,7 +211,7 @@ export default function EmailChange({ openModal, handleOpen, handleClose, setEma
                 <Fade in={open}>
                     <Box sx={style}>
                         <Typography
-                            sx={{ width: 270, mx: "auto", mb: 3 }}
+                            sx={{ textAlign: "center", mx: "auto", mb: 3 }}
                             id="spring-modal-title"
                             variant="h5"
                             component="h2"
@@ -237,7 +237,7 @@ export default function EmailChange({ openModal, handleOpen, handleClose, setEma
                             </Box>
                         </Box>
 
-                        <Box sx={{ display: "flex", mt: 2, ml: 47 }}>
+                        <Box sx={{ display: "flex", mt: 2, ml: 47, justifyContent: "right" }}>
                             <Box sx={{ mr: 3 }}>
                                 <CustomizedButton label="Check Duplicate" onClick={idDuplicateCheck}></CustomizedButton>
                             </Box>
