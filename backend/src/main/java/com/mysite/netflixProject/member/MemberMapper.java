@@ -34,23 +34,13 @@ public interface MemberMapper {
 	public int idDuplicateCheck(MemberVO vo);
 	
 	@Select("select * from member where member_id = #{member_id}")
-	public MemberVO selectMember(MemberVO vo);
+	public MemberVO selectMember(String member_id);
 	
 	@Delete("delete from member where member_id = #{member_id}")
 	public int deleteMember(MemberVO vo);
 	
-
-	@Update("set @cnt=0;")
-	public void counterset();
-	
-	@Update("update member"
-			+ " set member_num = (@cnt := @cnt + 1)"
-			+ " order by signup_date asc;")
-	public void counterset2();
-	
 	@Select("select member_num, member_id, member_pw, member_name, member_tel, member_addr, pw_question, pw_answer, "
-			+ "date_format(signup_date, '%y/%m/%d') as signup_date from member order by member_num desc")
-//	@Select("select * from member")
+			+ "to_char(signup_date, 'YY/MM/DD') as signup_date from member order by member_num desc")
 	public List<MemberVO> getMembers();
 	
 	@Update("update member set member_pw = #{member_pw}, member_name = #{member_name}, member_tel = #{member_tel},"
@@ -58,7 +48,7 @@ public interface MemberMapper {
 	public int updateMembers(MemberVO vo);
 
 	@Select("SELECT member_num, member_id, member_pw, member_name, member_tel, member_addr, pw_question, pw_answer, "
-			+ "date_format(signup_date, '%y/%m/%d') as signup_date from member WHERE member_id LIKE CONCAT('%', #{search}, '%') OR member_name LIKE CONCAT('%', #{search}, '%') "
+			+ "to_char(signup_date, 'YY/MM/DD') as signup_date from member WHERE member_id LIKE CONCAT('%', #{search}, '%') OR member_name LIKE CONCAT('%', #{search}, '%') "
 			+ "order by member_num desc")
 	public List<MemberVO> searchMember(@Param("search") String search);
 }

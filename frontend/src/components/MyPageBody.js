@@ -33,9 +33,7 @@ const MyPageBody = () => {
     const navigate = useNavigate();
     useEffect(() => {
         axios
-            .post(`${config.API_URL}/selectMember`, {
-                member_id: user,
-            })
+            .get(`${config.API_URL}/selectMember?member_id=${user}`)
             .then((res) => {
                 if (res.data !== null) {
                 } else {
@@ -48,9 +46,7 @@ const MyPageBody = () => {
     }, [user]);
     useEffect(() => {
         axios
-            .post(`${config.API_URL}/selectMember`, {
-                member_id: email,
-            })
+            .get(`${config.API_URL}/selectMember?member_id=${email}`)
             .then((res) => {
                 if (res.data !== null) {
                     setTel(res.data.member_tel);

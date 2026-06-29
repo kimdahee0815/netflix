@@ -65,9 +65,7 @@ function Login() {
             setSaveAccount(true);
             setEmail(window.localStorage.getItem("id"));
             axios
-                .post(`${config.API_URL}/selectMember`, {
-                    member_id: window.localStorage.getItem("id"),
-                })
+                .get(`${config.API_URL}/selectMember?member_id=${window.localStorage.getItem("id")}`)    
                 .then((res) => {
                     if (res.data !== null) {
                         setPassword(res.data.member_pw);
@@ -123,9 +121,7 @@ function Login() {
 
     const handleLogin = () => {
         axios
-            .post(`${config.API_URL}/selectMember`, {
-                member_id: email,
-            })
+            .get(`${config.API_URL}/selectMember?member_id=${email}`)
             .then((res) => {
                 if (res.data) {
                     axios

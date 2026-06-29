@@ -120,9 +120,7 @@ export default function PasswordCheck({ openModal, handleOpen, handleClose }) {
                 .then((res) => {
                     if (res.data === 1) {
                         axios
-                            .post(`${config.API_URL}/selectMember`, {
-                                member_id: id,
-                            })
+                            .get(`${config.API_URL}/selectMember?member_id=${id}`)
                             .then((res) => {
                                 setPassword(res.data.member_pw);
                             });

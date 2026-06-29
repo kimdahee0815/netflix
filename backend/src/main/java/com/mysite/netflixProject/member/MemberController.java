@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -48,9 +48,9 @@ public class MemberController {
         return memberService.emailUpdate(vo);
     }
     
-    @PostMapping("/selectMember")  
-    public MemberVO selectMember(@RequestBody MemberVO vo) throws Exception {
-        return memberService.selectMember(vo);
+    @GetMapping("/selectMember")  
+    public MemberVO selectMember(@RequestParam String member_id) throws Exception {
+        return memberService.selectMember(member_id);
     }
     
     @PostMapping("/idDuplicateCheck")  
@@ -63,8 +63,8 @@ public class MemberController {
         return memberService.deleteMember(vo);
     }
     
-    @PostMapping("/getMembers")  
-    public List<MemberVO> getMembers(@RequestBody MemberVO vo) throws Exception {
+    @GetMapping("/getMembers")  
+    public List<MemberVO> getMembers() throws Exception {
         return memberService.getMembers();
     }
     
@@ -77,7 +77,7 @@ public class MemberController {
     }
     
     @GetMapping("/memberSearch")  
-    public List<MemberVO> searchMember(String search) {
+    public List<MemberVO> searchMember(@RequestParam String search) {
         return memberService.searchMember(search);
     }
 }

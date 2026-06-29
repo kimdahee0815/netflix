@@ -88,9 +88,7 @@ export default function StickyHeadTable() {
     const handleTableCellClick = (event, post) => {
         if (event.target.innerText === "Edit") {
             axios
-                .post(`${config.API_URL}/selectMember`, {
-                    member_id: post.member_id,
-                })
+                .get(`${config.API_URL}/selectMember?member_id=${post.member_id}`)
                 .then((res) => {
                     if (res.data !== null) {
                         updateFormOpen();

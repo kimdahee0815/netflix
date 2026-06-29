@@ -2,7 +2,6 @@ package com.mysite.netflixProject.member;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,77 +9,68 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class MemberServiceImpl implements MemberService {
 	private MemberMapper mapper;
-	
+
 	public MemberServiceImpl(MemberMapper mapper) {
 		this.mapper = mapper;
 	}
+
 	@Override
 	public int login(MemberVO member) {
-		int res = mapper.login(member);
-		return res; 
+		return mapper.login(member);
 	}
 
 	@Override
 	public int insertMember(MemberVO member) {
-		int res = mapper.insertMember(member);
-		//mapper.counterset();
-		//mapper.counterset2();
-		return res; 
-
+		return mapper.insertMember(member);
 	}
+
 	@Override
 	public int passwordSearch(MemberVO member) {
-		int res = mapper.passwordSearch(member);
-		return res; 
+		return mapper.passwordSearch(member);
 	}
-	
+
 	@Override
 	public int phoneUpdate(MemberVO member) {
-		int res = mapper.phoneUpdate(member);
-		return res; 
+		return mapper.phoneUpdate(member);
 	}
-	
+
 	@Override
 	public int emailUpdate(MemberVO member) {
-		int res = mapper.emailUpdate(member);
-		return res; 
+		return mapper.emailUpdate(member);
 	}
-	
+
 	@Override
 	public int passwordUpdate(MemberVO member) {
-		int res = mapper.passwordUpdate(member);
-		return res; 
+		return mapper.passwordUpdate(member);
 	}
+
 	@Override
 	public int idDuplicateCheck(MemberVO vo) {
 		return mapper.idDuplicateCheck(vo);
 	}
+
 	@Override
-	public MemberVO selectMember(MemberVO vo) {
-		MemberVO member = mapper.selectMember(vo);
-		return member;
-	}
-	@Override
-	public int deleteMember(MemberVO member) {
-		int res = mapper.deleteMember(member);
-		//mapper.counterset();
-		//mapper.counterset2();
-		return res; 
-	}
-	
-	public List<MemberVO> getMembers(){
-		List<MemberVO> memberList = mapper.getMembers();
-		return memberList;
-	}
-	@Override
-	public int updateMembers(MemberVO member) {
-		int res = mapper.updateMembers(member);
-		return res; 
-	}
-	@Override
-	public List<MemberVO> searchMember(String search) {
-		List<MemberVO> vo = mapper.searchMember(search);
-		  return vo;
+	public MemberVO selectMember(String member_id) {
+		return mapper.selectMember(member_id);
 	}
 
+	@Override
+	public int deleteMember(MemberVO member) {
+		return mapper.deleteMember(member);
+	}
+
+	@Override
+	public List<MemberVO> getMembers() {
+		return mapper.getMembers();
+	}
+
+	@Override
+	public int updateMembers(MemberVO member) {
+		return mapper.updateMembers(member);
+	}
+
+	@Override
+	public List<MemberVO> searchMember(String search) {
+		return mapper.searchMember(search);
+	}
 }

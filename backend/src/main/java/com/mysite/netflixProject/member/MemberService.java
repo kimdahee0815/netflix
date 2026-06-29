@@ -2,9 +2,6 @@ package com.mysite.netflixProject.member;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-
-
 public interface MemberService {
 	public int login(MemberVO member);
 	public int insertMember(MemberVO member);
@@ -12,7 +9,7 @@ public interface MemberService {
 	public int passwordUpdate(MemberVO vo);
 	public int phoneUpdate(MemberVO vo);
 	public int emailUpdate(MemberVO vo);
-	public MemberVO selectMember(MemberVO vo);
+	public MemberVO selectMember(String member_id);
 	public int idDuplicateCheck(MemberVO vo);
 	public int deleteMember(MemberVO vo);
 	public List<MemberVO> getMembers();

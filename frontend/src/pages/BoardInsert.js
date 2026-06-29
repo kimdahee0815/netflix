@@ -18,9 +18,7 @@ export default function BoardInsert() {
 
     useEffect(() => {
         axios
-            .post(`${config.API_URL}/selectMember`, {
-                member_id: user,
-            })
+            .get(`${config.API_URL}/selectMember?member_id=${user}`)
             .then((res) => {
                 if (res.data !== null) {
                     setUserName(res.data.member_name);
